@@ -53,6 +53,13 @@ public class UserController {
 		}
 		return "redirect:/user/login?errorPwd=true";
 	}
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout( HttpSession session) {
+        UserUtil.deleteUserFromSession(session);
+        return "redirect:/";
+    }
+
 	@RequestMapping(value = "/profile")
 	public ModelAndView profile(ModelAndView vo,HttpSession session){
 		User user = UserUtil.getUserFromSession(session);

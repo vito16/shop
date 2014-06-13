@@ -36,4 +36,12 @@ public class UserUtil {
         return attribute == null ? null : (User) attribute;
     }
 
+    /**
+     * 从Session中删除登陆用户的个人信息
+     *
+     * @param session
+     */
+    public static void deleteUserFromSession(HttpSession session) {
+        session.removeAttribute(USER);
+    }
 }

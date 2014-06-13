@@ -1,11 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="nav">
-	<ul class="ul_nav">
-		<li class="ryes"><a href="${ctx}/">网站首页</a></li>
-		<li class="ryes"><a href="${ctx}/user/">我的账号</a></li>
-		<li class="ryes"><a href="">礼品分类</a></li>
-		<li class="ryes"><a href="">信息资讯</a></li>
-		<li><a href="${ctx}/help">帮助中心</a></li>
-	</ul>
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-collapse">
+            <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">小小商店</a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="${ctx}/">首页</a></li>
+            <li><a href="${ctx}/product/">商品</a></li>
+            <li><a href="${ctx}/news/">公告</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <c:if test="${not empty login_user}">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            ${login_user.username}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">设置</a></li>
+                        <li><a href="#">登陆</a></li>
+                        <li><a href="${ctx}/user/logout">登出</a></li>
+                    </ul>
+                </li>
+            </c:if>
+            <c:if test="${empty login_user}">
+                <li><a href="${ctx}/user/login">登陆</a></li>
+                <li><a href="${ctx}/user/reg">注册</a></li>
+            </c:if>
+        </ul>
+    </div>
+    <!--/.nav-collapse -->
 </div>
