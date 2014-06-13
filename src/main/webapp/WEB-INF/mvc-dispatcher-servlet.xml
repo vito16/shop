@@ -24,7 +24,13 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- HandlerMapping -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.portlet.multipart.CommonsPortletMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="1024000"/>
+    </bean>
+
+    <!-- HandlerMapping -->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 
