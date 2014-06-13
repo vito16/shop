@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *
+ */
 public class ConvertUtil {
 	public static String toDateStr(Object o) throws ParseException {
 		return o == null ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
