@@ -1,41 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="/common/global.jsp" %>
     <title>主页</title>
-    <%@ include file="/common/meta.jsp" %>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-<div class="container">
-    <%@include file="/common/header-nav.jsp" %>
-    <div>
-        <form:form id="inputForm" role="form" action="${ctx}/product/new"
-                   method="post" class="form-horizontal">
-            <div class="form-group">
-                <label>商品名称：</label>
-                <input class="form-control" type="text" id="title" name="title"/>
-            </div>
-            <div class="form-group">
-                <label>商品价格：</label>
-                <input class="form-control" type="text" id="point" name="point"/>
-            </div>
-            <div class="form-group">
-                <label>商品简介：</label>
-                <textarea class="form-control" name="note"></textarea>
-            </div>
-            <button type="submit" class="btn btn-default">保存</button>
-        </form:form>
-    </div>
-
-
-</div>
-<!-- /container -->
-<%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
+<p><a class="btn btn-primary" href="#" role="button">View</a></p>
+<ul class="list-group">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Morbi leo risus</li>
+    <li class="list-group-item">Porta ac consectetur ac</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+</ul>
 </body>
+
 </html>
