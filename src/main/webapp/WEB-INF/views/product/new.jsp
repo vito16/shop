@@ -47,18 +47,25 @@
 					</ul>
 				</div><!--/.nav-collapse -->
       	</div>
+        <div>
+            <form:form id="inputForm" role="form" action="${ctx}/product/new"
+                       method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label>商品名称：</label>
+                    <input class="form-control" type="text" id="title" name="title" />
+                </div>
+                <div class="form-group">
+                    <label>商品价格：</label>
+                    <input class="form-control" type="text" id="point" name="point" />
+                </div>
+                <div class="form-group">
+                    <label>商品简介：</label>
+                    <textarea class="form-control" name="note"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default">保存</button>
+            </form:form>
+        </div>
 
-      <div class="jumbotron">
-				<h1>
-                    小小商店
-				</h1>
-				<p>
-                    Spring MVC + Spring Data JPA + Bootstrap 3
-				</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="http://github.com/vito16/shop">Github</a>
-				</p>
-	  </div>
 	  
 	  <div class="footer text-center">
       	<br>

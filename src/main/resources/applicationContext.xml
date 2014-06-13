@@ -15,26 +15,34 @@
 	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/application.properties"/>
 	
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
-	<context:component-scan base-package="com.vito16.mvc1">
+	<context:component-scan base-package="com.vito16.shop">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
 	<!-- 数据源配置, 使用Druid数据库连接池 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<!-- Connection Info -->
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<!-- Connection Pooling Info -->
-		<property name="maxActive" value="${dbcp.maxActive}" />
-		<property name="maxIdle" value="${dbcp.maxIdle}" />
-		<property name="defaultAutoCommit" value="false" />
-		<!-- 连接Idle一个小时后超时 -->
-		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
-		<property name="minEvictableIdleTimeMillis" value="3600000" />
+        <property name="maxActive"><value>20</value></property>
+        <property name="initialSize"><value>1</value></property>
+        <property name="maxWait"><value>60000</value></property>
+        <property name="minIdle"><value>1</value></property>
+
+        <property name="timeBetweenEvictionRunsMillis"><value>60000</value></property>
+        <property name="minEvictableIdleTimeMillis"><value>300000</value></property>
+
+        <property name="validationQuery"><value>SELECT 'x'</value></property>
+        <property name="testWhileIdle"><value>true</value></property>
+        <property name="testOnBorrow"><value>false</value></property>
+        <property name="testOnReturn"><value>false</value></property>
+
+        <property name="poolPreparedStatements"><value>true</value></property>
+        <property name="maxOpenPreparedStatements"><value>20</value></property>
 	</bean>
 
 	
@@ -43,7 +51,7 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
-		<property name="packagesToScan" value="com.vito16.mvc1.model" />
+		<property name="packagesToScan" value="com.vito16.shop.model" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -62,7 +70,7 @@
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 
 	<!-- Spring Data Jpa配置 -->
-	<jpa:repositories base-package="com.vito16.mvc1"
+	<jpa:repositories base-package="com.vito16.shop"
 		entity-manager-factory-ref="entityManagerFactory"
 		transaction-manager-ref="transactionManager" />
 
@@ -73,24 +81,5 @@
 	</bean>
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-	
-	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
-	    <property name="dataSource" ref="dataSource" />
-	    <property name="transactionManager" ref="transactionManager" />
-	    <property name="databaseSchemaUpdate" value="true" />
-	    <property name="jobExecutorActivate" value="false" />
-<!-- 	    <property name="deploymentResources" value="classpath*:/bpmn/*.bpmn" />
- -->        <property name="processDefinitionCacheLimit" value="10"/>
-	  </bean>
-  
-	  <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
-	    <property name="processEngineConfiguration" ref="processEngineConfiguration" />
-	  </bean>
-	  
-	  <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
-	  <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />
-	  <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />
-	  <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
-	  <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
-	
+
 </beans> 

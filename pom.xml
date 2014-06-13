@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.vito16.activiti</groupId>
-	<artifactId>leave</artifactId>
+	<artifactId>shop</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<name />
@@ -21,7 +21,6 @@
 		<junit.version>4.11</junit.version>
 		<logback.version>1.1.2</logback.version>
 		<jetty.version>9.1.5.v20140505</jetty.version>
-		<activiti.version>5.15.1</activiti.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -243,21 +242,11 @@
 			<artifactId>util</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-engine</artifactId>
-			<version>${activiti.version}</version>
-		</dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.6.6</version>
         </dependency>
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-spring</artifactId>
-			<version>${activiti.version}</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

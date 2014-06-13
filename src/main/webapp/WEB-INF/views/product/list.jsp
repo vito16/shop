@@ -23,8 +23,8 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="${ctx}/">首页</a></li>
-						<li><a href="${ctx}/product/">商品</a></li>
+						<li><a href="${ctx}/">首页</a></li>
+						<li class="active"><a href="${ctx}/product/">商品</a></li>
 						<li><a href="${ctx}/news/">公告</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -48,25 +48,23 @@
 				</div><!--/.nav-collapse -->
       	</div>
 
-      <div class="jumbotron">
-				<h1>
-                    小小商店
-				</h1>
-				<p>
-                    Spring MVC + Spring Data JPA + Bootstrap 3
-				</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="http://github.com/vito16/shop">Github</a>
-				</p>
-	  </div>
-	  
-	  <div class="footer text-center">
-      	<br>
-        <p>&copy; Company 2014</p>
-      </div> <!-- /footer -->
-      
+        <div>
+            <c:forEach items="${productList}" var="product">
+                <c:set var="task" value="${leave.task }" />
+                <c:set var="pi" value="${leave.processInstance }" />
+                <div class="col-md-4">
+                    <img src="${ctx}/images/product/pc.jpg" width="300px">
+                    <a href="${ctx}/product/${product.id}">${product.title}</a>
+                </div>
+            </c:forEach>
+        </div>
+
     </div> <!-- /container -->
-	
+    <div class="footer text-center">
+        <br>
+        <p>&copy; Company 2014</p>
+    </div> <!-- /footer -->
+
 	<%@ include file="/common/include-base-js.jsp"%>
 </body>
 </html>

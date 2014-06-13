@@ -47,18 +47,18 @@
 					</ul>
 				</div><!--/.nav-collapse -->
       	</div>
+        <div>
+                <div class="form-group">
+                    <label>商品名称：</label>${product.title}
+                </div>
+                <div class="form-group">
+                    <label>商品价格：</label>
+                </div>
+                <div class="form-group">
+                    <label>商品简介：</label>
+                </div>
+        </div>
 
-      <div class="jumbotron">
-				<h1>
-                    小小商店
-				</h1>
-				<p>
-                    Spring MVC + Spring Data JPA + Bootstrap 3
-				</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="http://github.com/vito16/shop">Github</a>
-				</p>
-	  </div>
 	  
 	  <div class="footer text-center">
       	<br>
