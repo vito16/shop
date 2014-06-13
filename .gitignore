@@ -1,0 +1,20 @@
+# 本地化资源文件 #
+/src/main/resources/application.local.properties
+/src/test/resources/application.test.local.properties
+
+# MAC OS隐藏文件 #
+*~
+.DS_Store
+
+# IDE Config Files #
+*.iml
+/.idea
+/.settings
+
+# Package Files #
+*.class
+*.jar
+*.war
+*.ear
+/target
+.ant_targets
