@@ -10,13 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 
 /**
@@ -54,13 +57,17 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String doNew(Product product,HttpSession session, @RequestParam("productPic") CommonsMultipartFile productPic) {
+    public String doNew(Product product,HttpSession session, @RequestParam("file") MultipartFile file) {
         String path = "D:\\Work\\idea\\shop\\src\\main\\webapp\\tmm\\";  //获取本地存储路径
         String fileName = new Date().getTime()+".jpg";
-        if (!productPic.isEmpty()) {
-            File file = new File(path + fileName); //新建一个文件
+        if (!file.isEmpty()) {
+            File newFile = new File(path + fileName); //新建一个文件
             try {
-                productPic.getFileItem().write(file);//将上传的文件写入新建的文件中
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(newFile));
+                stream.write(bytes);
+                stream.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
