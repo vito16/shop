@@ -5,7 +5,10 @@ package com.vito16.shop.service;
 
 import java.util.List;
 
+import com.vito16.shop.common.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.vito16.shop.dao.ProductDao;
@@ -55,4 +58,10 @@ public class ProductService {
 	public List<Product> findPop(){
 		return productDao.findPopProducts();
 	}
+
+    public List<Product> findProducts(Page<Product> page, int[] pageParams) {
+        page.setResult(productDao.findAll(new PageRequest(pageParams[0],pageParams[1])).getContent());
+        page.setTotalCount(productDao.count());
+        return page.getResult();
+    }
 }

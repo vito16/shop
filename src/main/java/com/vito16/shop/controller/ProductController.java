@@ -3,8 +3,11 @@
  */
 package com.vito16.shop.controller;
 
+import com.vito16.shop.common.Page;
+import com.vito16.shop.common.PageUtil;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;
+import com.vito16.shop.util.UserUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -42,8 +46,12 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView listProduct(ModelAndView model) {
-        model.addObject("productList", productService.findAll());
+    public ModelAndView listProduct(ModelAndView model,HttpServletRequest request) {
+
+        Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
+        int[] pageParams = PageUtil.init(page, request);
+        productService.findProducts(page,pageParams);
+        model.addObject("page", page);
         model.setViewName("product/list");
         return model;
     }

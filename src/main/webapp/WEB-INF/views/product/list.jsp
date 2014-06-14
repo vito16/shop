@@ -14,30 +14,20 @@
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
     <div class="row">
-        <c:forEach items="${productList}" var="product">
+        <c:forEach items="${page.result}" var="product">
             <c:set var="task" value="${leave.task }"/>
             <c:set var="pi" value="${leave.processInstance }"/>
             <div class="col-lg-3 text-center">
-                <img class="img-thumbnail" src="${ctx}/images/product/pc.jpg" style="width: 140px; height: 140px;">
+                <a href="${ctx}/product/${product.id}"><img class="img-thumbnail" src="${ctx}/images/product/pc.jpg" style="width: 140px; height: 140px;"></a>
                 <p>${product.title}</p>
                 <p class="price">${product.point}</p>
                 <p><a class="btn btn-primary" href="${ctx}/product/${product.id}" role="button">查看</a></p>
             </div>
-
         </c:forEach>
     </div>
-    <div class="center row">
-        <ul class="pagination">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
+    <div class="text-center">
+        <tags:pagination page="${page}" paginationSize="${page.pageSize}"/>
     </div>
-
 </div>
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
