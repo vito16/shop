@@ -9,6 +9,8 @@ import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.UserUtil;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,7 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public Product newForm() {
@@ -50,7 +53,7 @@ public class ProductController {
 
         Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
         int[] pageParams = PageUtil.init(page, request);
-        productService.findProducts(page,pageParams);
+        productService.findProducts(page, pageParams);
         model.addObject("page", page);
         model.setViewName("product/list");
         return model;
@@ -65,21 +68,28 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String doNew(Product product,HttpSession session, @RequestParam("file") MultipartFile file) {
-        String path = "D:\\Work\\idea\\shop\\src\\main\\webapp\\tmm\\";  //获取本地存储路径
+    public String doNew(Product product,HttpSession session,@RequestParam("file") MultipartFile file) {
         String fileName = new Date().getTime()+".jpg";
+        String path = session.getServletContext().getRealPath("/upload");
+        String serverFile = path+"/"+fileName;
         if (!file.isEmpty()) {
-            File newFile = new File(path + fileName); //新建一个文件
             try {
+                logger.info(path);
+                if(!new File(path).exists()){
+                    new File(path).mkdirs();
+                }
+                if(!new File(serverFile).exists()){
+                    new File(serverFile).createNewFile();
+                }
                 byte[] bytes = file.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(newFile));
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(serverFile)));
                 stream.write(bytes);
                 stream.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            product.setPicUrl("/tmp/"+fileName);
+            product.setPicUrl("/upload/" + fileName);
         }
         product.setCreateTime(new Date());
         productService.save(product);

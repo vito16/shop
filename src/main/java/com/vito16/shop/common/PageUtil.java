@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 2014/6/14
  */
 public class PageUtil {
-    public static int PAGE_SIZE = 8;
+    public static int PAGE_SIZE = 12;
 
     public static int[] init(Page<?> page, HttpServletRequest request) {
         int pageNumber = Integer.parseInt(StringUtils.defaultIfBlank(request.getParameter("p"), "1"));
