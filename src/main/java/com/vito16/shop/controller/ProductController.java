@@ -58,7 +58,7 @@ public class ProductController {
         return model;
     }
 
-    @RequestMapping(value = "/edit/${id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView model,HttpSession session,@PathVariable Integer id) {
         if(UserUtil.getUserFromSession(session)==null){
             model.setViewName("redirect:/user/login?error=true");
@@ -66,10 +66,10 @@ public class ProductController {
         }
         Product product = productService.findById(id);
         model.addObject("product", product);
-        model.setViewName("product/view");
+        model.setViewName("product/edit");
         return model;
     }
-    @RequestMapping(value = "/edit/${id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public ModelAndView doEdit(ModelAndView model,HttpSession session,@PathVariable Integer id) {
         if(UserUtil.getUserFromSession(session)==null){
             model.setViewName("redirect:/user/login?error=true");
@@ -77,7 +77,7 @@ public class ProductController {
         }
         Product product = productService.findById(id);
         model.addObject("product", product);
-        model.setViewName("product/view");
+        model.setViewName("product/edit");
         return model;
     }
 
