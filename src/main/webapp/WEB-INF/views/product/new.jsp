@@ -20,14 +20,14 @@
                 <label class="col-sm-2 control-label">商品名称</label>
 
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" id="title" name="title"/>
+                    <input minlength="6" required class="form-control" type="text" id="title" name="title"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">商品价格</label>
 
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" id="point" name="point"/>
+                    <input type="number" required class="form-control" type="text" id="point" name="point"/>
                 </div>
             </div>
             <div class="form-group">
@@ -48,7 +48,7 @@
                 <label class="col-sm-2 control-label">商品库存</label>
 
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" id="stock" name="stock"/>
+                    <input class="form-control" required type="text" id="stock" name="stock"/>
                 </div>
             </div>
             <div class="form-group">
@@ -74,5 +74,9 @@
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
 <%@ include file="/common/include-base-js.jsp" %>
+<script src="${ctx }/common/bootstrap/js/jqBootstrapValidation.js" type="text/javascript"></script>
+<script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
 </body>
 </html>

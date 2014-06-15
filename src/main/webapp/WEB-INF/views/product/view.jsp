@@ -15,7 +15,7 @@
 	<div class="container">
         <div class="row">
             <div class="col-md-5 text-center">
-                <img src="${ctx}/images/product/pc.jpg">
+                <img src="${ctx}${product.picUrl}">
             </div>
             <div class="col-md-7">
                 <div class="form-group">
