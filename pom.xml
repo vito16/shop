@@ -282,6 +282,28 @@
                     </httpConnector>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <!-- http port -->
+                    <port>9999</port>
+                    <!-- application path always starts with /-->
+                    <path>/</path>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <!-- http port -->
+                    <port>9999</port>
+                    <!-- application path always starts with /-->
+                    <path>/</path>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 </project>

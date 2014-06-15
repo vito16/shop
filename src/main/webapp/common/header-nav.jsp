@@ -22,8 +22,10 @@
                             ${login_user.username}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">设置</a></li>
-                        <li><a href="#">登陆</a></li>
+                        <li><a href="${ctx}/user/setting">设置</a></li>
+                        <li><a href="${ctx}/product/admin">商品管理</a></li>
+                        <li><a href="${ctx}/order/admin">订单管理</a></li>
+                        <li><a href="${ctx}/news/admin">公告管理</a></li>
                         <li><a href="${ctx}/user/logout">登出</a></li>
                     </ul>
                 </li>

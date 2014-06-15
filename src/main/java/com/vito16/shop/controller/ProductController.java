@@ -8,19 +8,14 @@ import com.vito16.shop.common.PageUtil;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.UserUtil;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
@@ -42,15 +37,52 @@ public class ProductController {
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public Product newForm() {
+    public String newForm(HttpSession session) {
+        if(UserUtil.getUserFromSession(session)==null){
+            return "redirect:/user/login?error=true";
+        }
+        return "product/new";
+    }
 
-        Product product = new Product();
-        return product;
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public ModelAndView admin(ModelAndView model,HttpSession session,HttpServletRequest request) {
+        if(UserUtil.getUserFromSession(session)==null){
+            model.setViewName("redirect:/user/login?error=true");
+            return model;
+        }
+        Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
+        int[] pageParams = PageUtil.init(page, request);
+        productService.findProducts(page, pageParams);
+        model.addObject("page", page);
+        model.setViewName("product/admin");
+        return model;
+    }
+
+    @RequestMapping(value = "/edit/${id}", method = RequestMethod.GET)
+    public ModelAndView edit(ModelAndView model,HttpSession session,@PathVariable Integer id) {
+        if(UserUtil.getUserFromSession(session)==null){
+            model.setViewName("redirect:/user/login?error=true");
+            return model;
+        }
+        Product product = productService.findById(id);
+        model.addObject("product", product);
+        model.setViewName("product/view");
+        return model;
+    }
+    @RequestMapping(value = "/edit/${id}", method = RequestMethod.POST)
+    public ModelAndView doEdit(ModelAndView model,HttpSession session,@PathVariable Integer id) {
+        if(UserUtil.getUserFromSession(session)==null){
+            model.setViewName("redirect:/user/login?error=true");
+            return model;
+        }
+        Product product = productService.findById(id);
+        model.addObject("product", product);
+        model.setViewName("product/view");
+        return model;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView listProduct(ModelAndView model,HttpServletRequest request) {
-
         Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
         int[] pageParams = PageUtil.init(page, request);
         productService.findProducts(page, pageParams);

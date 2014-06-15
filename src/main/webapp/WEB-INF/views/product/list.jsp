@@ -11,16 +11,20 @@
 </head>
 
 <body>
-<%@include file="/common/header-nav.jsp" %>
 <div class="container">
+    <%@include file="/common/header-nav.jsp" %>
     <div class="row">
         <c:forEach items="${page.result}" var="product">
             <c:set var="task" value="${leave.task }"/>
             <c:set var="pi" value="${leave.processInstance }"/>
             <div class="col-lg-3 text-center">
-                <a href="${ctx}/product/${product.id}"><img class="img-thumbnail" src="${ctx}${product.picUrl}" style="width: 140px; height: 140px;"></a>
+                <a href="${ctx}/product/${product.id}"><img class="img-thumbnail" src="${ctx}${product.picUrl}"
+                                                            style="width: 140px; height: 140px;"></a>
+
                 <p>${product.title}</p>
+
                 <p class="price">${product.point}</p>
+
                 <p>
                     <a class="btn btn-info" href="${ctx}/product/${product.id}" role="button">查看</a>
                     <a class="btn btn-primary" productID="${product.id}" role="button">购买</a>
