@@ -60,7 +60,7 @@ public class ProductService {
 	}
 
     public List<Product> findProducts(Page<Product> page, int[] pageParams) {
-        page.setResult(productDao.findAll(new PageRequest(pageParams[0],pageParams[1])).getContent());
+        page.setResult(productDao.findAll(new PageRequest(pageParams[0]-1,pageParams[1])).getContent());
         page.setTotalCount(productDao.count());
         return page.getResult();
     }
