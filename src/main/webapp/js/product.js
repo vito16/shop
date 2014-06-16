@@ -8,7 +8,7 @@ $(function() {
             url:ctx+"/cart/add/"+$(this).attr("productid")+"/1",
             success:function(result){
                 if(result=="success"){
-                    alert(result);
+                    alert("添加购物车成功...");
                 }else{
                     alert("发生错误..");
                 }
