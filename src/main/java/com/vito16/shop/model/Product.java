@@ -49,7 +49,7 @@ public class Product implements Serializable {
 	}
 
     @Lob
-    @Column(length = 255000)
+    @Column(columnDefinition = "TEXT",length = 255000)
 	public String getNote() {
 		return note;
 	}

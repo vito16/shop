@@ -100,7 +100,7 @@ public class ProductController {
         }
         product.setInputUser(UserUtil.getUserFromSession(session));
         productService.save(product);
-        model.setViewName("redirect:/product/");
+        model.setViewName("redirect:/product/admin");
         return model;
     }
 
@@ -150,4 +150,5 @@ public class ProductController {
         productService.save(product);
         return "redirect:/product/";
     }
+
 }

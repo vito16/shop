@@ -1,5 +1,21 @@
 $(function() {
     $(".addCart").click(function () {
-        alert(this + " 加入购物车成功.");
+//        $('#trigger').scojs_confirm({
+//            content: "Ain't that cute?",
+//            action: "http://google.com"
+//        });
+        $.ajax({
+            url:ctx+"/cart/add/"+$(this).attr("productid")+"/1",
+            success:function(result){
+                if(result=="success"){
+                    alert(result);
+                }else{
+                    alert("发生错误..");
+                }
+            },
+            error:function(){
+                alert("发生错误..");
+            }
+        })
     })
 })

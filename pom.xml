@@ -280,6 +280,7 @@
                     <httpConnector>
                         <port>9999</port>
                     </httpConnector>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
                 </configuration>
             </plugin>
             <plugin>
