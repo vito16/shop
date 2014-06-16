@@ -69,15 +69,38 @@ public class ProductController {
         model.setViewName("product/edit");
         return model;
     }
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView doEdit(ModelAndView model,HttpSession session,@PathVariable Integer id) {
+    public ModelAndView doEdit(ModelAndView model,Product product,HttpSession session,@RequestParam("file") MultipartFile file,@PathVariable Integer id) {
         if(UserUtil.getUserFromSession(session)==null){
             model.setViewName("redirect:/user/login?error=true");
             return model;
         }
-        Product product = productService.findById(id);
-        model.addObject("product", product);
-        model.setViewName("product/edit");
+        if (!file.isEmpty()) {
+            String fileName = new Date().getTime()+".jpg";
+            String path = session.getServletContext().getRealPath("/upload");
+            String serverFile = path+"/"+fileName;
+            try {
+                logger.info(path);
+                if(!new File(path).exists()){
+                    new File(path).mkdirs();
+                }
+                if(!new File(serverFile).exists()){
+                    new File(serverFile).createNewFile();
+                }
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(serverFile)));
+                stream.write(bytes);
+                stream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            product.setPicUrl("/upload/" + fileName);
+        }
+        product.setInputUser(UserUtil.getUserFromSession(session));
+        productService.save(product);
+        model.setViewName("redirect:/product/");
         return model;
     }
 
