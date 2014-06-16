@@ -36,7 +36,7 @@
                 </script>
             </c:if>
 
-	        <h2 class="form-signin-heading">请假系统登陆</h2>
+	        <h2 class="form-signin-heading">系统登录</h2>
 	        <input type="text" class="form-control" name="username" placeholder="账号" required autofocus>
 	        <input type="password" class="form-control" name="password" placeholder="密码" required>
 	        <label class="checkbox">

@@ -11,8 +11,8 @@
 </head>
 
 <body>
+<%@include file="/common/header-nav.jsp" %>
 <div class="container">
-    <%@include file="/common/header-nav.jsp" %>
     <div class="row">
         <table class="table table-striped">
             <thead>

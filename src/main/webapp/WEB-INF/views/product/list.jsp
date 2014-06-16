@@ -11,8 +11,8 @@
 </head>
 
 <body>
+<%@include file="/common/header-nav.jsp" %>
 <div class="container">
-    <%@include file="/common/header-nav.jsp" %>
     <div class="row">
         <c:forEach items="${page.result}" var="product">
             <c:set var="task" value="${leave.task }"/>
