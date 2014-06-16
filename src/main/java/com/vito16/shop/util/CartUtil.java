@@ -46,11 +46,11 @@ public class CartUtil {
      * 删除购物车中的商品
      *
      * @param session
-     * @param product
+     * @param productId
      */
-    public static synchronized void deleteProductFromCart(HttpSession session, Product product) {
+    public static synchronized void deleteProductFromCart(HttpSession session, Integer productId) {
         Map<Integer, CartItem> cartItemMap = (HashMap<Integer, CartItem>) session.getAttribute(CART);
-        cartItemMap.remove(product.getId());
+        cartItemMap.remove(productId);
         session.setAttribute(CART, cartItemMap);
     }
 
@@ -58,7 +58,6 @@ public class CartUtil {
      * 清空购物车
      *
      * @param session
-     * @param product
      */
     public static synchronized void cleanCart(HttpSession session) {
         Map<Integer, CartItem> cartItemMap = (HashMap<Integer, CartItem>) session.getAttribute(CART);

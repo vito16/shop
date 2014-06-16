@@ -18,26 +18,33 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Vito16 zhouwentao16@gmail.com
  * @date 2013-7-8
- * 
  */
 @Controller
 @RequestMapping("/cart")
 public class CartController {
-	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
-	@Autowired
-	ProductService productService;
+    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
+    @Autowired
+    ProductService productService;
 
-	@RequestMapping(value = "/",method = RequestMethod.GET)
-	public String cart() {
-		return "order/cart";
-	}
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String cart() {
+        return "order/cart";
+    }
 
     @RequestMapping(value = "/add/{id}/{total}")
     @ResponseBody
-    public String addToCart(ModelAndView model,@PathVariable Integer id,@PathVariable Integer total,HttpSession session) {
+    public String addToCart(ModelAndView model, @PathVariable Integer id, @PathVariable Integer total, HttpSession session) {
         Product product = productService.findById(id);
-        CartUtil.saveProductToCart(session,product,total);
+        CartUtil.saveProductToCart(session, product, total);
         logger.debug("添加到购物车成功...");
+        return "success";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    @ResponseBody
+    public String deleteFromCart(ModelAndView model, @PathVariable(value = "id") Integer productId, HttpSession session) {
+        CartUtil.deleteProductFromCart(session, productId);
+        logger.debug("购物车商品删除成功...");
         return "success";
     }
 
