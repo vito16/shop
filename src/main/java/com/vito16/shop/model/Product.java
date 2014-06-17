@@ -3,11 +3,7 @@ package com.vito16.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 
@@ -32,6 +28,7 @@ public class Product implements Serializable {
 	private String code;//商品编码
 	private String model;//型号
 	private Long stock;//库存
+    private User inputUser;//创建人
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +48,8 @@ public class Product implements Serializable {
 		this.title = title;
 	}
 
+    @Lob
+    @Column(columnDefinition = "TEXT",length = 255000)
 	public String getNote() {
 		return note;
 	}
@@ -107,4 +106,13 @@ public class Product implements Serializable {
 		this.stock = stock;
 	}
 
+    @ManyToOne
+    @JoinColumn
+    public User getInputUser() {
+        return inputUser;
+    }
+
+    public void setInputUser(User inputUser) {
+        this.inputUser = inputUser;
+    }
 }

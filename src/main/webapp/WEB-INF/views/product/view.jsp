@@ -11,62 +11,40 @@
 </head>
 
 <body>
+    <%@include file="/common/header-nav.jsp" %>
 	<div class="container">
-		<div class="navbar navbar-default">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target=".navbar-collapse">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Vito16</a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="${ctx}/">首页</a></li>
-						<li><a href="${ctx}/product/">商品</a></li>
-						<li><a href="${ctx}/news/">公告</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<c:if test="${not empty login_user}">
-	          				<li class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							      	我的账号
-							    </a>
-							    <ul class="dropdown-menu">
-							      	<li><a href="#">设置</a></li>
-						            <li><a href="#">登陆</a></li>
-						            <li><a href="#">登出</a></li>
-							    </ul>
-							  </li>
-						</c:if>
-						<c:if test="${empty login_user}">
-								<li><a href="${ctx}/user/login">登陆</a></li>
-								<li><a href="${ctx}/user/reg">注册</a></li>
-						</c:if>
-					</ul>
-				</div><!--/.nav-collapse -->
-      	</div>
-        <div>
+        <div class="row">
+            <div class="col-md-5 text-center">
+                <img class="img-responsive img-rounded" src="${ctx}${product.picUrl}">
+            </div>
+            <div class="col-md-7">
                 <div class="form-group">
                     <label>商品名称：</label>${product.title}
                 </div>
                 <div class="form-group">
-                    <label>商品价格：</label>
+                    <label>商品编码：</label>${product.code}
                 </div>
                 <div class="form-group">
-                    <label>商品简介：</label>
+                    <label>商品型号：</label>${product.model}
                 </div>
+                <div class="form-group">
+                    <label>商品价格：</label>${product.point}
+                </div>
+                <div class="form-group">
+                    <label>商品简介：</label>${product.note}
+                </div>
+                <p>
+                    <a class="btn btn-primary btn-lg  btn-block addCart" productid="${product.id}" role="button">加入购物车</a>
+                </p>
+            </div>
+        </div>
         </div>
 
-	  
-	  <div class="footer text-center">
-      	<br>
-        <p>&copy; Company 2014</p>
-      </div> <!-- /footer -->
-      
+
     </div> <!-- /container -->
-	
+
+    <%@include file="/common/footer.jsp" %>
 	<%@ include file="/common/include-base-js.jsp"%>
+    <script src="${ctx }/js/product.js" type="text/javascript"></script>
 </body>
 </html>
