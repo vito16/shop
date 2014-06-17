@@ -14,7 +14,7 @@
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
     <div class="row">
-        <table class="table table-striped">
+        <table class="table table-responsive table-striped">
             <c:choose>
                 <c:when test="${empty sessionScope.cart}">
                     <tbody class="text-center">
@@ -42,8 +42,8 @@
                             <td>${ci.product.model}</td>
                             <td>${ci.product.code}</td>
                             <td>${ci.product.point}</td>
-                            <td>${ci.total}</td>
-                            <td><a class="btn btn-info delBtn" productid="${ci.product.id}">删除</a></td>
+                            <td><a class="btn btn-default btn-xs">-</a> ${ci.total} <a class="btn btn-default btn-xs">+</a></td>
+                            <td><a class="btn btn-info delBtn btn-xs" productid="${ci.product.id}">删除</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -56,7 +56,7 @@
     <div class="row">
         <div class="col-md-6">
             <a class="btn btn-info" href="${ctx}/product/">继续购买</a>
-            <button class="btn btn-warning" id="cleanCart">清空购物车</button>
+            <button class="btn btn-info" id="cleanCart">清空购物车</button>
         </div>
         <div class="col-md-6 text-right">
             <a class="btn btn-primary" href="${ctx}/order/purchase/">结账</a>
