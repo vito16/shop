@@ -148,6 +148,7 @@ public class ProductController {
             }
             product.setPicUrl("/upload/" + fileName);
         }
+        product.setInputUser(AdminUtil.getAdminFromSession(session));
         product.setCreateTime(new Date());
         productService.save(product);
         return "redirect:/product/";

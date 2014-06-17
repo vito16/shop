@@ -3,6 +3,7 @@
  */
 package com.vito16.shop.service;
 
+import com.vito16.shop.dao.AdminDao;
 import com.vito16.shop.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService {
 	@Autowired
-	private com.vito16.shop.dao.AdminDao adminDao;
+	private AdminDao adminDao;
 
 	public boolean checkLogin(Admin admin) {
         admin = adminDao.findByUsernameAndPassword(admin.getUsername(),admin.getPassword());
 		return admin == null ? false : true;
 	}
 
+    public Admin findByUsernameAndPassword(String username,String password){
+        return adminDao.findByUsernameAndPassword(username,password);
+    }
 	public void save(Admin admin) {
         adminDao.save(admin);
 	}

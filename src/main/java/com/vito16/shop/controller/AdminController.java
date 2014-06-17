@@ -25,21 +25,15 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String index() {
-		return "admin/index";
-	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public Admin loginForm() {
-		Admin admin = new Admin();
-		return admin;
+	public void loginForm() {
+
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String doLogin(Admin admin, HttpSession session) {
 		if(adminService.checkLogin(admin)){
-            AdminUtil.saveAdminToSession(session,admin);
+            AdminUtil.saveAdminToSession(session,adminService.findByUsernameAndPassword(admin.getUsername(),admin.getPassword()));
 			logger.debug("管理员["+admin.getUsername()+"]登陆成功");
 			return "redirect:/";
 		}
@@ -53,14 +47,12 @@ public class AdminController {
     }
 
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
-	public Admin regForm(){
-		Admin admin = new Admin();
-		admin.setUsername("请输入名称");
-		return admin;
+	public void regForm(){
 	}
+
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public Admin regForm(Admin admin,HttpSession session){
+	public String regForm(Admin admin,HttpSession session){
 		adminService.save(admin);
-		return admin;
+        return "redirect:/";
 	}
 }

@@ -18,6 +18,7 @@
                    method="post" class="form-horizontal" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="hidden" name="id" value="${product.id}">
+                <input type="hidden" name="inputUser" value="${product.inputUser}">
                 <label class="col-sm-2 control-label">商品名称</label>
                 <div class="col-sm-10">
                     <input minlength="6" required class="form-control" value="${product.title}" type="text" id="title" name="title"/>
@@ -45,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">商品库存</label>
-
+                <form:
                 <div class="col-sm-10">
                     <input class="form-control" required type="number" value="${product.stock}" id="stock" name="stock"/>
                 </div>
@@ -53,7 +54,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="pic">封面图片</label>
                 <div class="col-sm-10">
-                    <img src="${ctx}${product.picUrl}">
+                    <img class="img-responsive img-rounded" src="${ctx}${product.picUrl}">
                     <input type="file" id="pic" name="file">
                     <p class="help-block">图片不能超过1MB.</p>
                 </div>
