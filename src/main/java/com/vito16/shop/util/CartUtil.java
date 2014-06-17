@@ -1,10 +1,12 @@
 package com.vito16.shop.util;
 
 import com.vito16.shop.common.Constants;
+import com.vito16.shop.model.OrderItem;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.model.User;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,5 +69,19 @@ public class CartUtil {
             cartItemMap.clear();
         }
         session.setAttribute(CART, cartItemMap);
+    }
+
+    public static List<OrderItem> getOrderItemFromCart(HttpSession session){
+        Map<Integer, CartItem> cartItemMap = (HashMap<Integer, CartItem>) session.getAttribute(CART);
+        if(cartItemMap==null) cartItemMap = new HashMap<Integer, CartItem>();
+        List<OrderItem> oiList = new ArrayList<OrderItem>();
+        for(CartItem ci:cartItemMap.values()){
+            OrderItem oi = new OrderItem();
+            oi.setProduct(ci.getProduct());
+            oi.setQuantity(ci.getTotal());
+            oiList
+                    .add(oi);
+        }
+        return oiList;
     }
 }
