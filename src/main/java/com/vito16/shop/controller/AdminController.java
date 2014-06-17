@@ -45,6 +45,13 @@ public class AdminController {
 		}
 		return "redirect:/admin/login?errorPwd=true";
 	}
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String doLogout(HttpSession session) {
+        AdminUtil.deleteAdminFromSession(session);
+        return "redirect:/";
+    }
+
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
 	public Admin regForm(){
 		Admin admin = new Admin();
