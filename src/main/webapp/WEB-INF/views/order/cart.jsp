@@ -39,11 +39,13 @@
             </c:forEach>
             </tbody>
         </table>
-        <div id="delSuccess" class="alert alert-success">删除成功...</div>
+        <div id="delSuccess" class="alert alert-success" style="display: none;">删除成功...</div>
+        <div id="delAllSuccess" class="alert alert-success" style="display: none;">购物车清空成功...</div>
     </div>
     <div class="row">
         <div class="col-md-6">
             <a class="btn btn-primary" href="${ctx}/product/">继续购买</a>
+            <button class="btn btn-warn" id="cleanCart">清空购物车</button>
         </div>
         <div class="col-md-6 text-right">
             <a class="btn btn-success" href="${ctx}/product/">结账</a>

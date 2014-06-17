@@ -47,5 +47,11 @@ public class CartController {
         logger.debug("购物车商品删除成功...");
         return "success";
     }
-
+    @RequestMapping(value = "/deleteAll")
+    @ResponseBody
+    public String deleteAllFromCart(HttpSession session) {
+        CartUtil.cleanCart(session);
+        logger.debug("购物车商品清空成功...");
+        return "success";
+    }
 }
