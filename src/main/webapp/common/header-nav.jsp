@@ -36,6 +36,9 @@
                     <li><a href="${ctx}/user/reg">注册</a></li>
                 </c:if>
             </ul>
+            <form class="navbar-form navbar-right" role="cart">
+                <a href="${ctx}/cart/" class="btn btn-info">购物车</a>
+            </form>
         </div>
         <!--/.nav-collapse -->
     </div>
