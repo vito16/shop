@@ -28,7 +28,7 @@ public class Product implements Serializable {
 	private String code;//商品编码
 	private String model;//型号
 	private Long stock;//库存
-    private User inputUser;//创建人
+    private Admin inputUser;//创建人
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -108,11 +108,11 @@ public class Product implements Serializable {
 
     @ManyToOne
     @JoinColumn
-    public User getInputUser() {
+    public Admin getInputUser() {
         return inputUser;
     }
 
-    public void setInputUser(User inputUser) {
+    public void setInputUser(Admin inputUser) {
         this.inputUser = inputUser;
     }
 }

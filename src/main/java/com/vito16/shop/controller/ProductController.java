@@ -5,8 +5,10 @@ package com.vito16.shop.controller;
 
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
+import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;
+import com.vito16.shop.util.AdminUtil;
 import com.vito16.shop.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,16 +40,16 @@ public class ProductController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newForm(HttpSession session) {
-        if(UserUtil.getUserFromSession(session)==null){
-            return "redirect:/user/login?error=true";
+        if(AdminUtil.getAdminFromSession(session)==null){
+            return "redirect:/admin/login?error=true";
         }
         return "product/new";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(ModelAndView model,HttpSession session,HttpServletRequest request) {
-        if(UserUtil.getUserFromSession(session)==null){
-            model.setViewName("redirect:/user/login?error=true");
+        if(AdminUtil.getAdminFromSession(session)==null){
+            model.setViewName("redirect:/admin/login?error=true");
             return model;
         }
         Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
@@ -60,8 +62,8 @@ public class ProductController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView model,HttpSession session,@PathVariable Integer id) {
-        if(UserUtil.getUserFromSession(session)==null){
-            model.setViewName("redirect:/user/login?error=true");
+        if(AdminUtil.getAdminFromSession(session)==null){
+            model.setViewName("redirect:/admin/login?error=true");
             return model;
         }
         Product product = productService.findById(id);
@@ -72,8 +74,8 @@ public class ProductController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public ModelAndView doEdit(ModelAndView model,Product product,HttpSession session,@RequestParam("file") MultipartFile file,@PathVariable Integer id) {
-        if(UserUtil.getUserFromSession(session)==null){
-            model.setViewName("redirect:/user/login?error=true");
+        if(AdminUtil.getAdminFromSession(session)==null){
+            model.setViewName("redirect:/admin/login?error=true");
             return model;
         }
         if (!file.isEmpty()) {
@@ -98,7 +100,7 @@ public class ProductController {
             }
             product.setPicUrl("/upload/" + fileName);
         }
-        product.setInputUser(UserUtil.getUserFromSession(session));
+        product.setInputUser(AdminUtil.getAdminFromSession(session));
         productService.save(product);
         model.setViewName("redirect:/product/admin");
         return model;

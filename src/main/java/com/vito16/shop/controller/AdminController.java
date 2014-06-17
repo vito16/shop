@@ -3,6 +3,7 @@ package com.vito16.shop.controller;
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.service.AdminService;
+import com.vito16.shop.util.AdminUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,11 @@ public class AdminController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String doLogin(Admin admin, HttpSession session) {
 		if(adminService.checkLogin(admin)){
-			session.setAttribute(Constants.LOGIN_ADMIN, admin);
+            AdminUtil.saveAdminToSession(session,admin);
 			logger.debug("管理员["+admin.getUsername()+"]登陆成功");
-			return "redirect:/admin/";
+			return "redirect:/";
 		}
-		return "redirect:/admin/login?error=true";
+		return "redirect:/admin/login?errorPwd=true";
 	}
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
 	public Admin regForm(){
