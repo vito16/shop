@@ -72,8 +72,9 @@ public class ProductController {
         return model;
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView doEdit(ModelAndView model,Product product,HttpSession session,@RequestParam("file") MultipartFile file,@PathVariable Integer id) {
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public ModelAndView doEdit(ModelAndView model,Product product,HttpSession session,@RequestParam("file") MultipartFile file) {
+        System.out.println(file);
         if(AdminUtil.getAdminFromSession(session)==null){
             model.setViewName("redirect:/admin/login?error=true");
             return model;
@@ -151,7 +152,7 @@ public class ProductController {
         product.setInputUser(AdminUtil.getAdminFromSession(session));
         product.setCreateTime(new Date());
         productService.save(product);
-        return "redirect:/product/";
+        return "redirect:/product/admin";
     }
 
 }
