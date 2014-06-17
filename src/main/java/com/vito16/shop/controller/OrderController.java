@@ -25,7 +25,7 @@ import java.util.List;
 public class OrderController {
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
-    @RequestMapping(value="",method = RequestMethod.GET)
+    @RequestMapping(value="/purchase",method = RequestMethod.GET)
     public String purchase(HttpSession session){
 
         return "/order/purchase";

@@ -50,7 +50,9 @@ public class CartUtil {
      */
     public static synchronized void deleteProductFromCart(HttpSession session, Integer productId) {
         Map<Integer, CartItem> cartItemMap = (HashMap<Integer, CartItem>) session.getAttribute(CART);
-        cartItemMap.remove(productId);
+        if(cartItemMap!=null) {
+            cartItemMap.remove(productId);
+        }
         session.setAttribute(CART, cartItemMap);
     }
 
@@ -61,7 +63,9 @@ public class CartUtil {
      */
     public static synchronized void cleanCart(HttpSession session) {
         Map<Integer, CartItem> cartItemMap = (HashMap<Integer, CartItem>) session.getAttribute(CART);
-        cartItemMap.clear();
+        if(cartItemMap!=null){
+            cartItemMap.clear();
+        }
         session.setAttribute(CART, cartItemMap);
     }
 }
