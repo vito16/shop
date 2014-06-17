@@ -61,7 +61,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">商品简介：</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" value="${product.note}" name="note"></textarea>
+                    <textarea class="form-control" name="note">${product.note}</textarea>
                 </div>
             </div>
             <div class="text-center">
