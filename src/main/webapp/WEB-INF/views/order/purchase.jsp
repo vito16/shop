@@ -13,16 +13,46 @@
 <body>
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
-    <form:form action="${ctx}/order/ordering" method="post">
+    <form:form cssClass="form-horizontal" action="${ctx}/order/ordering" method="post">
+        <div style="display: none;" class="row list-group">
+            <div class="col-sm-6 col-sm-offset-2">
+                <c:forEach items="${addressList}" var="address">
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading"><input type="radio" name="oldAddress"/>${address.address}</h4>
+                        <p class="list-group-item-text">${address.consignee}</p>
+                    </a>
+                </c:forEach>
+            </div>
+        </div>
+
         <div class="row">
             <div class="form-group">
-                <label>地址</label><input name="address"/>
+                <label for="address" class="col-sm-2 control-label">地址</label>
+
+                <div class="col-sm-6">
+                    <input id="address" class="form-control" type="text" name="address"/>
+                </div>
             </div>
             <div class="form-group">
-                <label>电话</label><input name="phone"/>
+                <label for="zipcode" class="col-sm-2 control-label">邮编</label>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="zipcode" name="zipcode"/>
+                </div>
             </div>
             <div class="form-group">
-                <label>联系人</label><input name="name"/>
+                <label for="address" class="col-sm-2 control-label">电话</label>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="phone" name="phone"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="consignee" class="col-sm-2 control-label">联系人</label>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="consignee" name="consignee"/>
+                </div>
             </div>
         </div>
 
@@ -51,7 +81,8 @@
                 </tbody>
             </table>
             <a class="btn btn-primary" href="${ctx}/cart/">回购物车修改</a>
-            <a class="btn btn-primary" href="${ctx}/order/ordering/">确认</a>
+            <button class="btn btn-primary" type="submit" href="${ctx}/order/ordering/">确认</button>
+
             <div id="delSuccess" class="alert alert-success" style="display: none;">删除成功...</div>
             <div id="delAllSuccess" class="alert alert-success" style="display: none;">购物车清空成功...</div>
         </div>
