@@ -1,5 +1,6 @@
 package com.vito16.shop.controller;
 
+import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
 import com.vito16.shop.model.*;
@@ -90,10 +91,9 @@ public class OrderController {
         Order order = new Order();
         order.setCreateTime(new Date());
         address.setUser(UserUtil.getUserFromSession(session));
-        logger.info(ToStringBuilder.reflectionToString(address));
         userAddressService.save(address);
-        DateTime dt = new DateTime();
-        order.setOrderNumber(dt.toString("yyyyMMddHHmmSS"));
+        order.setOrderNumber( new DateTime().toString("yyyyMMddHHmmSS"));
+        order.setStatus(Constants.OrderStatus.WAIT_PAY);
         List<OrderItem> oiList = CartUtil.getOrderItemFromCart(session);
         for(OrderItem oi : oiList){
             oi.setOrder(order);
@@ -101,7 +101,7 @@ public class OrderController {
         order.setOrderItems(oiList);
         order.setUser(UserUtil.getUserFromSession(session));
         order.setUserAddress(address);
-        orderService.save(order);
+        orderService.addOrder(order,oiList);
         return "order/orderingSuccess";
     }
 }

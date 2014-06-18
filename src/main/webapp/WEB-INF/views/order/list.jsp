@@ -27,13 +27,17 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${page.result}" var="order">
+                    <c:set value="0" var="sum" />
                     <tr pid="${order.id}">
                         <td>${order.createTime}</td>
                         <td>${order.orderNumber}</td>
-                        <td></td>
+                        <c:forEach items="${order.orderItems}" var="item">
+                            <c:set value="${sum + (item.quantity*item.product.point)}" var="sum" />
+                        </c:forEach>
+                        <td>${sum}</td>
                         <td>${order.status}</td>
                         <td>${order.userAddress.consignee}</td>
-                        <td><a class="btn btn-info delBtn btn-xs" productid="${ci.product.id}">删除</a></td>
+                        <td><a class="btn btn-info btn-xs" href="${ctx}/order/view/${ci.product.id}">查看</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -46,6 +50,5 @@
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
 <%@ include file="/common/include-base-js.jsp" %>
-<script src="${ctx }/js/product.js" type="text/javascript"></script>
 </body>
 </html>

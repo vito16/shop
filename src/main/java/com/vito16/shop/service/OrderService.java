@@ -5,9 +5,11 @@ package com.vito16.shop.service;
 
 import com.vito16.shop.common.Page;
 import com.vito16.shop.dao.OrderDao;
+import com.vito16.shop.dao.OrderItemDao;
 import com.vito16.shop.dao.ProductDao;
 import com.vito16.shop.dao.ProductTypeDao;
 import com.vito16.shop.model.Order;
+import com.vito16.shop.model.OrderItem;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.model.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,15 @@ public class OrderService {
 
 	@Autowired
     OrderDao orderDao;
+    @Autowired
+    OrderItemDao orderItemDao;
 
+    public void addOrder(Order order,List<OrderItem> orderItemList){
+        save(order);
+        for(OrderItem orderItem:orderItemList){
+            orderItemDao.save(orderItem);
+        }
+    }
 	public void save(Order order) {
         orderDao.save(order);
 	}
