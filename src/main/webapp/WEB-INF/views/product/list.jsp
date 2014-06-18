@@ -27,7 +27,7 @@
 
                 <p>
                     <a class="btn btn-info" href="${ctx}/product/${product.id}" role="button">查看</a>
-                    <a class="btn btn-primary" productID="${product.id}" role="button">购买</a>
+                    <a class="btn btn-primary addCart" productid="${product.id}" role="button">购买</a>
                 </p>
             </div>
         </c:forEach>
@@ -39,5 +39,6 @@
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
 <%@ include file="/common/include-base-js.jsp" %>
+<script src="${ctx }/js/product.js" type="text/javascript"></script>
 </body>
 </html>

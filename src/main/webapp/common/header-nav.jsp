@@ -17,24 +17,38 @@
                 <li><a href="${ctx}/news/">公告</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <c:if test="${not empty login_user}">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                ${login_user.username}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="${ctx}/user/setting">设置</a></li>
-                            <li><a href="${ctx}/product/admin">商品管理</a></li>
-                            <li><a href="${ctx}/order/admin">订单管理</a></li>
-                            <li><a href="${ctx}/news/admin">公告管理</a></li>
-                            <li><a href="${ctx}/user/logout">登出</a></li>
-                        </ul>
-                    </li>
-                </c:if>
-                <c:if test="${empty login_user}">
-                    <li><a href="${ctx}/user/login">登陆</a></li>
-                    <li><a href="${ctx}/user/reg">注册</a></li>
-                </c:if>
+                <c:choose>
+                    <c:when test="${not empty login_user}">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    ${login_user.username}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="${ctx}/user/setting">设置</a></li>
+                                <li><a href="${ctx}/order/list">订单管理</a></li>
+                                <li><a href="${ctx}/user/logout">登出</a></li>
+                            </ul>
+                        </li>
+                    </c:when>
+                    <c:when test="${not empty login_admin}">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    ${login_admin.username}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="${ctx}/admin/setting">设置</a></li>
+                                <li><a href="${ctx}/product/admin">商品管理</a></li>
+                                <li><a href="${ctx}/order/admin">订单管理</a></li>
+                                <li><a href="${ctx}/news/admin">公告管理</a></li>
+                                <li><a href="${ctx}/admin/logout">登出</a></li>
+                            </ul>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${ctx}/user/login">登陆</a></li>
+                        <li><a href="${ctx}/user/reg">注册</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
             <form class="navbar-form navbar-right" role="cart">
                 <a href="${ctx}/cart/" class="btn btn-info">购物车</a>

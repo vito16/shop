@@ -22,6 +22,7 @@ public class UserUtil {
      * @param user
      */
     public static void saveUserToSession(HttpSession session, User user) {
+        AdminUtil.deleteAdminFromSession(session);
         session.setAttribute(USER, user);
     }
 
