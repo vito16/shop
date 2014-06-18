@@ -74,7 +74,6 @@ public class ProductController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView doEdit(ModelAndView model,Product product,HttpSession session,@RequestParam("file") MultipartFile file) {
-        System.out.println(file);
         if(AdminUtil.getAdminFromSession(session)==null){
             model.setViewName("redirect:/admin/login?error=true");
             return model;

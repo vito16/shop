@@ -42,7 +42,7 @@
                             <td>${ci.product.model}</td>
                             <td>${ci.product.code}</td>
                             <td>${ci.product.point}</td>
-                            <td><a class="btn btn-default btn-xs">-</a> ${ci.total} <a class="btn btn-default btn-xs">+</a></td>
+                            <td><a class="btn btn-default btn-xs delTotal">-</a> <label productid="${ci.product.id}">${ci.total}</label> <a class="btn btn-default btn-xs addTotal">+</a></td>
                             <td><a class="btn btn-info delBtn btn-xs" productid="${ci.product.id}">删除</a></td>
                         </tr>
                     </c:forEach>
