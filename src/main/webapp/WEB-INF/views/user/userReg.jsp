@@ -7,9 +7,7 @@
     <title>用户注册</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
-    <%@ include file="/common/include-base-js.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/login.css"/>
-    <link type="text/css" rel="stylesheet" href="${ctx}/common/bootstrap/css/bootstrapValidator.min.css"/>
 </head>
 
 <body>
@@ -42,36 +40,6 @@
 <!-- /container -->
 
 <%@ include file="/common/include-base-js.jsp" %>
-<script src="${ctx }/common/bootstrap/js/bootstrapValidator.min.js" type="text/javascript"></script>
-<script>
-    $('#regForm').bootstrapValidator({
-        fields: {
-            username: {
-                validators: {
-                    notEmpty: {
-                        message: '用户名不能为空.'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 15,
-                        message: '用户名长度应该在6 - 15之间.'
-                    }
-                }
-            },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: '密码不能为空.'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 15,
-                        message: '密码长度应该在6 - 15之间.'
-                    }
-                }
-            }
-        }
-    });
-</script>
+<script src="${ctx }/js/login.js" type="text/javascript"></script>
 </body>
 </html>

@@ -39,15 +39,15 @@ public class ProductController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newForm(HttpSession session) {
-        if(AdminUtil.getAdminFromSession(session)==null){
+        if (AdminUtil.getAdminFromSession(session) == null) {
             return "redirect:/admin/login?error=true";
         }
         return "product/productNew";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView admin(ModelAndView model,HttpSession session,HttpServletRequest request) {
-        if(AdminUtil.getAdminFromSession(session)==null){
+    public ModelAndView admin(ModelAndView model, HttpSession session, HttpServletRequest request) {
+        if (AdminUtil.getAdminFromSession(session) == null) {
             model.setViewName("redirect:/admin/login?error=true");
             return model;
         }
@@ -60,8 +60,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(ModelAndView model,HttpSession session,@PathVariable Integer id) {
-        if(AdminUtil.getAdminFromSession(session)==null){
+    public ModelAndView edit(ModelAndView model, HttpSession session, @PathVariable Integer id) {
+        if (AdminUtil.getAdminFromSession(session) == null) {
             model.setViewName("redirect:/admin/login?error=true");
             return model;
         }
@@ -72,32 +72,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public ModelAndView doEdit(ModelAndView model,Product product,HttpSession session,@RequestParam("file") MultipartFile file) {
-        if(AdminUtil.getAdminFromSession(session)==null){
+    public ModelAndView doEdit(ModelAndView model, Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
+        if (AdminUtil.getAdminFromSession(session) == null) {
             model.setViewName("redirect:/admin/login?error=true");
             return model;
         }
         if (!file.isEmpty()) {
-            String fileName = new Date().getTime()+".jpg";
-            String path = session.getServletContext().getRealPath("/upload");
-            String serverFile = path+"/"+fileName;
-            try {
-                logger.info(path);
-                if(!new File(path).exists()){
-                    new File(path).mkdirs();
-                }
-                if(!new File(serverFile).exists()){
-                    new File(serverFile).createNewFile();
-                }
-                byte[] bytes = file.getBytes();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(serverFile)));
-                stream.write(bytes);
-                stream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            product.setPicUrl("/upload/" + fileName);
+            uploadImage(product, session, file);
         }
         product.setInputUser(AdminUtil.getAdminFromSession(session));
         productService.save(product);
@@ -105,8 +86,31 @@ public class ProductController {
         return model;
     }
 
+    private void uploadImage(Product product, HttpSession session, MultipartFile file) {
+        String fileName = new Date().getTime() + ".jpg";
+        String path = session.getServletContext().getRealPath("/upload");
+        String serverFile = path + "/" + fileName;
+        try {
+            logger.info(path);
+            if (!new File(path).exists()) {
+                new File(path).mkdirs();
+            }
+            if (!new File(serverFile).exists()) {
+                new File(serverFile).createNewFile();
+            }
+            byte[] bytes = file.getBytes();
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(new File(serverFile)));
+            stream.write(bytes);
+            stream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        product.setPicUrl("/upload/" + fileName);
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView listProduct(ModelAndView model,HttpServletRequest request) {
+    public ModelAndView listProduct(ModelAndView model, HttpServletRequest request) {
         Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
         int[] pageParams = PageUtil.init(page, request);
         productService.findProducts(page, pageParams);
@@ -123,28 +127,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String doNew(Product product,HttpSession session,@RequestParam("file") MultipartFile file) {
-        String fileName = new Date().getTime()+".jpg";
-        String path = session.getServletContext().getRealPath("/upload");
-        String serverFile = path+"/"+fileName;
+    public String doNew(Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
-            try {
-                logger.info(path);
-                if(!new File(path).exists()){
-                    new File(path).mkdirs();
-                }
-                if(!new File(serverFile).exists()){
-                    new File(serverFile).createNewFile();
-                }
-                byte[] bytes = file.getBytes();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(serverFile)));
-                stream.write(bytes);
-                stream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            product.setPicUrl("/upload/" + fileName);
+            uploadImage(product, session, file);
         }
         product.setInputUser(AdminUtil.getAdminFromSession(session));
         product.setCreateTime(new Date());

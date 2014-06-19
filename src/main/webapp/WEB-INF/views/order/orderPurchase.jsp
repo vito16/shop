@@ -49,7 +49,6 @@
             </div>
             <div class="form-group">
                 <label for="consignee" class="col-sm-2 control-label">联系人</label>
-
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="consignee" name="consignee"/>
                 </div>

@@ -8,10 +8,7 @@ import com.vito16.shop.dao.OrderDao;
 import com.vito16.shop.dao.OrderItemDao;
 import com.vito16.shop.dao.ProductDao;
 import com.vito16.shop.dao.ProductTypeDao;
-import com.vito16.shop.model.Order;
-import com.vito16.shop.model.OrderItem;
-import com.vito16.shop.model.Product;
-import com.vito16.shop.model.ProductType;
+import com.vito16.shop.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -31,8 +28,11 @@ public class OrderService {
     OrderDao orderDao;
     @Autowired
     OrderItemDao orderItemDao;
+    @Autowired
+    UserAddressService userAddressService;
 
-    public void addOrder(Order order,List<OrderItem> orderItemList){
+    public void addOrder(Order order,List<OrderItem> orderItemList,UserAddress userAddress){
+        userAddressService.save(userAddress);
         save(order);
         for(OrderItem orderItem:orderItemList){
             orderItemDao.save(orderItem);

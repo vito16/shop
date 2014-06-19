@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -83,7 +84,6 @@ public class OrderController {
         Order order = new Order();
         order.setCreateTime(new Date());
         address.setUser(UserUtil.getUserFromSession(session));
-        userAddressService.save(address);
         order.setOrderNumber(new DateTime().toString("yyyyMMddHHmmSS"));
         order.setStatus(Constants.OrderStatus.WAIT_PAY);
         List<OrderItem> oiList = CartUtil.getOrderItemFromCart(session);
@@ -93,7 +93,13 @@ public class OrderController {
         order.setOrderItems(oiList);
         order.setUser(UserUtil.getUserFromSession(session));
         order.setUserAddress(address);
-        orderService.addOrder(order, oiList);
+        orderService.addOrder(order, oiList,address);
         return "order/orderingSuccess";
+    }
+
+    @RequestMapping(value="/view/{id}",method = RequestMethod.GET)
+    public String viewOrder(@PathVariable Integer id,Model model){
+        model.addAttribute("order",orderService.findById(id));
+        return "order/orderView";
     }
 }

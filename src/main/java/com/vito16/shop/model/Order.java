@@ -3,6 +3,8 @@
  */
 package com.vito16.shop.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -31,12 +33,15 @@ public class Order implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String orderNumber;
-	private User user;
-	private UserAddress userAddress;
-	private List<OrderItem> orderItems;
-	private Date createTime;
-	private Integer status;
+	private String orderNumber;//订单编号
+	private User user;//关联客户
+	private UserAddress userAddress;//关联地址
+	private List<OrderItem> orderItems;//关联商品
+	private Date createTime;//创建时间
+    private Date payTime;//付款时间
+    private Date shipTime;//发货时间
+    private Date confirmTime;//确认收货时间
+	private Integer status;//状态
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,4 +106,30 @@ public class Order implements Serializable {
 		this.userAddress = userAddress;
 	}
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
+    public Date getShipTime() {
+        return shipTime;
+    }
+
+    public void setShipTime(Date shipTime) {
+        this.shipTime = shipTime;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
+    public Date getConfirmTime() {
+        return confirmTime;
+    }
+
+    public void setConfirmTime(Date confirmTime) {
+        this.confirmTime = confirmTime;
+    }
 }

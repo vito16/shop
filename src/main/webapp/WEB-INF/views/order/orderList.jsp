@@ -37,7 +37,7 @@
                         <td>${sum}</td>
                         <td>${order.status}</td>
                         <td>${order.userAddress.consignee}</td>
-                        <td><a class="btn btn-info btn-xs" href="${ctx}/order/view/${ci.product.id}">查看</a></td>
+                        <td><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
