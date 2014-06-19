@@ -7,27 +7,19 @@ import com.vito16.shop.model.*;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
-import com.vito16.shop.util.CartItem;
 import com.vito16.shop.util.CartUtil;
 import com.vito16.shop.util.UserUtil;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,7 +52,7 @@ public class OrderController {
         User user = userService.findOne(UserUtil.getUserFromSession(session).getId());
         List<UserAddress> userAddressList = user.getAddresses();
         model.addAttribute("addressList",userAddressList);
-        return "order/purchase";
+        return "order/orderPurchase";
     }
 
     /**
@@ -77,7 +69,7 @@ public class OrderController {
         int[] pageParams = PageUtil.init(page, request);
         orderService.findOrders(page, pageParams);
         model.addAttribute("page", page);
-        return "order/list";
+        return "order/orderList";
     }
 
     /**
@@ -92,7 +84,7 @@ public class OrderController {
         order.setCreateTime(new Date());
         address.setUser(UserUtil.getUserFromSession(session));
         userAddressService.save(address);
-        order.setOrderNumber( new DateTime().toString("yyyyMMddHHmmSS"));
+        order.setOrderNumber(new DateTime().toString("yyyyMMddHHmmSS"));
         order.setStatus(Constants.OrderStatus.WAIT_PAY);
         List<OrderItem> oiList = CartUtil.getOrderItemFromCart(session);
         for(OrderItem oi : oiList){
@@ -101,7 +93,7 @@ public class OrderController {
         order.setOrderItems(oiList);
         order.setUser(UserUtil.getUserFromSession(session));
         order.setUserAddress(address);
-        orderService.addOrder(order,oiList);
+        orderService.addOrder(order, oiList);
         return "order/orderingSuccess";
     }
 }

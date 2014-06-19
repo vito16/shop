@@ -9,6 +9,7 @@
     <%@ include file="/common/include-base-styles.jsp" %>
     <%@ include file="/common/include-base-js.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/login.css"/>
+    <link type="text/css" rel="stylesheet" href="${ctx}/common/bootstrap/css/bootstrapValidator.min.css"/>
 </head>
 
 <body>
@@ -23,14 +24,14 @@
         </script>
     </c:if>
     <form:form role="form" action="${ctx}/user/reg"
-               method="post" class="form-signin">
+               method="post" id="regForm" class="form-signin">
         <h2 class="form-signin-heading">用户注册</h2>
 
         <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="账号" required autofocus>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="密码" required>
+            <input type="password"  class="form-control" minlength="6" name="password" placeholder="密码" required>
         </div>
         <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
@@ -41,5 +42,36 @@
 <!-- /container -->
 
 <%@ include file="/common/include-base-js.jsp" %>
+<script src="${ctx }/common/bootstrap/js/bootstrapValidator.min.js" type="text/javascript"></script>
+<script>
+    $('#regForm').bootstrapValidator({
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: '用户名不能为空.'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 15,
+                        message: '用户名长度应该在6 - 15之间.'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空.'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 15,
+                        message: '密码长度应该在6 - 15之间.'
+                    }
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html>

@@ -5,15 +5,14 @@ package com.vito16.shop.controller;
 
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
-import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.AdminUtil;
-import com.vito16.shop.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +42,7 @@ public class ProductController {
         if(AdminUtil.getAdminFromSession(session)==null){
             return "redirect:/admin/login?error=true";
         }
-        return "product/new";
+        return "product/productNew";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -56,7 +55,7 @@ public class ProductController {
         int[] pageParams = PageUtil.init(page, request);
         productService.findProducts(page, pageParams);
         model.addObject("page", page);
-        model.setViewName("product/admin");
+        model.setViewName("product/productAdmin");
         return model;
     }
 
@@ -68,7 +67,7 @@ public class ProductController {
         }
         Product product = productService.findById(id);
         model.addObject("product", product);
-        model.setViewName("product/edit");
+        model.setViewName("product/productEdit");
         return model;
     }
 
@@ -112,16 +111,15 @@ public class ProductController {
         int[] pageParams = PageUtil.init(page, request);
         productService.findProducts(page, pageParams);
         model.addObject("page", page);
-        model.setViewName("product/list");
+        model.setViewName("product/productList");
         return model;
     }
 
     @RequestMapping(value = "/{id}")
-    public ModelAndView showInfo(@PathVariable Integer id, ModelAndView model) {
+    public String showInfo(@PathVariable Integer id, Model model) {
         Product product = productService.findById(id);
-        model.addObject("product", product);
-        model.setViewName("product/view");
-        return model;
+        model.addAttribute("product", product);
+        return "product/productView";
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)

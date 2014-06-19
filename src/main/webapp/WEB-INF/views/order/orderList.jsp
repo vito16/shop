@@ -4,7 +4,7 @@
 <html>
 <head>
     <%@ include file="/common/global.jsp" %>
-    <title>主页</title>
+    <title>订单列表</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>

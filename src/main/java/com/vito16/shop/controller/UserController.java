@@ -38,9 +38,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public User loginForm() {
-		User user = new User();
-		return user;
+	public String loginForm() {
+        return "user/userLogin";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -97,23 +96,22 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/reg", method = RequestMethod.GET)
-	public User reg() {
-		User user = new User();
-		user.setUsername("请填写用户名");
-		user.setPassword("");
-		return user;
+	public String reg() {
+        return "user/userReg";
 	}
 
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public String add(@Valid User user,Model model, BindingResult result) {
+        System.out.println(1);
 		if (result.hasErrors()) {
+            System.out.println(2);
 			logger.error("Java Bean 没有通过验证");
 			for (ObjectError or : result.getAllErrors()) {
 				logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
 						+ or.getDefaultMessage());
 			}
 			model.addAttribute("error", "数据信息错误");
-			return "user/reg";
+			return "user/userReg";
 		}
 		userService.save(user);
 		logger.info("后台成功添加用户:" + user);
