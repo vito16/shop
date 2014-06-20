@@ -1,9 +1,10 @@
 /**
- * 
+ *
  */
 package com.vito16.shop.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,90 +22,92 @@ import javax.persistence.Table;
 
 /**
  * 订单
+ *
  * @author Vito16 zhouwentao16@gmail.com
  * @date 2013-7-8
- * 
  */
 @Entity
 @Table(name = "T_ORDER")
 public class Order implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private String orderNumber;//订单编号
-	private User user;//关联客户
-	private UserAddress userAddress;//关联地址
-	private List<OrderItem> orderItems;//关联商品
-	private Date createTime;//创建时间
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String orderNumber;//订单编号
+    private User user;//关联客户
+    private UserAddress userAddress;//关联地址
+    private List<OrderItem> orderItems;//关联商品
+    private Date createTime;//创建时间
     private Date payTime;//付款时间
     private Date shipTime;//发货时间
     private Date confirmTime;//确认收货时间
-	private Integer status;//状态
+    private Integer status;//状态
+    private Double finalPrice;//实际成交价
+    private Double totalPrice;//总价
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getOrderNumber() {
-		return orderNumber;
-	}
+    public String getOrderNumber() {
+        return orderNumber;
+    }
 
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
-	}
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	public User getUser() {
-		return user;
-	}
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	@OneToMany(mappedBy="order")
-	public List<OrderItem> getOrderItems() {
-		return orderItems;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setOrderItems(List<OrderItem> orderItems) {
-		this.orderItems = orderItems;
-	}
+    @OneToMany(mappedBy = "order")
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	@OneToOne
-	@JoinColumn
-	public UserAddress getUserAddress() {
-		return userAddress;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public void setUserAddress(UserAddress userAddress) {
-		this.userAddress = userAddress;
-	}
+    @OneToOne
+    @JoinColumn
+    public UserAddress getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
+    }
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     public Date getPayTime() {
@@ -131,5 +134,23 @@ public class Order implements Serializable {
 
     public void setConfirmTime(Date confirmTime) {
         this.confirmTime = confirmTime;
+    }
+
+    @NumberFormat(pattern = "0.00")
+    public Double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(Double finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    @NumberFormat(pattern = "0.00")
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

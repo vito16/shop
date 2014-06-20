@@ -4,7 +4,7 @@
 <html>
 <head>
     <%@ include file="/common/global.jsp" %>
-    <title>订单列表</title>
+    <title>订单管理</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>
@@ -44,12 +44,11 @@
                         <td>${order.userAddress.consignee}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/pay/${order.id}">付款</a><a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">取消订单</a></c:when>
-                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">取消订单</a></c:when>
-                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">确认收货</a></c:when>
+                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">删除</a></c:when>
+                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/ship/${order.id}">发货</a><a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">删除</a></c:when>
+                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                                 <c:when test="${order.status==3}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                             </c:choose>
-                            <a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a>
                         </td>
                     </tr>
                 </c:forEach>

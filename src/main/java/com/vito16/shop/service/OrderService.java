@@ -31,6 +31,12 @@ public class OrderService {
     @Autowired
     UserAddressService userAddressService;
 
+    /**
+     * 新建订单
+     * @param order
+     * @param orderItemList
+     * @param userAddress
+     */
     public void addOrder(Order order,List<OrderItem> orderItemList,UserAddress userAddress){
         userAddressService.save(userAddress);
         save(order);
@@ -54,5 +60,13 @@ public class OrderService {
         page.setResult(orderDao.findAll(new PageRequest(pageParams[0]-1,pageParams[1])).getContent());
         page.setTotalCount(orderDao.count());
         return page.getResult();
+    }
+
+    /**
+     * 删除订单以及订单相关信息
+     * @param id 订单ID
+     */
+    public void deleteOrder(Integer id) {
+        orderDao.delete(id);
     }
 }

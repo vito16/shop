@@ -1,5 +1,6 @@
 package com.vito16.shop.controller;
 
+import com.google.common.math.IntMath;
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
@@ -18,9 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -90,9 +93,13 @@ public class OrderController {
         order.setOrderNumber(new DateTime().toString("yyyyMMddHHmmSS"));
         order.setStatus(Constants.OrderStatus.WAIT_PAY);
         List<OrderItem> oiList = CartUtil.getOrderItemFromCart(session);
+        BigDecimal totalSum = new BigDecimal("0");
         for (OrderItem oi : oiList) {
+            totalSum.add(new BigDecimal(oi.getProduct().getPoint() * oi.getQuantity()));
             oi.setOrder(order);
         }
+        order.setTotalPrice(totalSum.doubleValue());
+        order.setFinalPrice(totalSum.doubleValue());
         order.setOrderItems(oiList);
         order.setUser(UserUtil.getUserFromSession(session));
         order.setUserAddress(address);
@@ -104,5 +111,17 @@ public class OrderController {
     public String viewOrder(@PathVariable Integer id, Model model) {
         model.addAttribute("order", orderService.findById(id));
         return "order/orderView";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String delete(@PathVariable Integer id){
+        orderService.deleteOrder(id);
+        return "success";
+    }
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String pay(){
+
     }
 }
