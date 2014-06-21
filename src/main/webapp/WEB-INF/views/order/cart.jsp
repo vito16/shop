@@ -51,7 +51,7 @@
             </c:choose>
         </table>
         <div id="delSuccess" class="alert alert-success" style="display: none;">删除成功...</div>
-        <div id="delAllSuccess" class="alert alert-success" style="display: none;">购物车清空成功...</div>
+        <div id="delAllSuccess" class="alert alert-success" style="display: none;">购物车清空成功....</div>
     </div>
     <div class="row">
         <div class="col-md-6 col-xs-9">
