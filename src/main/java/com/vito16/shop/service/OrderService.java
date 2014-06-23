@@ -38,6 +38,7 @@ public class OrderService {
      * @param userAddress
      */
     public void addOrder(Order order,List<OrderItem> orderItemList,UserAddress userAddress){
+        //更新或新增用户收获地址(根据userAddress是否包含id判断新增还是更新)
         userAddressService.save(userAddress);
         save(order);
         for(OrderItem orderItem:orderItemList){
