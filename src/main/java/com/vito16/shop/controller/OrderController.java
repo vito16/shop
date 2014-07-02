@@ -120,8 +120,10 @@ public class OrderController {
         return "success";
     }
 
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
+    @ResponseBody
     public String pay(){
-
+        //TODO 付款操作
+        return "success";
     }
 }
