@@ -141,10 +141,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userAddress/del/{id}",method = RequestMethod.GET)
+    @ResponseBody
     public String delUserAddress(Model model,@PathVariable Integer id){
         userAddressService.deleteById(id);
-        model.addAttribute("title","添加收货地址");
-        return "user/addUserAddress";
+        logger.debug("收货地址删除成功...");
+        return "success";
     }
 
     @RequestMapping(value = "/userAddress/add",method = RequestMethod.POST)
