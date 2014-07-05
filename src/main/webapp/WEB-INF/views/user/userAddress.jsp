@@ -47,8 +47,8 @@
                     <td>${userAddress.phone}</td>
                     <td>${userAddress.address}</td>
                     <td>
-                        <a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">删除</a>
-                        <a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">修改</a>
+                        <a class="btn btn-info btn-xs" href="${ctx}/user/userAddress/del/${order.id}">删除</a>
+                        <a class="btn btn-info btn-xs" href="${ctx}/user/userAddress/edit/${order.id}">修改</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -81,7 +81,7 @@
                     <label class="col-sm-2 control-label">地址</label>
 
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="note"></textarea>
+                        <textarea class="form-control" name="address"></textarea>
                     </div>
                 </div>
                 <div class="text-center">

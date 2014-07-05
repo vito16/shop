@@ -13,10 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -139,6 +136,13 @@ public class UserController {
 
     @RequestMapping(value = "/userAddress/add",method = RequestMethod.GET)
     public String addUserAddress(Model model){
+        model.addAttribute("title","添加收货地址");
+        return "user/addUserAddress";
+    }
+
+    @RequestMapping(value = "/userAddress/del/{id}",method = RequestMethod.GET)
+    public String delUserAddress(Model model,@PathVariable Integer id){
+        userAddressService.deleteById(id);
         model.addAttribute("title","添加收货地址");
         return "user/addUserAddress";
     }
