@@ -18,8 +18,6 @@ a.more{float:right;display:block;margin-top:10px;width:43px;height:13px;backgrou
 .newproimg{top:-3px;left:-3px;width:82px;height:100px;background:url(../images/trans.png) no-repeat}
 .rpt_x01{background:url(../images/rpt_x01.gif) repeat-x bottom center}
 
-
-
 .ul_news{padding-top:15px;width:190px;}
 .ul_news li{padding-left:24px;width:166px;height:32px;line-height:32px;border-bottom:1px dotted #ccc;background:url(../images/icorn.gif) no-repeat -26px -174px;overflow:hidden}
 .more01 a{ float:right;margin-right:15px;text-align:right;height:34px;line-height:34px}

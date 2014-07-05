@@ -10,6 +10,8 @@ import com.vito16.shop.model.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Vito
  * @email zhouwentao16@gmail.com
@@ -28,5 +30,11 @@ public class UserAddressService {
 	public UserAddress findById(Integer id) {
 		return userAddressDao.findOne(id);
 	}
+
+    public List<UserAddress> findByUserId(Integer userId){
+        User user = new User();
+        user.setId(userId);
+        return userAddressDao.findByUser(user);
+    }
 
 }

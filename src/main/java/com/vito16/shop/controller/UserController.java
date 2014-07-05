@@ -1,8 +1,11 @@
 package com.vito16.shop.controller;
 
 import com.vito16.shop.model.User;
+import com.vito16.shop.model.UserAddress;
+import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
 import com.vito16.shop.util.UserUtil;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -32,6 +36,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+
+    @Autowired
+    UserAddressService userAddressService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index() {
@@ -118,4 +125,30 @@ public class UserController {
 		logger.info("后台成功添加用户:" + user);
 		return "redirect:/";
 	}
+
+    @RequestMapping(value="/userAddress", method = RequestMethod.GET)
+    public String userAddress(Model model,HttpSession session){
+        model.addAttribute("title","地址管理");
+        List<UserAddress> userAddressList = userAddressService.findByUserId(UserUtil.getUserFromSession(session).getId());
+        model.addAttribute("userAddressList",userAddressList);
+        for(UserAddress ua : userAddressList){
+            logger.warn(ToStringBuilder.reflectionToString(ua));
+        }
+        return "user/userAddress";
+    }
+
+    @RequestMapping(value = "/userAddress/add",method = RequestMethod.GET)
+    public String addUserAddress(Model model){
+        model.addAttribute("title","添加收货地址");
+        return "user/addUserAddress";
+    }
+
+    @RequestMapping(value = "/userAddress/add",method = RequestMethod.POST)
+    public String doAdd(Model model,HttpSession session,UserAddress userAddress){
+        userAddress.setUser(UserUtil.getUserFromSession(session));
+        userAddressService.save(userAddress);
+        model.addAttribute("successInfo","地址信息保存成功...");
+        logger.debug("地址信息保存成功.");
+        return "redirect:/user/userAddress";
+    }
 }

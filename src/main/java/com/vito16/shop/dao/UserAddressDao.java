@@ -5,6 +5,8 @@ import com.vito16.shop.model.UserAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 
  * @author Vito
@@ -14,4 +16,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserAddressDao extends JpaRepository<UserAddress, Integer> {
+    List<UserAddress> findByUser(User user);
 }

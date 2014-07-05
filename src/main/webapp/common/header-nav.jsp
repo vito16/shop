@@ -26,6 +26,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="${ctx}/user/setting">设置</a></li>
                                 <li><a href="${ctx}/order/">订单管理</a></li>
+                                <li><a href="${ctx}/user/userAddress">地址管理</a></li>
                                 <li><a href="${ctx}/user/logout">登出</a></li>
                             </ul>
                         </li>
