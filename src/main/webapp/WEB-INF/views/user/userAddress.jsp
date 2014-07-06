@@ -41,13 +41,13 @@
             </thead>
             <tbody>
             <c:forEach items="${userAddressList}" var="userAddress">
-                <tr pid="${order.id}">
+                <tr addressId="${userAddress.id}">
                     <td>${userAddress.consignee}</td>
                     <td>${userAddress.zipcode}</td>
                     <td>${userAddress.phone}</td>
                     <td>${userAddress.address}</td>
                     <td>
-                        <a class="btn btn-info btn-xs" href="${ctx}/user/userAddress/del/${order.id}">删除</a>
+                        <a class="btn btn-info btn-xs deAddresslBtn" addressId="${userAddress.id}">删除</a>
                         <a class="btn btn-info btn-xs" href="${ctx}/user/userAddress/edit/${order.id}">修改</a>
                     </td>
                 </tr>
@@ -94,10 +94,6 @@
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
 <%@ include file="/common/include-base-js.jsp" %>
-<script>
-    $(function () {
-        alert(${ctx});
-    });
-</script>
+<script src="${ctx }/js/user.js" type="text/javascript"></script>
 </body>
 </html>
