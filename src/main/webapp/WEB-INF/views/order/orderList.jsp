@@ -7,12 +7,14 @@
     <title>订单列表</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>
+    <%@ include file="/common/include-base-js.jsp" %>
+    <script src="${ctx }/js/order.js" type="text/javascript"></script>
 </head>
 
 <body>
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
+    <%@include file="/common/user-admin-nav.jsp" %>
     <div class="row">
         <table class="table table-responsive table-striped">
                 <thead>
@@ -62,6 +64,5 @@
 </div>
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
 </body>
 </html>

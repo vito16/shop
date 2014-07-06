@@ -8,27 +8,17 @@
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>
+    <%@ include file="/common/include-base-js.jsp" %>
+    <script src="${ctx }/js/userAddress.js" type="text/javascript"></script>
 </head>
 
 <body>
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
-    <div class="row br">
-        <ul class="nav nav-tabs">
-            <li><a href="${ctx}/user/info">个人信息</a></li>
-            <li class="active"><a href="#">地址管理</a></li>
-            <li><a href="${ctx}/user/security">安全管理</a></li>
-        </ul>
-    </div>
+    <%@include file="/common/user-admin-nav.jsp" %>
     <div class="row">
-        <c:if test="${not empty successInfo}">
-            <div id="successInfo" class="alert alert-success">123123${successInfo}</div>
-            <script type="text/javascript">
-                setTimeout(function () {
-                    $('#successInfo').hide('slow');
-                }, 4000);
-            </script>
-        </c:if>
+        <div id="errorTip" style="display: none" class="alert alert-warn">发生错误</div>
+        <div id="addAddressSuccess" style="display: none" class="alert alert-success">添加成功</div>
         <div id="delAddressSuccess" style="display: none" class="alert alert-success">删除成功</div>
         <table class="table table-responsive table-striped">
             <thead>
@@ -48,8 +38,8 @@
                     <td>${userAddress.phone}</td>
                     <td>${userAddress.address}</td>
                     <td>
-                        <a class="btn btn-info btn-xs deAddresslBtn" addressId="${userAddress.id}">删除</a>
-                        <a class="btn btn-info btn-xs" href="${ctx}/user/userAddress/edit/${order.id}">修改</a>
+                        <a class="btn btn-info btn-xs delAddresslBtn" addressId="${userAddress.id}">删除</a>
+                        <a class="btn btn-info btn-xs editAddresslBtn" addressId="${userAddress.id}">修改</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -82,11 +72,11 @@
                     <label class="col-sm-2 control-label">地址</label>
 
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="address"></textarea>
+                        <textarea class="form-control" name="address" id="address"></textarea>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">保存</button>
+                    <button type="button" id="addAddressBtn" class="btn btn-primary">保存</button>
                 </div>
             </form:form>
         </div>
@@ -94,7 +84,5 @@
 </div>
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
-<script src="${ctx }/js/user.js" type="text/javascript"></script>
 </body>
 </html>

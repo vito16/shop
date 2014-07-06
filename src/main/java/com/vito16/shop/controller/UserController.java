@@ -136,6 +136,22 @@ public class UserController {
         return "user/addUserAddress";
     }
 
+    @RequestMapping(value = "/userAddress/add", method = RequestMethod.POST)
+    @ResponseBody
+    public String doAddUserAddress(HttpSession session, UserAddress userAddress) {
+        userAddress.setUser(UserUtil.getUserFromSession(session));
+        userAddressService.save(userAddress);
+        logger.debug("地址信息保存成功.");
+        return "success";
+    }
+
+    @RequestMapping(value = "/userAddress/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public UserAddress findAddress(@PathVariable Integer id) {
+        UserAddress userAddress = userAddressService.findById(id);
+        return userAddress;
+    }
+
     @RequestMapping(value = "/userAddress/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String delUserAddress(Model model, @PathVariable Integer id) {
@@ -144,12 +160,4 @@ public class UserController {
         return "success";
     }
 
-    @RequestMapping(value = "/userAddress/add", method = RequestMethod.POST)
-    public String doAdd(Model model, HttpSession session, UserAddress userAddress) {
-        userAddress.setUser(UserUtil.getUserFromSession(session));
-        userAddressService.save(userAddress);
-        model.addAttribute("successInfo", "地址信息保存成功...");
-        logger.debug("地址信息保存成功.");
-        return "redirect:/user/userAddress";
-    }
 }
