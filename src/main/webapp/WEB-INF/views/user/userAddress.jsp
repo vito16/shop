@@ -29,6 +29,7 @@
                 }, 4000);
             </script>
         </c:if>
+        <div id="delAddressSuccess" style="display: none" class="alert alert-success">删除成功</div>
         <table class="table table-responsive table-striped">
             <thead>
             <tr>

@@ -9,7 +9,7 @@ $(function () {
                     $("tr[addressId="+addressId+"]").remove();
                     $('#delAddressSuccess').show();
                     setTimeout(function () {
-                        $('#delSuccess').hide('slow');
+                        $('#delAddressSuccess').hide('slow');
                     }, 3000);
                 } else {
                     alert("发生错误..");

@@ -24,135 +24,131 @@ import java.util.List;
 /**
  * @author Vito16 zhouwentao16@gmail.com
  * @date 2013-7-8
- * 
  */
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@Autowired
-	UserService userService;
+    @Autowired
+    UserService userService;
 
     @Autowired
     UserAddressService userAddressService;
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String index() {
-		return "user/index";
-	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginForm() {
+    @RequestMapping(method = RequestMethod.GET)
+    public String index() {
+        return "user/index";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginForm() {
         return "user/userLogin";
-	}
+    }
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String doLogin(User user, HttpSession session) {
-		if(userService.checkLogin(user)){
-			user = userService.findByUsernameAndPassword(user.getUsername(),user.getPassword());
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String doLogin(User user, HttpSession session) {
+        if (userService.checkLogin(user)) {
+            user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
-			logger.debug("用户["+user.getUsername()+"]登陆成功");
-			return "redirect:/";
-		}
-		return "redirect:/user/login?errorPwd=true";
-	}
+            logger.debug("用户[" + user.getUsername() + "]登陆成功");
+            return "redirect:/";
+        }
+        return "redirect:/user/login?errorPwd=true";
+    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout( HttpSession session) {
+    public String logout(HttpSession session) {
         UserUtil.deleteUserFromSession(session);
         return "redirect:/";
     }
 
-	@RequestMapping(value = "/profile")
-	public ModelAndView profile(ModelAndView vo,HttpSession session){
-		User user = UserUtil.getUserFromSession(session);
-		if(user==null){
-			vo.setViewName("redirect:/user/login?timeout=true");
-			return vo;
-		}
-		user = userService.findOne(user.getId());
-		vo.addObject(user);
-		vo.setViewName("user/userinfo");
-		return vo;
-	}
-
-	@RequestMapping("/list")
-	public ModelAndView listUser(ModelAndView model) {
-		List<User> userList = new ArrayList<User>();
-		User user1 = new User();
-		user1.setUsername("测试用户1");
-		user1.setPassword("123");
-		user1.setId(1);
-		userList.add(user1);
-		User user2 = new User();
-		user2.setUsername("测试用户2");
-		user2.setPassword("123");
-		user2.setId(2);
-		userList.add(user2);
-		User user3 = new User();
-		user3.setUsername("测试用户3");
-		user3.setPassword("12333");
-		user3.setId(3);
-		userList.add(user3);
-		User user = new User(2, null, null);
-		model.addObject(userList).addObject(user);
-		return model;
-	}
-
-	@RequestMapping(value="/reg", method = RequestMethod.GET)
-	public String reg() {
-        return "user/userReg";
-	}
-
-	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String add(@Valid User user,Model model, BindingResult result) {
-        System.out.println(1);
-		if (result.hasErrors()) {
-            System.out.println(2);
-			logger.error("Java Bean 没有通过验证");
-			for (ObjectError or : result.getAllErrors()) {
-				logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
-						+ or.getDefaultMessage());
-			}
-			model.addAttribute("error", "数据信息错误");
-			return "user/userReg";
-		}
-		userService.save(user);
-		logger.info("后台成功添加用户:" + user);
-		return "redirect:/";
-	}
-
-    @RequestMapping(value="/userAddress", method = RequestMethod.GET)
-    public String userAddress(Model model,HttpSession session){
-        model.addAttribute("title","地址管理");
-        List<UserAddress> userAddressList = userAddressService.findByUserId(UserUtil.getUserFromSession(session).getId());
-        model.addAttribute("userAddressList",userAddressList);
-        for(UserAddress ua : userAddressList){
-            logger.warn(ToStringBuilder.reflectionToString(ua));
+    @RequestMapping(value = "/profile")
+    public ModelAndView profile(ModelAndView vo, HttpSession session) {
+        User user = UserUtil.getUserFromSession(session);
+        if (user == null) {
+            vo.setViewName("redirect:/user/login?timeout=true");
+            return vo;
         }
+        user = userService.findOne(user.getId());
+        vo.addObject(user);
+        vo.setViewName("user/userinfo");
+        return vo;
+    }
+
+    @RequestMapping("/list")
+    public ModelAndView listUser(ModelAndView model) {
+        List<User> userList = new ArrayList<User>();
+        User user1 = new User();
+        user1.setUsername("测试用户1");
+        user1.setPassword("123");
+        user1.setId(1);
+        userList.add(user1);
+        User user2 = new User();
+        user2.setUsername("测试用户2");
+        user2.setPassword("123");
+        user2.setId(2);
+        userList.add(user2);
+        User user3 = new User();
+        user3.setUsername("测试用户3");
+        user3.setPassword("12333");
+        user3.setId(3);
+        userList.add(user3);
+        User user = new User(2, null, null);
+        model.addObject(userList).addObject(user);
+        return model;
+    }
+
+    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    public String reg() {
+        return "user/userReg";
+    }
+
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
+    public String doReg(@Valid User user, Model model, BindingResult result) {
+        System.out.println(1);
+        if (result.hasErrors()) {
+            System.out.println(2);
+            logger.error("Java Bean 没有通过验证");
+            for (ObjectError or : result.getAllErrors()) {
+                logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
+                        + or.getDefaultMessage());
+            }
+            model.addAttribute("error", "数据信息错误");
+            return "user/userReg";
+        }
+        userService.save(user);
+        logger.info("后台成功添加用户:" + user);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/userAddress", method = RequestMethod.GET)
+    public String userAddress(Model model, HttpSession session) {
+        model.addAttribute("title", "地址管理");
+        List<UserAddress> userAddressList = userAddressService.findByUserId(UserUtil.getUserFromSession(session).getId());
+        model.addAttribute("userAddressList", userAddressList);
         return "user/userAddress";
     }
 
-    @RequestMapping(value = "/userAddress/add",method = RequestMethod.GET)
-    public String addUserAddress(Model model){
-        model.addAttribute("title","添加收货地址");
+    @RequestMapping(value = "/userAddress/add", method = RequestMethod.GET)
+    public String addUserAddress(Model model) {
+        model.addAttribute("title", "添加收货地址");
         return "user/addUserAddress";
     }
 
-    @RequestMapping(value = "/userAddress/del/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/userAddress/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String delUserAddress(Model model,@PathVariable Integer id){
+    public String delUserAddress(Model model, @PathVariable Integer id) {
         userAddressService.deleteById(id);
         logger.debug("收货地址删除成功...");
         return "success";
     }
 
-    @RequestMapping(value = "/userAddress/add",method = RequestMethod.POST)
-    public String doAdd(Model model,HttpSession session,UserAddress userAddress){
+    @RequestMapping(value = "/userAddress/add", method = RequestMethod.POST)
+    public String doAdd(Model model, HttpSession session, UserAddress userAddress) {
         userAddress.setUser(UserUtil.getUserFromSession(session));
         userAddressService.save(userAddress);
-        model.addAttribute("successInfo","地址信息保存成功...");
+        model.addAttribute("successInfo", "地址信息保存成功...");
         logger.debug("地址信息保存成功.");
         return "redirect:/user/userAddress";
     }
