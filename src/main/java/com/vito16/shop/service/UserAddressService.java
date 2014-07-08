@@ -61,4 +61,12 @@ public class UserAddressService {
     public void deleteById(Integer id) {
         userAddressDao.delete(id);
     }
+
+    /**
+     * 修改地址
+     * @param userAddress
+     */
+    public void updateUserAddress(UserAddress userAddress) {
+        userAddressDao.save(userAddress);
+    }
 }

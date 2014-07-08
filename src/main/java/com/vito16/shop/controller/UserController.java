@@ -145,6 +145,13 @@ public class UserController {
         return "success";
     }
 
+    @RequestMapping(value = "/userAddress/update", method = RequestMethod.POST)
+    @ResponseBody
+    public String doUpdeteUserAddress(HttpSession session,UserAddress userAddress){
+        userAddressService.updateUserAddress(userAddress);
+        return "success";
+    }
+
     @RequestMapping(value = "/userAddress/{id}", method = RequestMethod.POST)
     @ResponseBody
     public UserAddress findAddress(@PathVariable Integer id) {

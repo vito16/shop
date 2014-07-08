@@ -29,6 +29,7 @@ $(function () {
             url: ctx + "/user/userAddress/add/",
             method:"post",
             data:{
+                "id":$("#id").val(),
                 "address":$("#address").val(),
                 "phone":$("#phone").val(),
                 "zipcode":$("#zipcode").val(),

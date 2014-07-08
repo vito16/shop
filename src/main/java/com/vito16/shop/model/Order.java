@@ -36,7 +36,10 @@ public class Order implements Serializable {
     private Integer id;
     private String orderNumber;//订单编号
     private User user;//关联客户
-    private UserAddress userAddress;//关联地址
+    private String address;//收货地址
+    private String phone;//收货电话
+    private String zipcode;//收货邮编
+    private String consignee;//收货人
     private List<OrderItem> orderItems;//关联商品
     private Date createTime;//创建时间
     private Date payTime;//付款时间
@@ -99,16 +102,6 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    @OneToOne
-    @JoinColumn
-    public UserAddress getUserAddress() {
-        return userAddress;
-    }
-
-    public void setUserAddress(UserAddress userAddress) {
-        this.userAddress = userAddress;
-    }
-
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     public Date getPayTime() {
         return payTime;
@@ -152,5 +145,37 @@ public class Order implements Serializable {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getConsignee() {
+        return consignee;
+    }
+
+    public void setConsignee(String consignee) {
+        this.consignee = consignee;
     }
 }
