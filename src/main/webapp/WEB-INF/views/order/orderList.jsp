@@ -43,7 +43,7 @@
                                 <c:when test="${order.status==3}">已取消</c:when>
                             </c:choose>
                         </td>
-                        <td>${order.userAddress.consignee}</td>
+                        <td>${order.consignee}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/pay/${order.id}">付款</a><a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">取消订单</a></c:when>

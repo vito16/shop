@@ -16,31 +16,31 @@
     <div class="form-horizontal">
         <div class="row">
             <div class="form-group">
-                <label for="address" class="col-sm-2 control-label">地址</label>
+                <label class="col-sm-2 control-label">地址</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.userAddress.address}</p>
+                    <p class="form-control-static">${order.address}</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="zipcode" class="col-sm-2 control-label">邮编</label>
+                <label class="col-sm-2 control-label">邮编</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.userAddress.zipcode}</p>
+                    <p class="form-control-static">${order.zipcode}</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="address" class="col-sm-2 control-label">电话</label>
+                <label class="col-sm-2 control-label">电话</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.userAddress.phone}</p>
+                    <p class="form-control-static">${order.phone}</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="consignee" class="col-sm-2 control-label">联系人</label>
+                <label class="col-sm-2 control-label">联系人</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.userAddress.consignee}</p>
+                    <p class="form-control-static">${order.consignee}</p>
                 </div>
             </div>
         </div>
