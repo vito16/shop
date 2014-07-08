@@ -102,7 +102,8 @@ public class OrderController {
         order.setFinalPrice(totalSum.doubleValue());
         order.setOrderItems(oiList);
         order.setUser(UserUtil.getUserFromSession(session));
-        order.setUserAddress(address);
+        //TODO 查询地址数据，将数据保存到订单实体中，取消直接与地址的关联关系
+        //order.setUserAddress(address);
         orderService.addOrder(order, oiList, address);
         return "order/orderingSuccess";
     }
