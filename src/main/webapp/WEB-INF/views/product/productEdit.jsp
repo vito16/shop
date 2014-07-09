@@ -8,76 +8,76 @@
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>
+    <%@ include file="/common/include-base-js.jsp" %>
+    <script src="${ctx }/js/product.js" type="text/javascript"></script>
 </head>
 
 <body>
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
-    <div class="col-md-6 col-md-offset-3">
-        <form:form id="inputForm" role="form" action="${ctx}/product/edit"
-                   method="post" class="form-horizontal" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="hidden" name="id" value="${product.id}"/>
-                <input type="hidden" name="inputUser.id" value="${product.inputUser.id}"/>
-                <input type="hidden" name="picUrl" value="${product.picUrl}"/>
-                <input type="hidden" name="createTime" value="${product.createTime}"/>
-                <label class="col-sm-2 control-label">商品名称</label>
-                <div class="col-sm-10">
-                    <input minlength="6" required class="form-control" value="${product.title}" type="text" id="title" name="title"/>
+    <%@include file="/common/admin-admin-nav.jsp" %>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form:form id="inputForm" role="form" action="${ctx}/product/edit"
+                       method="post" class="form-horizontal" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="hidden" name="id" value="${product.id}"/>
+                    <input type="hidden" name="inputUser.id" value="${product.inputUser.id}"/>
+                    <input type="hidden" name="picUrl" value="${product.picUrl}"/>
+                    <input type="hidden" name="createTime" value="${product.createTime}"/>
+                    <label class="col-sm-2 control-label">商品名称</label>
+                    <div class="col-sm-10">
+                        <input minlength="6" required class="form-control" value="${product.title}" type="text" id="title" name="title"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">商品价格</label>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商品价格</label>
 
-                <div class="col-sm-10">
-                    <input type="number" required class="form-control" type="text" value="${product.point}" id="point" name="point"/>
+                    <div class="col-sm-10">
+                        <input type="number" required class="form-control" type="text" value="${product.point}" id="point" name="point"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">商品编码</label>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商品编码</label>
 
-                <div class="col-sm-10">
-                    <input class="form-control" type="text" id="code" value="${product.code}" name="code"/>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="code" value="${product.code}" name="code"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">商品型号</label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="text" id="model" value="${product.model}" name="model"/>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商品型号</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="model" value="${product.model}" name="model"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">商品库存</label>
-                <div class="col-sm-10">
-                    <input class="form-control" required type="number" value="${product.stock}" id="stock" name="stock"/>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商品库存</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" required type="number" value="${product.stock}" id="stock" name="stock"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="pic">封面图片</label>
-                <div class="col-sm-10">
-                    <img class="img-responsive img-rounded" width="300px" src="${ctx}${product.picUrl}">
-                    <input type="file" id="pic" name="file">
-                    <p class="help-block">图片不能超过1MB.</p>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="pic">封面图片</label>
+                    <div class="col-sm-10">
+                        <img class="img-responsive img-rounded" width="300px" src="${ctx}${product.picUrl}">
+                        <input type="file" id="pic" name="file">
+                        <p class="help-block">图片不能超过1MB.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">商品简介：</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" name="note">${product.note}</textarea>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商品简介：</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="note">${product.note}</textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">保存</button>
-            </div>
-        </form:form>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form:form>
+        </div>
     </div>
 </div>
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
-<script src="${ctx }/common/bootstrap/js/jqBootstrapValidation.js" type="text/javascript"></script>
-<script>
-    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
-</script>
 </body>
 </html>

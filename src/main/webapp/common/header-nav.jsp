@@ -24,9 +24,7 @@
                                     ${login_user.username}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="${ctx}/user/profile">设置</a></li>
-                                <li><a href="${ctx}/order/">订单管理</a></li>
-                                <li><a href="${ctx}/user/userAddress">地址管理</a></li>
+                                <li><a href="${ctx}/user/profile">个人设置</a></li>
                                 <li><a href="${ctx}/user/logout">登出</a></li>
                             </ul>
                         </li>
@@ -37,10 +35,7 @@
                                     ${login_admin.username}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="${ctx}/admin/setting">设置</a></li>
-                                <li><a href="${ctx}/product/admin">商品管理</a></li>
-                                <li><a href="${ctx}/order/admin">订单管理</a></li>
-                                <li><a href="${ctx}/news/admin">公告管理</a></li>
+                                <li><a href="${ctx}/product/admin">后台管理</a></li>
                                 <li><a href="${ctx}/admin/logout">登出</a></li>
                             </ul>
                         </li>
