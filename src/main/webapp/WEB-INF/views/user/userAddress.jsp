@@ -40,6 +40,7 @@
                     <td>
                         <a class="btn btn-info btn-xs delAddresslBtn" addressId="${userAddress.id}">删除</a>
                         <a class="btn btn-info btn-xs editAddresslBtn" addressId="${userAddress.id}">修改</a>
+                        <a data-trigger="confirm" href="/delete/me" class="btn btn-info btn-xs">Demo</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -84,5 +85,10 @@
 </div>
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
+<script>
+    $(function(){
+        $('#confirm_trigger').scojs_confirm();
+    })
+</script>
 </body>
 </html>

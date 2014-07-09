@@ -108,6 +108,7 @@ public class OrderController {
         order.setConsignee(address.getConsignee());
         order.setPhone(address.getPhone());
         orderService.addOrder(order, oiList, address);
+        CartUtil.cleanCart(session);
         return "order/orderingSuccess";
     }
 

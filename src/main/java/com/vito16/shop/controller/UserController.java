@@ -64,16 +64,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile")
-    public ModelAndView profile(ModelAndView vo, HttpSession session) {
+    public String profile(HttpSession session,Model model) {
         User user = UserUtil.getUserFromSession(session);
         if (user == null) {
-            vo.setViewName("redirect:/user/login?timeout=true");
-            return vo;
+            return "redirect:/user/login?timeout=true";
         }
-        user = userService.findOne(user.getId());
-        vo.addObject(user);
-        vo.setViewName("user/userinfo");
-        return vo;
+        model.addAttribute("user",user);
+        return "user/userProfile";
     }
 
     @RequestMapping("/list")

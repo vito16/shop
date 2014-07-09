@@ -14,43 +14,46 @@
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
     <form:form cssClass="form-horizontal" action="${ctx}/order/ordering" method="post">
-        <div style="display: none;" class="row list-group">
-            <div class="col-sm-6 col-sm-offset-2">
+        <div class="row">
+            <div class="col-sm-6 list-group">
                 <c:forEach items="${addressList}" var="address">
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading"><input type="radio" name="oldAddress"/>${address.address}</h4>
+                    <a href="#" class="list-group-item addressItem">
+                        <h4 class="list-group-item-heading">${address.address}</h4>
                         <p class="list-group-item-text">${address.consignee}</p>
+                        <input type="hidden" value="${address.id}"/>
+                        <input type="hidden" value="${address.zipcode}"/>
+                        <input type="hidden" value="${address.phone}"/>
                     </a>
                 </c:forEach>
             </div>
-        </div>
+            <div class="col-sm-6">
+                <input type="hidden" id="id" name="id"/>
+                <div class="form-group">
+                    <label for="address" class="col-sm-2 control-label">地址</label>
 
-        <div class="row">
-            <div class="form-group">
-                <label for="address" class="col-sm-2 control-label">地址</label>
-
-                <div class="col-sm-6">
-                    <input id="address" class="form-control" type="text" name="address"/>
+                    <div class="col-sm-6">
+                        <input id="address" class="form-control" type="text" name="address"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="zipcode" class="col-sm-2 control-label">邮编</label>
+                <div class="form-group">
+                    <label for="zipcode" class="col-sm-2 control-label">邮编</label>
 
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="zipcode" name="zipcode"/>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="zipcode" name="zipcode"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="address" class="col-sm-2 control-label">电话</label>
+                <div class="form-group">
+                    <label for="address" class="col-sm-2 control-label">电话</label>
 
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="phone" name="phone"/>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="phone" name="phone"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="consignee" class="col-sm-2 control-label">联系人</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="consignee" name="consignee"/>
+                <div class="form-group">
+                    <label for="consignee" class="col-sm-2 control-label">联系人</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="consignee" name="consignee"/>
+                    </div>
                 </div>
             </div>
         </div>
