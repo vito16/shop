@@ -1,66 +1,134 @@
 package com.vito16.shop.controller;
 
+import com.google.common.math.IntMath;
+import com.vito16.shop.common.Constants;
+import com.vito16.shop.common.Page;
+import com.vito16.shop.common.PageUtil;
 import com.vito16.shop.model.*;
-import com.vito16.shop.util.CartItem;
+import com.vito16.shop.service.OrderService;
+import com.vito16.shop.service.UserAddressService;
+import com.vito16.shop.service.UserService;
 import com.vito16.shop.util.CartUtil;
 import com.vito16.shop.util.UserUtil;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 /**
  * @author Vito16 zhouwentao16@gmail.com
  * @date 2013-7-8
- * 
  */
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+
+    @Autowired
+    UserService userService;
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    UserAddressService userAddressService;
 
     /**
      * 订单确认
+     *
      * @param session
      * @return
      */
-    @RequestMapping(value="/purchase",method = RequestMethod.GET)
-    public String purchase(HttpSession session){
-        if(UserUtil.getUserFromSession(session)==null){
+    @RequestMapping(value = "/purchase", method = RequestMethod.GET)
+    public String purchase(Model model, HttpSession session) {
+        if (UserUtil.getUserFromSession(session) == null) {
             return "redirect:/user/login";
         }
-        return "order/purchase";
+        User user = userService.findOne(UserUtil.getUserFromSession(session).getId());
+        List<UserAddress> userAddressList = user.getAddresses();
+        model.addAttribute("addressList", userAddressList);
+        return "order/orderPurchase";
+    }
+
+    /**
+     * 订单列表
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String list(Model model, HttpSession session, HttpServletRequest request) {
+        if (UserUtil.getUserFromSession(session) == null) {
+            return "redirect:/user/login";
+        }
+        Page<Order> page = new Page<Order>(PageUtil.PAGE_SIZE);
+        int[] pageParams = PageUtil.init(page, request);
+        orderService.findOrders(page, pageParams);
+        model.addAttribute("page", page);
+        return "order/orderList";
     }
 
     /**
      * 下单
+     *
      * @param address
-     * @param order
      * @param session
      * @return
      */
-    @RequestMapping(value="/ordering",method = RequestMethod.GET)
-    public String ordering(UserAddress address,Order order,HttpSession session){
+    @RequestMapping(value = "/ordering", method = RequestMethod.POST)
+    public String ordering(UserAddress address, HttpSession session) {
+        Order order = new Order();
         order.setCreateTime(new Date());
-        order.setOrderNumber(new Date().toString());
+        address.setUser(UserUtil.getUserFromSession(session));
+        order.setOrderNumber(new DateTime().toString("yyyyMMddHHmmSS"));
+        order.setStatus(Constants.OrderStatus.WAIT_PAY);
         List<OrderItem> oiList = CartUtil.getOrderItemFromCart(session);
-        for(OrderItem oi : oiList){
+        BigDecimal totalSum = new BigDecimal("0");
+        for (OrderItem oi : oiList) {
+            totalSum.add(new BigDecimal(oi.getProduct().getPoint() * oi.getQuantity()));
             oi.setOrder(order);
         }
+        order.setTotalPrice(totalSum.doubleValue());
+        order.setFinalPrice(totalSum.doubleValue());
         order.setOrderItems(oiList);
         order.setUser(UserUtil.getUserFromSession(session));
-        order.setUserAddress(address);
-
+        //地址保存
+        order.setAddress(address.getAddress());
+        order.setZipcode(address.getZipcode());
+        order.setConsignee(address.getConsignee());
+        order.setPhone(address.getPhone());
+        orderService.addOrder(order, oiList, address);
+        CartUtil.cleanCart(session);
         return "order/orderingSuccess";
+    }
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String viewOrder(@PathVariable Integer id, Model model) {
+        model.addAttribute("order", orderService.findById(id));
+        return "order/orderView";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String delete(@PathVariable Integer id){
+        orderService.deleteOrder(id);
+        return "success";
+    }
+
+    @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String pay(){
+        //TODO 付款操作
+        return "success";
     }
 }

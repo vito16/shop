@@ -38,7 +38,6 @@ public abstract class BaseService<T, PK extends Serializable> implements
 
 	@Override
 	public List<T> findAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

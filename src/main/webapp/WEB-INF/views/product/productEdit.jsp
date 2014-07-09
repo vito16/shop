@@ -4,7 +4,7 @@
 <html>
 <head>
     <%@ include file="/common/global.jsp" %>
-    <title>修改商品</title>
+    <title>商品修改</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>

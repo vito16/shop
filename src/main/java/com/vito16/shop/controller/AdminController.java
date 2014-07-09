@@ -26,8 +26,8 @@ public class AdminController {
     AdminService adminService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginForm() {
-
+	public String loginForm() {
+        return "admin/adminLogin";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -47,7 +47,8 @@ public class AdminController {
     }
 
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
-	public void regForm(){
+	public String regForm(){
+        return "admin/adminReg";
 	}
 
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)

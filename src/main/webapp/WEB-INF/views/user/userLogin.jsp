@@ -4,10 +4,9 @@
 <html>
 <head>
     <%@ include file="/common/global.jsp" %>
-    <title>管理员登陆</title>
+    <title>登陆</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
-    <%@ include file="/common/include-base-js.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/login.css"/>
 </head>
 
@@ -15,11 +14,11 @@
 
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
-    <form:form role="form" action="${ctx}/admin/login"
-               method="post" class="form-signin">
+    <form:form role="form" action="${ctx}/user/login"
+               method="post" id="loginForm" class="form-signin">
         <!-- 自动隐藏提示信息 -->
         <c:if test="${not empty param.errorPwd}">
-            <div id="errorPwd" class="alert alert-success">密码错误...</div>
+            <div id="errorPwd" class="alert alert-success">用户密码错误...</div>
             <!-- 自动隐藏提示信息 -->
             <script type="text/javascript">
                 setTimeout(function () {
@@ -29,7 +28,7 @@
         </c:if>
         <!-- 自动隐藏提示信息 -->
         <c:if test="${not empty param.error}">
-            <div id="error" class="alert alert-success">管理员未登录或会话失效...</div>
+            <div id="error" class="alert alert-success">未登录或会话失效...</div>
             <!-- 自动隐藏提示信息 -->
             <script type="text/javascript">
                 setTimeout(function () {
@@ -38,7 +37,7 @@
             </script>
         </c:if>
 
-        <h2 class="form-signin-heading">系统管理员登录</h2>
+        <h2 class="form-signin-heading">系统登录</h2>
 
         <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="账号" required autofocus>
@@ -60,5 +59,6 @@
 <!-- /container -->
 
 <%@ include file="/common/include-base-js.jsp" %>
+<script src="${ctx }/js/login.js" type="text/javascript"></script>
 </body>
 </html>

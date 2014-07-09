@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/applicationContext.xml"})
 @Transactional
-@TransactionConfiguration
+@TransactionConfiguration(defaultRollback = false)
 public class UserTest  {
 		@Autowired
 		UserDao userDao;
@@ -30,7 +30,7 @@ public class UserTest  {
 		@Test
 		public void testSave(){
 			User u = new User();
-			u.setUsername("百度文化");
+			u.setUsername("测试用户");
 			u.setPassword("123456");
 			userDao.save(u);
 		}

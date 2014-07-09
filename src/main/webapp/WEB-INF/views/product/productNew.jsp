@@ -4,7 +4,7 @@
 <html>
 <head>
     <%@ include file="/common/global.jsp" %>
-    <title>添加商品</title>
+    <title>商品添加</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>

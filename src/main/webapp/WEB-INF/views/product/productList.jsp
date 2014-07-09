@@ -4,7 +4,7 @@
 <html>
 <head>
     <%@ include file="/common/global.jsp" %>
-    <title>主页</title>
+    <title>商品列表</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>
@@ -17,7 +17,7 @@
         <c:forEach items="${page.result}" var="product">
             <c:set var="task" value="${leave.task }"/>
             <c:set var="pi" value="${leave.processInstance }"/>
-            <div class="col-lg-3 text-center">
+            <div class="col-md-3 col-sm-4 col-xs-6 text-center">
                 <a href="${ctx}/product/${product.id}"><img class="img-thumbnail" src="${ctx}${product.picUrl}"
                                                             style="width: 140px; height: 140px;"></a>
 

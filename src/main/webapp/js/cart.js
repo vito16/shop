@@ -1,4 +1,27 @@
 $(function () {
+
+    $(".addressItem").click(function () {
+        var $kids = $(this).children();
+
+        $kids.each(function( index ) {
+            if(index==0){
+                $("#address").val($(this).text());
+            }
+            if(index==1){
+                $("#consignee").val($(this).text());
+            }
+            if(index==2){
+                $("#id").val($(this).val());
+            }
+            if(index==3){
+                $("#zipcode").val($(this).val());
+            }
+            if(index==4){
+                $("#phone").val($(this).val());
+            }
+        });
+    });
+
     $(".delBtn").click(function () {
         var pid = $(this).attr("productid");
         $.ajax({
