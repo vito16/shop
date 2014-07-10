@@ -86,6 +86,7 @@ public class Order implements Serializable {
         this.orderItems = orderItems;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     public Date getCreateTime() {
         return createTime;
     }

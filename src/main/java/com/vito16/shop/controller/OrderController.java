@@ -77,7 +77,7 @@ public class OrderController {
         int[] pageParams = PageUtil.init(page, request);
         orderService.findOrders(page, pageParams);
         model.addAttribute("page", page);
-        return "order/orderList";
+        return "order/orderAdmin";
     }
 
     /**
@@ -115,7 +115,7 @@ public class OrderController {
         List<OrderItem> oiList = CartUtil.getOrderItemFromCart(session);
         BigDecimal totalSum = new BigDecimal("0");
         for (OrderItem oi : oiList) {
-            totalSum.add(new BigDecimal(oi.getProduct().getPoint() * oi.getQuantity()));
+            totalSum = totalSum.add(new BigDecimal(oi.getProduct().getPoint() * oi.getQuantity()));
             oi.setOrder(order);
         }
         order.setTotalPrice(totalSum.doubleValue());
@@ -147,12 +147,19 @@ public class OrderController {
 
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String pay(@PathVariable(value="id") Integer orderId,HttpSession session) {
+    public String pay(@PathVariable(value = "id") Integer orderId, HttpSession session) {
         //验证订单是否归当前人员所有
-        if(orderService.checkOwned(orderId,UserUtil.getUserFromSession(session).getId())){
-            orderService.updateOrderStatus(orderId,Constants.OrderStatus.PAYED);
+        if (orderService.checkOwned(orderId, UserUtil.getUserFromSession(session).getId())) {
+            orderService.updateOrderStatus(orderId, Constants.OrderStatus.PAYED);
             return "success";
         }
-        return  "error";
+        return "error";
+    }
+
+    @RequestMapping(value = "/ship/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String ship(@PathVariable(value = "id") Integer orderId, HttpSession session) {
+        orderService.updateOrderStatus(orderId, Constants.OrderStatus.SHIPPED);
+        return "success";
     }
 }

@@ -4,6 +4,8 @@ import com.vito16.shop.common.Constants;
 import com.vito16.shop.model.OrderItem;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.Map;
  */
 public class CartUtil {
     public static final String CART = Constants.CART;
+    private static Logger logger = LoggerFactory.getLogger(CartUtil.class);
 
     /**
      * 添加商品到购物车中
@@ -68,11 +71,13 @@ public class CartUtil {
         if(cartItemMap!=null){
             cartItemMap.clear();
         }
+        logger.debug("清空购物车 ： cart :"+cartItemMap);
         session.setAttribute(CART, cartItemMap);
     }
 
     public static List<OrderItem> getOrderItemFromCart(HttpSession session){
         Map<Integer, CartItem> cartItemMap = (HashMap<Integer, CartItem>) session.getAttribute(CART);
+        logger.debug("获取商品信息 ： cart :"+cartItemMap);
         if(cartItemMap==null) cartItemMap = new HashMap<Integer, CartItem>();
         List<OrderItem> oiList = new ArrayList<OrderItem>();
         for(CartItem ci:cartItemMap.values()){
