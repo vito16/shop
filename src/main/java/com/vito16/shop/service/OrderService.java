@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vito16.shop.service;
 
@@ -12,19 +12,21 @@ import com.vito16.shop.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 /**
  * @author Vito
  * @email zhouwentao16@gmail.com
  * @date 2013-7-17
- * 
  */
 @Service
+@Transactional
 public class OrderService {
 
-	@Autowired
+    @Autowired
     OrderDao orderDao;
     @Autowired
     OrderItemDao orderItemDao;
@@ -33,41 +35,66 @@ public class OrderService {
 
     /**
      * 新建订单
+     *
      * @param order
      * @param orderItemList
      * @param userAddress
      */
-    public void addOrder(Order order,List<OrderItem> orderItemList,UserAddress userAddress){
+    public void addOrder(Order order, List<OrderItem> orderItemList, UserAddress userAddress) {
         //更新或新增用户收获地址(根据userAddress是否包含id判断新增还是更新)
         userAddressService.save(userAddress);
         save(order);
-        for(OrderItem orderItem:orderItemList){
+        for (OrderItem orderItem : orderItemList) {
             orderItemDao.save(orderItem);
         }
     }
-	public void save(Order order) {
+
+    public void save(Order order) {
         orderDao.save(order);
-	}
+    }
 
-	public Order findById(Integer id) {
-		return orderDao.findOne(id);
-	}
+    public Order findById(Integer id) {
+        return orderDao.findOne(id);
+    }
 
-	public List<Order> findAll() {
-		return orderDao.findAll();
-	}
+    public List<Order> findAll() {
+        return orderDao.findAll();
+    }
 
     public List<Order> findOrders(Page<Order> page, int[] pageParams) {
-        page.setResult(orderDao.findAll(new PageRequest(pageParams[0]-1,pageParams[1])).getContent());
+        page.setResult(orderDao.findAll(new PageRequest(pageParams[0] - 1, pageParams[1])).getContent());
         page.setTotalCount(orderDao.count());
         return page.getResult();
     }
 
     /**
      * 删除订单以及订单相关信息
+     *
      * @param id 订单ID
      */
     public void deleteOrder(Integer id) {
         orderDao.delete(id);
+    }
+
+    /**
+     * 修改订单状态
+     *
+     * @param orderID
+     * @param status
+     */
+    public void updateOrderStatus(Integer orderID, Integer status) {
+        Order order = orderDao.findOne(orderID);
+        order.setStatus(status);
+        orderDao.save(order);
+    }
+
+    /**
+     * 验证订单归属人
+     * @param orderId
+     * @param userId
+     * @return
+     */
+    public boolean checkOwned(Integer orderId,Integer userId) {
+        return orderDao.findOne(orderId).getUser().getId().equals(userId)?true:false;
     }
 }

@@ -30,11 +30,10 @@
                 <tbody>
                 <un:useConstants className="com.vito16.shop.common.Constants" var="constants" />
                 <c:forEach items="${page.result}" var="order">
-                    <c:set value="0" var="sum" />
                     <tr pid="${order.id}">
                         <td>${order.createTime}</td>
                         <td>${order.orderNumber}</td>
-                        <td>${sum}</td>
+                        <td>${order.finalPrice}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${order.status==0}">等待付款</c:when>
@@ -46,12 +45,11 @@
                         <td>${order.consignee}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/pay/${order.id}">付款</a><a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">取消订单</a></c:when>
-                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">取消订单</a></c:when>
-                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">确认收货</a></c:when>
+                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a>  <a class="btn btn-info btn-xs btn-pay" orderId="${order.id}">付款</a> <a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">取消订单</a></c:when>
+                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs" href="${ctx}/order/delete/${order.id}">取消订单</a></c:when>
+                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">确认收货</a></c:when>
                                 <c:when test="${order.status==3}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                             </c:choose>
-                            <a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a>
                         </td>
                     </tr>
                 </c:forEach>

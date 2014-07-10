@@ -1,4 +1,5 @@
 $(function() {
+    $("#sub-nav-product").attr("class","active");
     $(".addCart").click(function () {
         $.ajax({
             url:ctx+"/cart/add/"+$(this).attr("productid")+"/1",

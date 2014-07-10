@@ -9,6 +9,7 @@ import com.vito16.shop.model.User;
 import com.vito16.shop.model.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * @date 2013-7-9
  */
 @Service
+@Transactional
 public class UserAddressService {
     @Autowired
     private UserAddressDao userAddressDao;
