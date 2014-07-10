@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.vito16.shop.dao.UserDao;
 import com.vito16.shop.model.User;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vito
@@ -16,6 +17,7 @@ import com.vito16.shop.model.User;
  * 
  */
 @Service
+@Transactional
 public class UserService {
 	@Autowired
 	private UserDao userDao;

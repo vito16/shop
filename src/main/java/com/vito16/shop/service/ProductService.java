@@ -15,6 +15,7 @@ import com.vito16.shop.dao.ProductDao;
 import com.vito16.shop.dao.ProductTypeDao;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.model.ProductType;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vito
@@ -23,6 +24,7 @@ import com.vito16.shop.model.ProductType;
  * 
  */
 @Service
+@Transactional
 public class ProductService {
 
 	@Autowired

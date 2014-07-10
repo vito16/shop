@@ -7,6 +7,7 @@ import com.vito16.shop.dao.AdminDao;
 import com.vito16.shop.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vito
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @date 2013-7-9
  */
 @Service
+@Transactional
 public class AdminService {
     @Autowired
     private AdminDao adminDao;

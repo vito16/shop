@@ -8,6 +8,7 @@ import com.vito16.shop.model.*;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
+import com.vito16.shop.util.AdminUtil;
 import com.vito16.shop.util.CartUtil;
 import com.vito16.shop.util.UserUtil;
 import org.joda.time.DateTime;
@@ -44,23 +45,6 @@ public class OrderController {
     UserAddressService userAddressService;
 
     /**
-     * 订单确认
-     *
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/purchase", method = RequestMethod.GET)
-    public String purchase(Model model, HttpSession session) {
-        if (UserUtil.getUserFromSession(session) == null) {
-            return "redirect:/user/login";
-        }
-        User user = userService.findOne(UserUtil.getUserFromSession(session).getId());
-        List<UserAddress> userAddressList = user.getAddresses();
-        model.addAttribute("addressList", userAddressList);
-        return "order/orderPurchase";
-    }
-
-    /**
      * 订单列表
      *
      * @param session
@@ -77,6 +61,42 @@ public class OrderController {
         model.addAttribute("page", page);
         return "order/orderList";
     }
+
+    /**
+     * 订单管理
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminList(Model model, HttpSession session, HttpServletRequest request) {
+        if (AdminUtil.getAdminFromSession(session) == null) {
+            return "redirect:/admin/login";
+        }
+        Page<Order> page = new Page<Order>(PageUtil.PAGE_SIZE);
+        int[] pageParams = PageUtil.init(page, request);
+        orderService.findOrders(page, pageParams);
+        model.addAttribute("page", page);
+        return "order/orderList";
+    }
+
+    /**
+     * 订单确认
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/purchase", method = RequestMethod.GET)
+    public String purchase(Model model, HttpSession session) {
+        if (UserUtil.getUserFromSession(session) == null) {
+            return "redirect:/user/login";
+        }
+        User user = userService.findOne(UserUtil.getUserFromSession(session).getId());
+        List<UserAddress> userAddressList = user.getAddresses();
+        model.addAttribute("addressList", userAddressList);
+        return "order/orderPurchase";
+    }
+
 
     /**
      * 下单
@@ -120,15 +140,19 @@ public class OrderController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String delete(@PathVariable Integer id){
+    public String delete(@PathVariable Integer id) {
         orderService.deleteOrder(id);
         return "success";
     }
 
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String pay(){
-        //TODO 付款操作
-        return "success";
+    public String pay(@PathVariable(value="id") Integer orderId,HttpSession session) {
+        //验证订单是否归当前人员所有
+        if(orderService.checkOwned(orderId,UserUtil.getUserFromSession(session).getId())){
+            orderService.updateOrderStatus(orderId,Constants.OrderStatus.PAYED);
+            return "success";
+        }
+        return  "error";
     }
 }
