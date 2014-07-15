@@ -74,7 +74,8 @@ public class Product implements Serializable {
         this.picUrl = picUrl;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     public Date getCreateTime() {
         return createTime;
     }

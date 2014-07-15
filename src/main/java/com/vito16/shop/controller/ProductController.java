@@ -23,6 +23,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Vito
@@ -57,6 +58,15 @@ public class ProductController {
         model.addObject("page", page);
         model.setViewName("product/productAdmin");
         return model;
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Product> test( HttpSession session, HttpServletRequest request) {
+        Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
+        int[] pageParams = PageUtil.init(page, request);
+        productService.findProducts(page, pageParams);
+        return page.getResult();
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
