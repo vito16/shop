@@ -9,16 +9,16 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * realm
  * @author Vito
  * @version  1.0
  */
+@Component("shopRealm")
 public class ShopRealm extends AuthorizingRealm {
 
-    @Autowired
-    private UserService userService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -30,9 +30,12 @@ public class ShopRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
+        System.out.println("开始验证用户");
         String username = (String) token.getPrincipal();
-        User user = userService.findByUsernameAndPassword(username,"");
+        //User user = userService.findByUsernameAndPassword(username,"");
+        User user = new User();
+        user.setId(1);
+        user.setUsername("zhouzhou");
         if (user == null) {
             throw new UnknownAccountException();//没找到帐号
         }

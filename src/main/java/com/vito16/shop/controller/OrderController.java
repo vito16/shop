@@ -162,4 +162,11 @@ public class OrderController {
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.SHIPPED);
         return "success";
     }
+
+    @RequestMapping(value = "/confirm/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String confirm(@PathVariable(value = "id") Integer orderId){
+        orderService.updateOrderStatus(orderId,Constants.OrderStatus.ENDED);
+        return "success";
+    }
 }
