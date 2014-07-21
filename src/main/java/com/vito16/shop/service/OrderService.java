@@ -3,6 +3,7 @@
  */
 package com.vito16.shop.service;
 
+import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.dao.OrderDao;
 import com.vito16.shop.dao.OrderItemDao;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Null;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -85,16 +87,25 @@ public class OrderService {
     public void updateOrderStatus(Integer orderID, Integer status) {
         Order order = orderDao.findOne(orderID);
         order.setStatus(status);
+        //状态修改时修改相应时间数据
+        if (status == Constants.OrderStatus.PAYED) {
+            order.setPayTime(new Date());
+        } else if (status == Constants.OrderStatus.SHIPPED) {
+            order.setShipTime(new Date());
+        } else if (status == Constants.OrderStatus.ENDED) {
+            order.setConfirmTime(new Date());
+        }
         orderDao.save(order);
     }
 
     /**
      * 验证订单归属人
+     *
      * @param orderId
      * @param userId
      * @return
      */
-    public boolean checkOwned(Integer orderId,Integer userId) {
-        return orderDao.findOne(orderId).getUser().getId().equals(userId)?true:false;
+    public boolean checkOwned(Integer orderId, Integer userId) {
+        return orderDao.findOne(orderId).getUser().getId().equals(userId) ? true : false;
     }
 }

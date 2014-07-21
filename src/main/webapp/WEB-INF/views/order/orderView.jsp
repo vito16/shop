@@ -43,6 +43,30 @@
                     <p class="form-control-static">${order.consignee}</p>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">创建时间</label>
+
+                <div class="col-sm-6">
+                    <p class="form-control-static">${order.createTime}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">付款时间</label>
+
+                <div class="col-sm-6">
+                    <p class="form-control-static">${order.shipTime}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">发货时间</label>
+
+                <div class="col-sm-6">
+                    <p class="form-control-static">${order.confirmTime}</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

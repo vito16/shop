@@ -48,6 +48,7 @@
                                 <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs ship-order-btn">发货</a> <a class="btn btn-info btn-xs del-order-btn">删除</a></c:when>
                                 <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                                 <c:when test="${order.status==3}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
+                                <c:when test="${order.status==4}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                             </c:choose>
                             <a class="btn btn-info btn-xs del-order-btn">删除</a>
                         </td>
@@ -73,6 +74,7 @@
                 success:function(result){
                     if(result=="success"){
                         alert("订单删除成功...");
+                        window.location.reload();
                     }else{
                         alert("发生错误..");
                     }
@@ -89,6 +91,7 @@
                 success:function(result){
                     if(result=="success"){
                         alert("发货成功...");
+                        window.location.reload();
                     }else{
                         alert("发生错误..");
                     }

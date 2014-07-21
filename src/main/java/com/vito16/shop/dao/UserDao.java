@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.vito16.shop.model.User;
 
 /**
- * 
+ * User DAO
  * @author Vito
  * @email zhouwentao16@gmail.com
  * @date 2013-7-9
@@ -15,4 +15,6 @@ import com.vito16.shop.model.User;
 @Repository
 public interface UserDao extends JpaRepository<User, Integer> {
 	public User findByUsernameAndPassword(String username, String password);
+
+    public User  findByUsername(String username);
 }

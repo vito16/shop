@@ -1,6 +1,5 @@
 package com.vito16.shop.controller;
 
-import com.google.common.math.IntMath;
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
@@ -160,6 +159,13 @@ public class OrderController {
     @ResponseBody
     public String ship(@PathVariable(value = "id") Integer orderId, HttpSession session) {
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.SHIPPED);
+        return "success";
+    }
+
+    @RequestMapping(value = "/confirm/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String confirm(@PathVariable(value = "id") Integer orderId){
+        orderService.updateOrderStatus(orderId,Constants.OrderStatus.ENDED);
         return "success";
     }
 }

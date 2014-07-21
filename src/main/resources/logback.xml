@@ -13,8 +13,8 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="com.vito16.shop" level="DEBUG">
-        <appender-ref ref="STDOUT"/>
-    </logger>
+    <!--<logger name="com.vito16.shop" level="DEBUG">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
 
 </configuration>

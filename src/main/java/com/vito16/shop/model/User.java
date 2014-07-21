@@ -43,6 +43,7 @@ public class User implements Serializable {
 	private String password;// 密码
 	private List<UserAddress> addresses; // 关联收货地址
 	private List<Order> orders;// 订单
+    private String slat;//密码加密使用
 
 	// ***** VO *********
 	private String spc; // 验证码
@@ -187,4 +188,11 @@ public class User implements Serializable {
 		this.spc = spc;
 	}
 
+    public String getSlat() {
+        return slat;
+    }
+
+    public void setSlat(String slat) {
+        this.slat = slat;
+    }
 }

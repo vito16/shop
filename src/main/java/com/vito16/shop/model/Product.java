@@ -1,5 +1,6 @@
 package com.vito16.shop.model;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import javax.persistence.*;
  * @date 2013-7-9
  */
 @Entity
+@DynamicUpdate
 @Table(name = "T_PRODUCT")
 public class Product implements Serializable {
     /**
