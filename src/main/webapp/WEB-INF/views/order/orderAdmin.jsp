@@ -7,7 +7,8 @@
     <title>订单管理</title>
     <%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>
+    <%@ include file="/common/include-base-js.jsp" %>
+    <script src="${ctx }/js/order.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -27,7 +28,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <un:useConstants className="com.vito16.shop.common.Constants" var="constants" />
                 <c:forEach items="${page.result}" var="order">
                     <tr pid="${order.id}">
                         <td>${order.createTime}</td>
@@ -50,7 +50,6 @@
                                 <c:when test="${order.status==3}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                                 <c:when test="${order.status==4}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                             </c:choose>
-                            <a class="btn btn-info btn-xs del-order-btn">删除</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -63,45 +62,5 @@
 </div>
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
-<script>
-    $(function(){
-        $("#sub-nav-order").attr("class","active");
-        $(".del-order-btn").click(function(){
-            var orderId = $(this).parent().parent().attr("pid");
-            $.ajax({
-                url:ctx+"/order/delete/"+orderId,
-                success:function(result){
-                    if(result=="success"){
-                        alert("订单删除成功...");
-                        window.location.reload();
-                    }else{
-                        alert("发生错误..");
-                    }
-                },
-                error:function(){
-                    alert("发生错误..");
-                }
-            })
-        })
-        $(".ship-order-btn").click(function(){
-            var orderId = $(this).parent().parent().attr("pid");
-            $.ajax({
-                url:ctx+"/order/ship/"+orderId,
-                success:function(result){
-                    if(result=="success"){
-                        alert("发货成功...");
-                        window.location.reload();
-                    }else{
-                        alert("发生错误..");
-                    }
-                },
-                error:function(){
-                    alert("发生错误..");
-                }
-            })
-        })
-    })
-</script>
 </body>
 </html>
