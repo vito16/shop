@@ -87,7 +87,7 @@
             <tbody>
             <c:forEach items="${order.orderItems}" var="orderItem">
                 <tr pid="${orderItem.id}">
-                    <td>${orderItem.product.title}</td>
+                    <td><a href="${ctx}/product/${orderItem.product.id}">${orderItem.product.title}</a></td>
                     <td>${orderItem.product.model}</td>
                     <td>${orderItem.product.code}</td>
                     <td>${orderItem.product.point}</td>
