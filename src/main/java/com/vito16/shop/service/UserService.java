@@ -31,6 +31,10 @@ public class UserService {
 	public User findByUsernameAndPassword(String username,String password){
 		return userDao.findByUsernameAndPassword(username, password);
 	}
+
+    public User findByUsername(String username){
+        return userDao.findByUsername(username);
+    }
 	
 	public void save(User user) {
 		userDao.save(user);
