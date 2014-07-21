@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * @author Vito16 zhouwentao16@gmail.com
@@ -44,10 +45,20 @@ public class NewsController {
         return "news/newsList";
     }
 
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String admin(Model model,HttpServletRequest request) {
+        Page<News> page = new Page<News>(PageUtil.PAGE_SIZE);
+        int[] pageParams = PageUtil.init(page, request);
+        newsService.findNews(page, pageParams);
+        model.addAttribute("page",page);
+        return "news/newsAdmin";
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public String doAdd(News news,HttpSession session) {
         news.setInputUser(AdminUtil.getAdminFromSession(session));
+        news.setCreateTime(new Date());
         newsService.addNews(news);
         return "success";
     }

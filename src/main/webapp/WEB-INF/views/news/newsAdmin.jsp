@@ -16,6 +16,7 @@
 <div class="container">
     <%@include file="/common/admin-admin-nav.jsp" %>
     <div class="row">
+        <div id="addNewsSuccess" style="display: none" class="alert alert-success">添加成功</div>
         <table class="table table-responsive table-striped">
                 <thead>
                 <tr>
@@ -51,7 +52,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="button" id="addAddressBtn" class="btn btn-primary">保存</button>
+                    <button type="button" id="addNewsBtn" class="btn btn-primary">保存</button>
                 </div>
             </form:form>
         </div>
