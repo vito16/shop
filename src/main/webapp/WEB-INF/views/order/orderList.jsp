@@ -28,7 +28,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <un:useConstants className="com.vito16.shop.common.Constants" var="constants" />
                 <c:forEach items="${page.result}" var="order">
                     <tr pid="${order.id}">
                         <td>${order.createTime}</td>
@@ -46,9 +45,9 @@
                         <td>${order.consignee}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a>  <a class="btn btn-info btn-xs btn-pay">付款</a> <a class="btn btn-info btn-xs">取消订单</a></c:when>
-                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs">取消订单</a></c:when>
-                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs btn-confirm">确认收货</a></c:when>
+                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a>  <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></c:when>
+                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></c:when>
+                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></c:when>
                                 <c:when test="${order.status==3}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                                 <c:when test="${order.status==4}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
                             </c:choose>

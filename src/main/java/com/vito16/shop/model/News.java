@@ -6,11 +6,7 @@ package com.vito16.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 新闻
@@ -30,6 +26,7 @@ public class News implements Serializable {
 	private String title;
 	private String content;
 	private Date createTime;
+    private Admin  inputUser;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,4 +61,14 @@ public class News implements Serializable {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+
+    @ManyToOne
+    @JoinColumn
+    public Admin getInputUser() {
+        return inputUser;
+    }
+
+    public void setInputUser(Admin inputUser) {
+        this.inputUser = inputUser;
+    }
 }

@@ -12,6 +12,6 @@ import com.vito16.shop.model.News;
  * @date 2013-7-9
  * 
  */
-@Repository
+@Repository("newsDao")
 public interface NewsDao extends JpaRepository<News, Integer> {
 }

@@ -155,6 +155,12 @@ public class OrderController {
         return "error";
     }
 
+    /**
+     * 订单发货
+     *
+     * @param orderId
+     * @return
+     */
     @RequestMapping(value = "/ship/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String ship(@PathVariable(value = "id") Integer orderId, HttpSession session) {
@@ -162,10 +168,29 @@ public class OrderController {
         return "success";
     }
 
+    /**
+     * 取消订单
+     *
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String cancel(@PathVariable(value = "id") Integer orderId) {
+        orderService.updateOrderStatus(orderId, Constants.OrderStatus.DELETED);
+        return "success";
+    }
+
+    /**
+     * 订单收货确认
+     *
+     * @param orderId
+     * @return
+     */
     @RequestMapping(value = "/confirm/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String confirm(@PathVariable(value = "id") Integer orderId){
-        orderService.updateOrderStatus(orderId,Constants.OrderStatus.ENDED);
+    public String confirm(@PathVariable(value = "id") Integer orderId) {
+        orderService.updateOrderStatus(orderId, Constants.OrderStatus.ENDED);
         return "success";
     }
 }
