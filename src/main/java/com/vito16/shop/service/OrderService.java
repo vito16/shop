@@ -75,6 +75,7 @@ public class OrderService {
      * @param id 订单ID
      */
     public void deleteOrder(Integer id) {
+        orderItemDao.deleteByOrderId(id);
         orderDao.delete(id);
     }
 

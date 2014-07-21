@@ -25,7 +25,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext.xml"})
 @Transactional
-@TransactionConfiguration(defaultRollback = true)
+@TransactionConfiguration(defaultRollback = false)
 public class OrderTest {
 
     @Autowired
@@ -55,5 +55,10 @@ public class OrderTest {
         ua.setAddress("asdfasdf");
         orderService.addOrder(order,orderItems,ua);
 
+    }
+
+    @Test
+    public void testDelOrder(){
+        orderService.deleteOrder(5);
     }
 }
