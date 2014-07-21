@@ -24,7 +24,6 @@
                     <input type="hidden" name="id" value="${product.id}"/>
                     <input type="hidden" name="inputUser.id" value="${product.inputUser.id}"/>
                     <input type="hidden" name="picUrl" value="${product.picUrl}"/>
-                    <input type="hidden" name="createTime" value="${product.createTime}"/>
                     <label class="col-sm-2 control-label">商品名称</label>
                     <div class="col-sm-10">
                         <input minlength="6" required class="form-control" value="${product.title}" type="text" id="title" name="title"/>
