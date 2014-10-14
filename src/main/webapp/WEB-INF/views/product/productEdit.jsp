@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <input type="hidden" name="id" value="${product.id}"/>
                     <input type="hidden" name="inputUser.id" value="${product.inputUser.id}"/>
-                    <input type="hidden" name="picUrl" value="${product.picUrl}"/>
+                    <%--<input type="hidden" name="picUrl" value="${product.picUrl}"/>--%>
                     <label class="col-sm-2 control-label">商品名称</label>
                     <div class="col-sm-10">
                         <input minlength="6" required class="form-control" value="${product.title}" type="text" id="title" name="title"/>
@@ -58,7 +58,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="pic">封面图片</label>
                     <div class="col-sm-10">
-                        <img class="img-responsive img-rounded" width="300px" src="${ctx}${product.picUrl}">
+                        <img class="img-responsive img-rounded" width="300px" src="${ctx}${product.masterPic.url}">
                         <input type="file" id="pic" name="file">
                         <p class="help-block">图片不能超过1MB.</p>
                     </div>
