@@ -9,15 +9,15 @@
     <description/>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.0.5.RELEASE</spring.version>
-        <mysql.version>5.1.30</mysql.version>
-        <springjpa.version>1.6.0.RELEASE</springjpa.version>
+        <spring.version>4.1.1.RELEASE</spring.version>
+        <mysql.version>5.1.33</mysql.version>
+        <springjpa.version>1.7.0.RELEASE</springjpa.version>
         <security.version>3.2.0.RELEASE</security.version>
-        <validator.version>5.1.1.Final</validator.version>
-        <entitymanager.version>4.2.13.Final</entitymanager.version>
+        <validator.version>5.1.2.Final</validator.version>
+        <entitymanager.version>4.3.6.Final</entitymanager.version>
         <ehcache.version>2.4.8</ehcache.version>
-        <slf.version>1.7.5</slf.version>
-        <druid.version>1.0.5</druid.version>
+        <slf.version>1.7.7</slf.version>
+        <druid.version>1.0.9</druid.version>
         <junit.version>4.11</junit.version>
         <logback.version>1.1.2</logback.version>
         <shiro.version>1.2.3</shiro.version>
@@ -72,7 +72,7 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
-            <version>2.0.0</version>
+            <version>2.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
