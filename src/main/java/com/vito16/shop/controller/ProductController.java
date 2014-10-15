@@ -5,7 +5,9 @@ package com.vito16.shop.controller;
 
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
+import com.vito16.shop.model.Picture;
 import com.vito16.shop.model.Product;
+import com.vito16.shop.service.PictureService;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.AdminUtil;
 import org.slf4j.Logger;
@@ -34,9 +36,11 @@ import java.util.List;
 @RequestMapping(value = "/product")
 public class ProductController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
     @Autowired
     ProductService productService;
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    @Autowired
+    PictureService pictureService;
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newForm(HttpSession session) {
@@ -62,7 +66,7 @@ public class ProductController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
-    public List<Product> test( HttpSession session, HttpServletRequest request) {
+    public List<Product> test(HttpSession session, HttpServletRequest request) {
         Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
         int[] pageParams = PageUtil.init(page, request);
         productService.findProducts(page, pageParams);
@@ -100,6 +104,7 @@ public class ProductController {
         String fileName = new Date().getTime() + ".jpg";
         String path = session.getServletContext().getRealPath("/upload");
         String serverFile = path + "/" + fileName;
+        Picture picture = new Picture();
         try {
             logger.info(path);
             if (!new File(path).exists()) {
@@ -116,7 +121,13 @@ public class ProductController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        product.setPicUrl("/upload/" + fileName);
+        picture.setMemo("商品上传");
+        picture.setTitle("商品上传");
+        picture.setUpdateTime(new Date());
+        picture.setUrl("/upload/" + fileName);
+        picture.setUpdateAdmin(AdminUtil.getAdminFromSession(session));
+        pictureService.save(picture);
+        product.setMasterPic(picture);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

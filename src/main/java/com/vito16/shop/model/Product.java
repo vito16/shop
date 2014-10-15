@@ -3,10 +3,10 @@ package com.vito16.shop.model;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author Vito
@@ -24,7 +24,8 @@ public class Product implements Serializable {
     private Integer id;
     private String title;//名称
     private Integer point;//价格
-    private String picUrl;//图片地址
+    private Picture masterPic;//主图
+    private List<Picture> slavePic;//关联图
     private String note;//描述
     private Date createTime;//创建时间
     private String code;//商品编码
@@ -68,14 +69,6 @@ public class Product implements Serializable {
         this.point = point;
     }
 
-    public String getPicUrl() {
-        return picUrl;
-    }
-
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
-
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getCreateTime() {
         return createTime;
@@ -117,5 +110,24 @@ public class Product implements Serializable {
 
     public void setInputUser(Admin inputUser) {
         this.inputUser = inputUser;
+    }
+
+    @ManyToOne
+    @JoinColumn
+    public Picture getMasterPic() {
+        return masterPic;
+    }
+
+    public void setMasterPic(Picture masterPic) {
+        this.masterPic = masterPic;
+    }
+
+    @ManyToMany
+    public List<Picture> getSlavePic() {
+        return slavePic;
+    }
+
+    public void setSlavePic(List<Picture> slavePic) {
+        this.slavePic = slavePic;
     }
 }

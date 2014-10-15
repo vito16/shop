@@ -18,7 +18,7 @@
             <c:set var="task" value="${leave.task }"/>
             <c:set var="pi" value="${leave.processInstance }"/>
             <div class="col-md-3 col-sm-4 col-xs-6 text-center">
-                <a href="${ctx}/product/${product.id}"><img class="img-thumbnail" src="${ctx}${product.picUrl}"
+                <a href="${ctx}/product/${product.id}"><img class="img-thumbnail" src="${ctx}${product.masterPic.url}"
                                                             style="width: 140px; height: 140px;"></a>
 
                 <p>${product.title}</p>
