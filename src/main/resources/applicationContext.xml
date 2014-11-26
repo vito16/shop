@@ -14,7 +14,8 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/application.properties"/>
+
+	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/application-${spring.profiles.active}.properties"/>
 	
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
 	<context:component-scan base-package="com.vito16.shop">

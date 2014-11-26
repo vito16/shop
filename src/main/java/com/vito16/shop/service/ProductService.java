@@ -54,8 +54,11 @@ public class ProductService {
 	}
 
 	public List<Product> findNew() {
-		return productDao.findNewProducts();
+		return productDao.findByOrderByCreateTimeDesc();
 	}
+    public List<Product> findOld() {
+        return productDao.findByOrderByCreateTimeAsc();
+    }
 	
 	public List<Product> findPop(){
 		return productDao.findPopProducts();

@@ -14,4 +14,5 @@ import com.vito16.shop.model.Order;
  */
 @Repository
 public interface OrderDao extends JpaRepository<Order, Integer> {
+
 }

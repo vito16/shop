@@ -6,9 +6,9 @@ $('#loginForm,#regForm').bootstrapValidator({
                     message: '用户名不能为空.'
                 },
                 stringLength: {
-                    min: 6,
+                    min: 3,
                     max: 15,
-                    message: '用户名长度应该在6 - 15之间.'
+                    message: '用户名长度应该在4 - 15之间.'
                 }
             }
         },

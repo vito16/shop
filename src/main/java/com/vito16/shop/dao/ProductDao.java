@@ -17,9 +17,10 @@ import com.vito16.shop.model.Product;
  */
 @Repository
 public interface ProductDao extends JpaRepository<Product, Integer> {
-	@Query("FROM Product p ORDER BY p.createTime")
-	public List<Product> findNewProducts();
+	public List<Product> findByOrderByCreateTimeDesc();
+    public List<Product> findByOrderByCreateTimeAsc();
 
 	@Query("FROM Product p")
 	public List<Product> findPopProducts();
+
 }

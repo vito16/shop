@@ -103,9 +103,7 @@ public class UserController {
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public String doReg(@Valid User user, Model model, BindingResult result) {
-        System.out.println(1);
         if (result.hasErrors()) {
-            System.out.println(2);
             logger.error("Java Bean 没有通过验证");
             for (ObjectError or : result.getAllErrors()) {
                 logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
@@ -115,6 +113,7 @@ public class UserController {
             return "user/userReg";
         }
         userService.save(user);
+        logger.info("");
         logger.info("后台成功添加用户:" + user);
         return "redirect:/";
     }

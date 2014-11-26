@@ -3,6 +3,8 @@ package com.vito16.shop.util;
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.User;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanUtilsBean;
 
 import javax.servlet.http.HttpSession;
 

@@ -16,11 +16,13 @@
         <validator.version>5.1.2.Final</validator.version>
         <entitymanager.version>4.3.6.Final</entitymanager.version>
         <ehcache.version>2.4.8</ehcache.version>
-        <slf.version>1.7.7</slf.version>
+        <slf4j.version>1.7.7</slf4j.version>
         <druid.version>1.0.9</druid.version>
         <junit.version>4.11</junit.version>
         <logback.version>1.1.2</logback.version>
         <shiro.version>1.2.3</shiro.version>
+        <tomcat.version>7.0.57</tomcat.version>
+        <vito-common.version>1.0.2.20141126</vito-common.version>
         <jetty.version>9.1.5.v20140505</jetty.version>
     </properties>
     <dependencies>
@@ -311,19 +313,34 @@
             <version>${ehcache.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.vito16</groupId>
-            <artifactId>util</artifactId>
-            <version>1.0.1</version>
+            <groupId>com.vito16.common</groupId>
+            <artifactId>common-util</artifactId>
+            <version>${vito-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-util</artifactId>
+            <version>${tomcat.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.6</version>
+            <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
     <build>
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.0.5</version>
@@ -338,7 +355,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
