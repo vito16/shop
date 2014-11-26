@@ -3,6 +3,8 @@
  */
 package com.vito16.shop.controller;
 
+import com.vito16.common.log.Logger;
+import com.vito16.common.log.LoggerFactory;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
 import com.vito16.shop.model.Picture;
@@ -10,8 +12,6 @@ import com.vito16.shop.model.Product;
 import com.vito16.shop.service.PictureService;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.AdminUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
