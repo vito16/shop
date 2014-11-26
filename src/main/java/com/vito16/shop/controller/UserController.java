@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Vito16 zhouwentao16@gmail.com
- * @date 2013-7-8
+ * @author Vito zhouwentao16@gmail.com
+ * @version 2013-7-8
  */
 @Controller
 @RequestMapping("/user")

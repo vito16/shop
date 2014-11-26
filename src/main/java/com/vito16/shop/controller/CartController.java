@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author Vito16 zhouwentao16@gmail.com
+ * @author Vito zhouwentao16@gmail.com
  * @date 2013-7-8
  */
 @Controller

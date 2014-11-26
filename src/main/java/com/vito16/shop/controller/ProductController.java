@@ -28,9 +28,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Vito
- * @email zhouwentao16@gmail.com
- * @date 2013-7-17
+ * @author Vito zhouwentao16@gmail.com
+ * @version 2013-7-17
  */
 @Controller
 @RequestMapping(value = "/product")

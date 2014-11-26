@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
- * @author Vito16 zhouwentao16@gmail.com
+ * @author Vito zhouwentao16@gmail.com
  * @date 2013-7-8
  */
 @Controller
