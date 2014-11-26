@@ -5,6 +5,7 @@ package com.vito16.shop.controller;
 
 import com.vito16.common.log.Logger;
 import com.vito16.common.log.LoggerFactory;
+import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.PageUtil;
 import com.vito16.shop.model.Picture;
@@ -13,18 +14,19 @@ import com.vito16.shop.service.PictureService;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.AdminUtil;
 import com.vito16.shop.util.Image;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 
@@ -102,7 +104,6 @@ public class ProductController {
 
     private void uploadImage(Product product, HttpSession session, MultipartFile file) {
         String fileName = new Date().getTime() + ".jpg";
-        Image image = new Image(file.get);
         String path = session.getServletContext().getRealPath("/upload");
         String serverFile = path + "/" + fileName;
         Picture picture = new Picture();
@@ -119,6 +120,10 @@ public class ProductController {
                     new BufferedOutputStream(new FileOutputStream(new File(serverFile)));
             stream.write(bytes);
             stream.close();
+            //缩放处理
+            Image image = new Image(serverFile);
+            image.resize(Constants.IMG_WIDTH,Constants.IMG_HEIGHT);
+            image.save();
         } catch (Exception e) {
             e.printStackTrace();
         }
