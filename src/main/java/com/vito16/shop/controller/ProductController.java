@@ -12,6 +12,7 @@ import com.vito16.shop.model.Product;
 import com.vito16.shop.service.PictureService;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.AdminUtil;
+import com.vito16.shop.util.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,6 +102,7 @@ public class ProductController {
 
     private void uploadImage(Product product, HttpSession session, MultipartFile file) {
         String fileName = new Date().getTime() + ".jpg";
+        Image image = new Image(file.get);
         String path = session.getServletContext().getRealPath("/upload");
         String serverFile = path + "/" + fileName;
         Picture picture = new Picture();

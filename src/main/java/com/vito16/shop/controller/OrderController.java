@@ -16,10 +16,7 @@ import com.vito16.common.log.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -94,6 +91,13 @@ public class OrderController {
         List<UserAddress> userAddressList = user.getAddresses();
         model.addAttribute("addressList", userAddressList);
         return "order/orderPurchase";
+    }
+
+    @RequestMapping(value = "/userAddressList/{id}")
+    @ModelAttribute
+    @ResponseBody
+    public List<UserAddress> getUserAddressList(@PathVariable int id) {
+        return userAddressService.findByUserId(id);
     }
 
 
