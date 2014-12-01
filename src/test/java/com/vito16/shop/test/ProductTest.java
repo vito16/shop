@@ -28,7 +28,7 @@ import java.util.List;
 @ActiveProfiles(profiles = "do")
 @ContextConfiguration(locations = {"/applicationContext.xml"})
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration(defaultRollback = true)
 public class ProductTest {
 
     @Autowired

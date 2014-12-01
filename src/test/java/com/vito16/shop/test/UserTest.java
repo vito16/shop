@@ -39,7 +39,7 @@ import static org.hamcrest.core.Is.is;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext.xml"})
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration(defaultRollback = true)
 public class UserTest extends BaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(UserTest.class);

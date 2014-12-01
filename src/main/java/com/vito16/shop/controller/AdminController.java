@@ -15,29 +15,28 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Vito zhouwentao16@gmail.com
  * @date 2013-7-8
- * 
  */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
     @Autowired
     AdminService adminService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginForm() {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginForm() {
         return "admin/adminLogin";
-	}
+    }
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String doLogin(Admin admin, HttpSession session) {
-		if(adminService.checkLogin(admin)){
-            AdminUtil.saveAdminToSession(session,adminService.findByUsernameAndPassword(admin.getUsername(),admin.getPassword()));
-			logger.debug("管理员["+admin.getUsername()+"]登陆成功");
-			return "redirect:/";
-		}
-		return "redirect:/admin/login?errorPwd=true";
-	}
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String doLogin(Admin admin, HttpSession session) {
+        if (adminService.checkLogin(admin)) {
+            AdminUtil.saveAdminToSession(session, adminService.findByUsernameAndPassword(admin.getUsername(), admin.getPassword()));
+            logger.debug("管理员[{}]登陆成功",admin.getUsername());
+            return "redirect:/";
+        }
+        return "redirect:/admin/login?errorPwd=true";
+    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String doLogout(HttpSession session) {
@@ -45,14 +44,14 @@ public class AdminController {
         return "redirect:/";
     }
 
-	@RequestMapping(value = "/reg", method = RequestMethod.GET)
-	public String regForm(){
+    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    public String regForm() {
         return "admin/adminReg";
-	}
+    }
 
-	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String regForm(Admin admin,HttpSession session){
-		adminService.save(admin);
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
+    public String regForm(Admin admin, HttpSession session) {
+        adminService.save(admin);
         return "redirect:/";
-	}
+    }
 }
