@@ -37,7 +37,7 @@
     </servlet-mapping>
 
     <!-- 配置文件Servlet -->
-    <servlet>
+    <!--<servlet>
         <servlet-name>PropertiesServlet</servlet-name>
         <servlet-class>com.vito16.util.web.servlet.PropertiesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -45,7 +45,7 @@
     <servlet-mapping>
         <servlet-name>PropertiesServlet</servlet-name>
         <url-pattern>/properties-servlet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
     <!-- Filter 定义 -->
     <!-- Character Encoding filter -->
