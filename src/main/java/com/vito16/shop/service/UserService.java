@@ -5,10 +5,10 @@ package com.vito16.shop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vito16.shop.dao.UserDao;
 import com.vito16.shop.model.User;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vito

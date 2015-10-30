@@ -1,11 +1,12 @@
 package com.vito16.shop.dao;
 
-import com.vito16.shop.model.User;
-import com.vito16.shop.model.UserAddress;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.vito16.shop.model.User;
+import com.vito16.shop.model.UserAddress;
 
 /**
  * 

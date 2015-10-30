@@ -1,12 +1,9 @@
 package com.vito16.shop.test;
 
-import com.vito16.shop.model.Order;
-import com.vito16.shop.model.OrderItem;
-import com.vito16.shop.model.Product;
-import com.vito16.shop.model.UserAddress;
-import com.vito16.shop.service.OrderService;
-import com.vito16.shop.service.ProductService;
-import com.vito16.shop.service.UserService;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +12,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.vito16.shop.model.Order;
+import com.vito16.shop.model.OrderItem;
+import com.vito16.shop.model.Product;
+import com.vito16.shop.model.UserAddress;
+import com.vito16.shop.service.OrderService;
+import com.vito16.shop.service.ProductService;
+import com.vito16.shop.service.UserService;
 
 /**
  * Created by Vito on 2014/7/10.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/applicationContext.xml"})
-@Transactional
-@TransactionConfiguration(defaultRollback = true)
-public class OrderTest {
+public class OrderTest extends BaseTest {
 
     @Autowired
     OrderService orderService;

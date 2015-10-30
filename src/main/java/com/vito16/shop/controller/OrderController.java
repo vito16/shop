@@ -1,15 +1,12 @@
 package com.vito16.shop.controller;
 
-import com.vito16.shop.common.Constants;
-import com.vito16.shop.common.Page;
-import com.vito16.shop.common.PageUtil;
-import com.vito16.shop.model.*;
-import com.vito16.shop.service.OrderService;
-import com.vito16.shop.service.UserAddressService;
-import com.vito16.shop.service.UserService;
-import com.vito16.shop.util.AdminUtil;
-import com.vito16.shop.util.CartUtil;
-import com.vito16.shop.util.UserUtil;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +15,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import com.vito16.shop.common.Constants;
+import com.vito16.shop.common.Page;
+import com.vito16.shop.common.PageUtil;
+import com.vito16.shop.model.Order;
+import com.vito16.shop.model.OrderItem;
+import com.vito16.shop.model.User;
+import com.vito16.shop.model.UserAddress;
+import com.vito16.shop.service.OrderService;
+import com.vito16.shop.service.UserAddressService;
+import com.vito16.shop.service.UserService;
+import com.vito16.shop.util.AdminUtil;
+import com.vito16.shop.util.CartUtil;
+import com.vito16.shop.util.UserUtil;
 
 /**
  * @author Vito zhouwentao16@gmail.com

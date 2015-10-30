@@ -3,8 +3,9 @@
  */
 package com.vito16.shop.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.*;
 
 /**
  * 管理员

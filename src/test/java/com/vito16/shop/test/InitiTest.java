@@ -1,12 +1,7 @@
 package com.vito16.shop.test;
 
-import com.vito16.shop.model.Admin;
-import com.vito16.shop.model.Product;
-import com.vito16.shop.model.User;
-import com.vito16.shop.service.AdminService;
-import com.vito16.shop.service.OrderService;
-import com.vito16.shop.service.ProductService;
-import com.vito16.shop.service.UserService;
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +10,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import com.vito16.shop.model.Admin;
+import com.vito16.shop.model.Product;
+import com.vito16.shop.model.User;
+import com.vito16.shop.service.AdminService;
+import com.vito16.shop.service.OrderService;
+import com.vito16.shop.service.ProductService;
+import com.vito16.shop.service.UserService;
 
 /**
  * 初始化测试用例

@@ -1,10 +1,10 @@
 package com.vito16.shop.test;
 
+import java.io.File;
+
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
-
-import java.io.File;
 
 /**
  * @author 木鱼 muyu@yiji.com

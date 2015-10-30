@@ -3,16 +3,17 @@
  */
 package com.vito16.shop.service;
 
-import com.vito16.shop.common.Page;
-import com.vito16.shop.dao.NewsDao;
-import com.vito16.shop.model.News;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.vito16.shop.common.Page;
+import com.vito16.shop.dao.NewsDao;
+import com.vito16.shop.model.News;
 
 /**
  * 新闻模块Service
