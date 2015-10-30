@@ -56,6 +56,6 @@ public class OrderTest extends BaseTest {
 
     @Test
     public void testDelOrder(){
-        orderService.deleteOrder(5);
+        //orderService.deleteOrder(5);
     }
 }
