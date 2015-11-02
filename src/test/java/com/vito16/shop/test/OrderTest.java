@@ -51,7 +51,6 @@ public class OrderTest extends BaseTest {
         UserAddress ua = new UserAddress();
         ua.setAddress("asdfasdf");
         orderService.addOrder(order,orderItems,ua);
-
     }
 
     @Test
