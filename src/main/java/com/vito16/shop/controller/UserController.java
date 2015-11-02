@@ -40,12 +40,14 @@ public class UserController {
     @Autowired
     UserAddressService userAddressService;
 
+
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
         return "user/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @ResponseBody
     public String loginForm() {
         return "user/userLogin";
     }
