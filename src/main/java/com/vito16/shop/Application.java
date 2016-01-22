@@ -18,6 +18,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -30,7 +31,7 @@ import com.alibaba.druid.pool.DruidDataSource;
  * @version 2015/10/30
  */
 @SpringBootApplication
-@ImportResource("classpath*:/web.xml")
+@Import(ServletConfig.class)
 public class Application extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {
@@ -74,8 +75,7 @@ public class Application extends SpringBootServletInitializer {
 	
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-		JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory);
-		return transactionManager;
+		return new JpaTransactionManager(entityManagerFactory);
 	}
 	
 }
