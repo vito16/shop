@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.service.AdminService;
 import com.vito16.shop.util.AdminUtil;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -27,6 +28,12 @@ public class AdminController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm() {
         return "admin/adminLogin";
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @ResponseBody
+    public String test() {
+        return "admin";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

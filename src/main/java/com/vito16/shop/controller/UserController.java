@@ -47,7 +47,6 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    @ResponseBody
     public String loginForm() {
         return "user/userLogin";
     }
