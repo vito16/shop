@@ -1,10 +1,10 @@
 购物系统
 =====================
 
-简单的一个在线商店，慢慢完善
+在线商城，持续完善中...
 
 ## 启动
-  直接运行
+
+    clean tomcat7:run -Dmaven.test.skip=true
     
-    com.vito16.shop.Application.main
-    
+访问URL：[http://localhost:9999/](localhost:9999/)
