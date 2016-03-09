@@ -1,11 +1,15 @@
 package com.vito16.shop;
 
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
@@ -15,16 +19,20 @@ import javax.servlet.ServletRegistration;
  */
 @EnableWebMvc
 @EnableSpringDataWebSupport
-public class WebConfig implements WebApplicationInitializer {
+public class WebConfig extends AbstractDispatcherServletInitializer {
 
     @Override
-    public void onStartup(ServletContext container) {
-        XmlWebApplicationContext appContext = new XmlWebApplicationContext();
-        appContext.setConfigLocation("/WEB-INF/mvc-dispatcher-servlet.xml");
+    protected WebApplicationContext createServletApplicationContext() {
+        return null;
+    }
 
-        ServletRegistration.Dynamic dispatcher =
-                container.addServlet("dispatcher", new DispatcherServlet(appContext));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+
+    @Override
+    protected WebApplicationContext createRootApplicationContext() {
+        return null;
     }
 }
