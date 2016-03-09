@@ -1,10 +1,9 @@
 package com.vito16.shop.test;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.service.AdminService;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by Vito on 2014/7/15.
