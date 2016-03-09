@@ -12,10 +12,6 @@ import java.util.List;
  * @date 2013-7-11
  *
  */
-public interface IBaseService<T,PK extends Serializable> {
-	void save(T t);
-	
-	T find(PK id);
-	
-	List<T> findAll();
+public interface IBaseService {
+
 }

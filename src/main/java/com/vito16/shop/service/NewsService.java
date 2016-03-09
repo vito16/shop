@@ -24,7 +24,7 @@ import com.vito16.shop.model.News;
  */
 @Service
 @Transactional
-public class NewsService {
+public class NewsService extends BaseService {
 
 	@Autowired
     @Qualifier("newsDao")
@@ -39,8 +39,16 @@ public class NewsService {
     }
 
     public List<News> findNews(Page<News> page, int[] pageParams) {
+        return doIt(page,List.class,new ProcessInvoker(){
+
+            @Override
+            void process() {
+
+            }
+        });
         page.setResult(newsDao.findAll(new PageRequest(pageParams[0] - 1, pageParams[1])).getContent());
         page.setTotalCount(newsDao.count());
         return page.getResult();
     }
+
 }

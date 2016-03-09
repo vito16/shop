@@ -6,6 +6,10 @@ package com.vito16.shop.service;
 import java.io.Serializable;
 import java.util.List;
 
+import com.vito16.shop.common.Page;
+import com.vito16.shop.model.News;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,31 +18,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2013-7-9
  * 
  */
-public abstract class BaseService<T, PK extends Serializable> implements
-		IBaseService<T, Serializable> {
+public abstract class BaseService implements
+		IBaseService {
 
-	protected JpaRepository<T, PK> dao;
+	private static final Logger logger = LoggerFactory.getLogger(BaseService.class);
 
-	public void setDao(JpaRepository<T, PK> dao) {// 需要依赖注入
-		this.dao = dao;
+	protected <T> T doIt(Page<News> page, T resultClass, ProcessInvoker processInvoker) {
+		T result = initResult();
+		processInvoker.process();
+		return result;
 	}
 
-	@Override
-	public void save(T t) {
-		dao.save(t);
-	}
-
-	
-
-	@Override
-	public T find(Serializable id) {
-//			return dao.findOne(id);
+	private <T> T initResult() {
 		return null;
 	}
-
-	@Override
-	public List<T> findAll() {
-		return null;
-	}
-
 }
