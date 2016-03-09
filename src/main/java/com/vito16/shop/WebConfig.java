@@ -3,9 +3,7 @@ package com.vito16.shop;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
 /**
  * Created by vito on 16/3/9.
