@@ -56,7 +56,7 @@ public class UserController {
         if (userService.checkLogin(user)) {
             user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
-            logger.debug("用户[" + user.getUsername() + "]登陆成功");
+            logger.info("用户[" + user.getUsername() + "]登陆成功");
             return "redirect:/";
         }
         return "redirect:/user/login?errorPwd=true";
@@ -118,7 +118,6 @@ public class UserController {
             return "user/userReg";
         }
         userService.save(user);
-        logger.info("");
         logger.info("后台成功添加用户:" + user);
         return "redirect:/";
     }
