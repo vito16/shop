@@ -2,7 +2,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <packaging>war</packaging>
     <name>商城</name>
     <description>基于Spring框架实现</description>
 
@@ -15,6 +14,7 @@
     <groupId>com.vito16.activiti</groupId>
     <artifactId>shop</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +23,7 @@
         <tomcat.version>7.0.59</tomcat.version>
         <guava.version>19.0</guava.version>
     </properties>
+
     <dependencies>
 
         <!--WEB-->
