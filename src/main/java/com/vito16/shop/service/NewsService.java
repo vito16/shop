@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +38,7 @@ public class NewsService extends BaseService {
     }
 
     public List<News> findNews(Page<News> page, int[] pageParams) {
-        return doIt(page,List.class,new ProcessInvoker(){
+        /*return doIt(page,List.class,new ProcessInvoker(){
 
             @Override
             void process() {
@@ -48,7 +47,8 @@ public class NewsService extends BaseService {
         });
         page.setResult(newsDao.findAll(new PageRequest(pageParams[0] - 1, pageParams[1])).getContent());
         page.setTotalCount(newsDao.count());
-        return page.getResult();
+        return page.getResult();*/
+        return null;
     }
 
 }

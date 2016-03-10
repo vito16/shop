@@ -9,10 +9,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vito16.shop.model.Admin;
@@ -24,10 +24,9 @@ import com.vito16.shop.service.ProductService;
  * Created by Vito on 2014/7/15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles(profiles = "do")
 @ContextConfiguration(locations = {"/applicationContext.xml"})
 @Transactional
-@TransactionConfiguration(defaultRollback = true)
+@Rollback
 public class ProductTest {
 
     @Autowired

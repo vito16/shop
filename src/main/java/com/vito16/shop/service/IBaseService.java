@@ -3,9 +3,6 @@
  */
 package com.vito16.shop.service;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * @author Vito
  * @email zhouwentao16@gmail.com
