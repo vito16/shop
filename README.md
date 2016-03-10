@@ -5,6 +5,6 @@
 
 ## 启动
 
-    clean tomcat7:run -Dmaven.test.skip=true
+    Application.main()
     
-访问URL：[http://localhost:9999/](localhost:9999/)
+访问URL：[http://localhost:8080/](localhost:8080/)
