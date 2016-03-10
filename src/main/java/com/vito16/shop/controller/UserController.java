@@ -1,24 +1,29 @@
 package com.vito16.shop.controller;
 
-import com.vito16.shop.model.User;
-import com.vito16.shop.model.UserAddress;
-import com.vito16.shop.service.UserAddressService;
-import com.vito16.shop.service.UserService;
-import com.vito16.shop.util.UserUtil;
-import com.vito16.common.log.Logger;
-import com.vito16.common.log.LoggerFactory;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import com.vito16.shop.model.User;
+import com.vito16.shop.model.UserAddress;
+import com.vito16.shop.service.UserAddressService;
+import com.vito16.shop.service.UserService;
+import com.vito16.shop.util.UserUtil;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -35,6 +40,7 @@ public class UserController {
     @Autowired
     UserAddressService userAddressService;
 
+
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
         return "user/index";
@@ -50,7 +56,7 @@ public class UserController {
         if (userService.checkLogin(user)) {
             user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
-            logger.debug("用户[" + user.getUsername() + "]登陆成功");
+            logger.info("用户[" + user.getUsername() + "]登陆成功");
             return "redirect:/";
         }
         return "redirect:/user/login?errorPwd=true";
@@ -112,7 +118,6 @@ public class UserController {
             return "user/userReg";
         }
         userService.save(user);
-        logger.info("");
         logger.info("后台成功添加用户:" + user);
         return "redirect:/";
     }

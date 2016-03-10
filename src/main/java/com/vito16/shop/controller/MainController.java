@@ -1,13 +1,14 @@
 package com.vito16.shop.controller;
 
-import com.vito16.shop.service.ProductService;
-import com.vito16.common.log.Logger;
-import com.vito16.common.log.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.vito16.shop.service.ProductService;
 
 /**
  * @author Vito zhouwentao16@gmail.com

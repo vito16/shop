@@ -3,16 +3,16 @@
  */
 package com.vito16.shop.service;
 
-import com.vito16.shop.common.Page;
-import com.vito16.shop.dao.NewsDao;
-import com.vito16.shop.model.News;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.vito16.shop.common.Page;
+import com.vito16.shop.dao.NewsDao;
+import com.vito16.shop.model.News;
 
 /**
  * 新闻模块Service
@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class NewsService {
+public class NewsService extends BaseService {
 
 	@Autowired
     @Qualifier("newsDao")
@@ -38,8 +38,17 @@ public class NewsService {
     }
 
     public List<News> findNews(Page<News> page, int[] pageParams) {
+        /*return doIt(page,List.class,new ProcessInvoker(){
+
+            @Override
+            void process() {
+
+            }
+        });
         page.setResult(newsDao.findAll(new PageRequest(pageParams[0] - 1, pageParams[1])).getContent());
         page.setTotalCount(newsDao.count());
-        return page.getResult();
+        return page.getResult();*/
+        return null;
     }
+
 }

@@ -5,17 +5,16 @@ package com.vito16.shop.service;
 
 import java.util.List;
 
-import com.vito16.shop.common.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.vito16.shop.common.Page;
 import com.vito16.shop.dao.ProductDao;
 import com.vito16.shop.dao.ProductTypeDao;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.model.ProductType;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vito

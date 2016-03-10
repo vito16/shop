@@ -1,16 +1,18 @@
 package com.vito16.shop.controller;
 
-import com.vito16.shop.model.Admin;
-import com.vito16.shop.service.AdminService;
-import com.vito16.shop.util.AdminUtil;
-import com.vito16.common.log.Logger;
-import com.vito16.common.log.LoggerFactory;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
+import com.vito16.shop.model.Admin;
+import com.vito16.shop.service.AdminService;
+import com.vito16.shop.util.AdminUtil;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -20,12 +22,19 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+
     @Autowired
     AdminService adminService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm() {
         return "admin/adminLogin";
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @ResponseBody
+    public String test() {
+        return "admin";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
