@@ -11,69 +11,10 @@
 
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-
-	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/application.properties"/>
-	
-	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
-	<context:component-scan base-package="com.vito16.shop">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
-
-	<!-- 数据源配置, 使用Druid数据库连接池 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-		<!-- Connection Info -->
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<!-- Connection Pooling Info -->
-        <property name="maxActive"><value>20</value></property>
-        <property name="initialSize"><value>1</value></property>
-        <property name="maxWait"><value>60000</value></property>
-        <property name="minIdle"><value>1</value></property>
-
-        <property name="timeBetweenEvictionRunsMillis"><value>60000</value></property>
-        <property name="minEvictableIdleTimeMillis"><value>300000</value></property>
-
-        <property name="validationQuery"><value>SELECT 'x'</value></property>
-        <property name="testWhileIdle"><value>true</value></property>
-        <property name="testOnBorrow"><value>false</value></property>
-        <property name="testOnReturn"><value>false</value></property>
-
-        <property name="poolPreparedStatements"><value>true</value></property>
-        <property name="maxOpenPreparedStatements"><value>20</value></property>
-	</bean>
-
-	
-	<!-- Jpa Entity Manager 配置 -->
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
-		<property name="packagesToScan" value="com.vito16.shop.model" />
-		<property name="jpaProperties">
-			<props>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.show_sql">false</prop>  
-           	 	<prop key="hibernate.format_sql">false</prop>   
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
-				</prop>
-				<prop key="net.sf.ehcache.configurationResourceName">ehcache/ehcache-hibernate-local.xml</prop>
-				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="hibernateJpaVendorAdapter"
-		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-
 	<!-- Spring Data Jpa配置 -->
 	<jpa:repositories base-package="com.vito16.shop"
 		entity-manager-factory-ref="entityManagerFactory"
 		transaction-manager-ref="transactionManager" />
-
 
 	<!-- Jpa 事务配置 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
