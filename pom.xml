@@ -17,7 +17,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <mysql.version>5.1.33</mysql.version>
+        <mysql.version>5.1.38</mysql.version>
         <druid.version>1.0.17</druid.version>
         <tomcat.version>7.0.59</tomcat.version>
         <guava.version>19.0</guava.version>
@@ -60,6 +60,11 @@
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -88,12 +93,12 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.182</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
