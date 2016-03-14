@@ -8,9 +8,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * @author Vito16 zhouwentao16@gmail.com
- * @date 2013-7-9
- * 
+ * @author 木鱼 muyu@yiji.com
+ * @version 2016/03/14
  */
 public class RegTest {
 

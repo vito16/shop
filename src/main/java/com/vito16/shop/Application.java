@@ -13,8 +13,8 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- *
- * Created by vito on 16/3/9.
+ * @author 木鱼 muyu@yiji.com
+ * @version 2016/03/14
  */
 @SpringBootApplication
 public class Application {
