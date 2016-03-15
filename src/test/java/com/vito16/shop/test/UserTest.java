@@ -13,8 +13,8 @@ import com.vito16.shop.model.User;
 import com.vito16.shop.service.UserService;
 
 /**
- * @author Vito16 zhouwentao16@gmail.com
- * @date 2013-7-8
+ * @author 木鱼 muyu@yiji.com
+ * @version 2016/03/14
  */
 public class UserTest extends BaseTest {
 

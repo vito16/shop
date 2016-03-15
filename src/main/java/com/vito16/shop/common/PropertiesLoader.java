@@ -12,6 +12,10 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+/**
+ * @author 木鱼 muyu@yiji.com
+ * @version 2016/03/14
+ */
 public class PropertiesLoader {
 	private static Logger logger = LoggerFactory
 			.getLogger(PropertiesLoader.class);

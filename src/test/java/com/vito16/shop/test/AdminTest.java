@@ -7,7 +7,8 @@ import com.vito16.shop.model.Admin;
 import com.vito16.shop.service.AdminService;
 
 /**
- * Created by Vito on 2014/7/15.
+ * @author 木鱼 muyu@yiji.com
+ * @version 2016/03/14
  */
 public class AdminTest extends BaseTest{
 

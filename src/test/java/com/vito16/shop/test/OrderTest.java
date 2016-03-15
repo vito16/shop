@@ -16,7 +16,8 @@ import com.vito16.shop.service.ProductService;
 import com.vito16.shop.service.UserService;
 
 /**
- * Created by Vito on 2014/7/10.
+ * @author 木鱼 muyu@yiji.com
+ * @version 2016/03/14
  */
 public class OrderTest extends BaseTest {
 

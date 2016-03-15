@@ -13,7 +13,6 @@ import com.vito16.shop.service.ProductService;
 /**
  * @author Vito zhouwentao16@gmail.com
  * @date 2013-7-8
- * 
  */
 @Controller
 @RequestMapping("/")

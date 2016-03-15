@@ -5,8 +5,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
- * @author Vito16 zhouwentao16@gmail.com
- * @date 2013-7-8
+ * @author 木鱼 muyu@yiji.com
+ * @version 2016/03/14
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

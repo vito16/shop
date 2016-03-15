@@ -26,7 +26,7 @@ import com.vito16.shop.service.UserService;
  * Created by Vito on 2014/7/15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/applicationContext.xml"})
+@ContextConfiguration(locations = {"/applicationContext1.xml"})
 @Transactional
 @Commit
 public class InitiTest {
