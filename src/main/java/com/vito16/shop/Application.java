@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -19,24 +22,28 @@ import java.util.Properties;
  * @version 2016/03/14
  */
 @SpringBootApplication
-@EnableRabbit
+@EnableJpaRepositories
+@EnableTransactionManagement
 public class Application {
-	
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class);
-	}
 	
 	@Value("${jdbc.driverClassName}")
 	private String driverClassName;
+
 	@Value("${jdbc.url}")
 	private String url;
+
 	@Value("${jdbc.username}")
 	private String username;
+
 	@Value("${jdbc.password}")
 	private String password;
-	
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class);
+	}
+
 	@Bean
-	public DataSource getDataSource() {
+	public DataSource dataSource() {
 		DruidDataSource druidDataSource = new DruidDataSource();
 		druidDataSource.setDriverClassName(driverClassName);
 		druidDataSource.setUrl(url);
@@ -63,7 +70,7 @@ public class Application {
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-		entityManagerFactoryBean.setDataSource(getDataSource());
+		entityManagerFactoryBean.setDataSource(dataSource());
 		entityManagerFactoryBean.setPackagesToScan("com.vito16.shop.model");
 		Properties jpaProperties = new Properties();
 		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
@@ -73,6 +80,13 @@ public class Application {
 		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		
 		return entityManagerFactoryBean;
+	}
+
+	@Bean
+	public JpaTransactionManager transactionManager() {
+		JpaTransactionManager txManager = new JpaTransactionManager();
+		txManager.setEntityManagerFactory(entityManagerFactory().getObject());
+		return txManager;
 	}
 
 }
