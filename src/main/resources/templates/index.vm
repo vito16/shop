@@ -1,36 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="/common/global.jsp" %>
+
+    #include("./common/global.vm")
     <title>主页</title>
-    <%@ include file="/common/meta.jsp" %>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>
+    #include("./common/meta.vm")
+    #include("./common/include-base-styles.vm")
+    <link type="text/css" rel="stylesheet" href="/css/index.css"/>
 </head>
 
 <body>
-<%@include file="/common/header-nav.jsp" %>
-<div class="container">
+    #include("./common/header-nav.vm")
 
-    <div class="jumbotron">
-        <h1>
-            小小商店
-        </h1>
+    <div class="container">
 
-        <p>
-            Spring + Bootstrap 3
-        </p>
+        <div class="jumbotron">
+            <h1>
+                小小商店
+            </h1>
 
-        <p>
-            <a class="btn btn-primary btn-large" href="http://github.com/vito16/shop">Github</a>
-        </p>
+            <p>
+                Spring + Bootstrap 3
+            </p>
+
+            <p>
+                <a class="btn btn-primary btn-large" href="http://github.com/vito16/shop">Github</a>
+            </p>
+        </div>
+
     </div>
+    <!-- /container -->
 
-</div>
-<!-- /container -->
-<%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
+    #include("./common/footer.vm")
+    #include("./common/include-base-js.vm")
+
 </body>
 </html>

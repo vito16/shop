@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+/*2012-5-15 密码设置*/
+.userpad{padding:40px 0 60px 100px;}
+.userpad1{padding:20px 30px 60px 100px;}
+
+.uermarl{margin-left:320px}
+.box_useroper{padding-top:20px;border-top:2px solid #a90957;overflow:hidden}
+
+.box_userpwd{border-top:2px solid #a90957;border-left:1px solid #d8d8d8;border-right:1px solid #d8d8d8;border-bottom:1px solid #d8d8d8;overflow:hidden}
+.usertopul li{float:left;width:100px;height:31px;text-align:center;background:url(../Images/btnbg.gif) no-repeat 0 -385px;line-height:31px;overflow:hidden}
+.usertopul .curr{background-position:0 -353px}
+a.bindcancel, a.bindyes{display:block;float:left;margin-left:5px;width:63px;height:25px;line-height:25px;text-align:center;color:#616161;background:url(../Images/btnbg.gif) no-repeat 0 -417px}
+a.bindyes{background-position:-64px -417px;color:#fd5102}
+.numem{display:block;float:left;width:20px;height:20px;line-height:20px;text-align:center;color:#fff;background:url(../Images/icorn.gif) no-repeat -20px -93px;margin-right:6px;font-weight:bold;font-family:Verdana;overflow:hidden}
+.box_usernotice li{margin-bottom:8px;height:20px;line-height:20px;*line-height:22px;overflow:hidden}
+.pwdtit{width:150px;height:31px;line-height:31px;text-align:center;background:url(../Images/btnbg.gif) no-repeat 0 -385px;color:#fff;overflow:hidden}
+.numem1{ display:inline;margin-right:5px;width:28px;height:23px;line-height:23px;font-size:14px;font-family:"微软雅黑";text-align:center;background:url(../Images/icorn.gif) no-repeat 0 -200px;overflow:hidden}
+.findtxt{padding-bottom:16px;height:23px;line-height:23px;overflow:hidden}
+.findtype{margin:12px 0 28px 0;padding:20px 0 30px 320px;background-color:#fefcee;overflow:hidden}
+.sbt_findpwd{ display:inline;width:84px;height:25px;border:0;background:url(../Images/btnbg.gif) no-repeat 0 -443px;cursor:pointer;overflow:hidden}
+
+.box_phone{margin:75px 0 100px 0;padding:16px 0 22px 280px;background-color:#fefcee}
+.ul_phone{ margin-bottom:10px}
+.ul_phone li{height:28px;line-height:28px;overflow:hidden}
+
+.tab_user{width:770px}
+.tabtd_user{height:35px; border:solid #ededed;border-width:1px 0;background-color:#f9f9f9}
+.tabtdl_user{height:35px; border:solid #ededed;border-width:1px 0 1px 1px;background-color:#f9f9f9}
+.tabtdr_user{height:35px; border:solid #ededed;border-width:1px 1px 1px 0;background-color:#f9f9f9}
+.dthbg{border:solid #d7d7d7;border-width:1px 0 1px 1px;height:34px;line-height:34px;background:url(../Images/bg01.gif) repeat-x 0 -362px;overflow:hidden}
+.dthbg1{border:1px solid #d7d7d7;height:34px;line-height:34px;background:url(../Images/bg01.gif) repeat-x 0 -362px;overflow:hidden}
+.tdbg01{width:62px;height:32px;border-left:1px solid #c7c7c7;background:url(../Images/tdbg01.gif) repeat-x 0 0;overflow:hidden}
+.tdbg02{height:32px;background:url(../Images/tdbg01.gif) repeat-x 0 -33px;overflow:hidden}
+.tdbg06{height:32px;border-right:1px solid #ededed;background:url(../Images/tdbg01.gif) repeat-x 0 -33px;overflow:hidden}
+.xqing{ float:right;margin-right:10px}
+.sbt1, .sbt2{display:block;margin-left:5px;width:63px;height:25px;line-height:25px;text-align:center;color:#616161;background:url(../Images/btnbg.gif) no-repeat 0 -417px}
+.sbt2{background-position: -64px -417px}
+.ul_userinfo li{height:35px;}
+.ul_userinfo div{float:left;height:35px;line-height:35px;*line-height:35px;}
+.texta01{width:300px;border:1px solid #e1dfdf;}
+
+/*2012-5-15 密码设置*/
