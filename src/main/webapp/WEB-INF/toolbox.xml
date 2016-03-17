@@ -1,0 +1,5 @@
+<tools>
+    <toolbox scope="session">
+        <tool key="map" class="java.util.HashMap"/>
+    </toolbox>
+</tools>

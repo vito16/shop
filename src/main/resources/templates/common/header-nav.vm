@@ -13,6 +13,7 @@
                 <li><a href="/">首页</a></li>
                 <li><a href="/product/">商品</a></li>
                 <li><a href="/news/">公告</a></li>
+                $session
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 #if($!request.getSession().getAttribute('login_user'))
