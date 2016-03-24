@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    $!session
+====
+    $session
     #include("./common/header-nav.vm")
 
     <div class="container">
