@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
-import com.vito16.shop.dao.OrderDao;
-import com.vito16.shop.dao.OrderItemDao;
+import com.vito16.shop.dao.OrderRepository;
+import com.vito16.shop.dao.OrderItemRepository;
 import com.vito16.shop.model.Order;
 import com.vito16.shop.model.OrderItem;
 import com.vito16.shop.model.UserAddress;
@@ -29,9 +29,9 @@ import com.vito16.shop.model.UserAddress;
 public class OrderService {
 
     @Autowired
-    OrderDao orderDao;
+    OrderRepository orderDao;
     @Autowired
-    OrderItemDao orderItemDao;
+    OrderItemRepository orderItemDao;
     @Autowired
     UserAddressService userAddressService;
 

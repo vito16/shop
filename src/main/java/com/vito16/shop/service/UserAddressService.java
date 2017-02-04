@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vito16.shop.dao.UserAddressDao;
+import com.vito16.shop.dao.UserAddressRepository;
 import com.vito16.shop.model.User;
 import com.vito16.shop.model.UserAddress;
 
@@ -22,7 +22,7 @@ import com.vito16.shop.model.UserAddress;
 @Transactional
 public class UserAddressService {
     @Autowired
-    private UserAddressDao userAddressDao;
+    private UserAddressRepository userAddressDao;
 
     /**
      * 保存收货地址

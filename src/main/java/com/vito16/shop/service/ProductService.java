@@ -3,18 +3,17 @@
  */
 package com.vito16.shop.service;
 
-import java.util.List;
-
+import com.vito16.shop.common.Page;
+import com.vito16.shop.dao.ProductRepository;
+import com.vito16.shop.dao.ProductTypeRepository;
+import com.vito16.shop.model.Product;
+import com.vito16.shop.model.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vito16.shop.common.Page;
-import com.vito16.shop.dao.ProductDao;
-import com.vito16.shop.dao.ProductTypeDao;
-import com.vito16.shop.model.Product;
-import com.vito16.shop.model.ProductType;
+import java.util.List;
 
 /**
  * @author Vito
@@ -27,10 +26,10 @@ import com.vito16.shop.model.ProductType;
 public class ProductService {
 
 	@Autowired
-	ProductTypeDao productTypeDao;
+    ProductTypeRepository productTypeDao;
 
 	@Autowired
-	ProductDao productDao;
+	ProductRepository productDao;
 
 	public void saveType(ProductType type) {
 		productTypeDao.save(type);

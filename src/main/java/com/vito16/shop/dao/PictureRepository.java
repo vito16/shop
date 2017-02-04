@@ -13,5 +13,5 @@ import com.vito16.shop.model.Picture;
  * 
  */
 @Repository
-public interface PictureDao extends JpaRepository<Picture, Integer> {
+public interface PictureRepository extends JpaRepository<Picture, Integer> {
 }

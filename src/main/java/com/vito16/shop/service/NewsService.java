@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vito16.shop.common.Page;
-import com.vito16.shop.dao.NewsDao;
+import com.vito16.shop.dao.NewsRepository;
 import com.vito16.shop.model.News;
 
 /**
@@ -27,7 +27,7 @@ public class NewsService extends BaseService {
 
 	@Autowired
     @Qualifier("newsDao")
-    NewsDao newsDao;
+    NewsRepository newsDao;
 
     public void addNews(News news){
         newsDao.save(news);

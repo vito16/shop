@@ -13,6 +13,6 @@ import com.vito16.shop.model.OrderItem;
  * 
  */
 @Repository
-public interface OrderItemDao extends JpaRepository<OrderItem, Integer> {
+public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
     void deleteByOrderId(Integer orderId);
 }

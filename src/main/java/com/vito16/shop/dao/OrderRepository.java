@@ -3,7 +3,7 @@ package com.vito16.shop.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.vito16.shop.model.News;
+import com.vito16.shop.model.Order;
 
 /**
  * 
@@ -12,6 +12,7 @@ import com.vito16.shop.model.News;
  * @date 2013-7-9
  * 
  */
-@Repository("newsDao")
-public interface NewsDao extends JpaRepository<News, Integer> {
+@Repository
+public interface OrderRepository extends JpaRepository<Order, Integer> {
+
 }

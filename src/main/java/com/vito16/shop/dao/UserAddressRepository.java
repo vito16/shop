@@ -1,9 +1,12 @@
 package com.vito16.shop.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.vito16.shop.model.Order;
+import com.vito16.shop.model.User;
+import com.vito16.shop.model.UserAddress;
 
 /**
  * 
@@ -13,6 +16,6 @@ import com.vito16.shop.model.Order;
  * 
  */
 @Repository
-public interface OrderDao extends JpaRepository<Order, Integer> {
-
+public interface UserAddressRepository extends JpaRepository<UserAddress, Integer> {
+    List<UserAddress> findByUser(User user);
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vito16.shop.dao.AdminDao;
+import com.vito16.shop.dao.AdminRepository;
 import com.vito16.shop.model.Admin;
 
 /**
@@ -19,7 +19,7 @@ import com.vito16.shop.model.Admin;
 @Transactional
 public class AdminService {
     @Autowired
-    private AdminDao adminDao;
+    private AdminRepository adminDao;
 
     public boolean checkLogin(Admin admin) {
         return findByUsernameAndPassword(admin.getUsername(), admin.getPassword()) == null ? false : true;

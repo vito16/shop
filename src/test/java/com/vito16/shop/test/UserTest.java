@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vito16.shop.dao.UserDao;
+import com.vito16.shop.dao.UserRepository;
 import com.vito16.shop.model.User;
 import com.vito16.shop.service.UserService;
 
@@ -22,7 +22,7 @@ public class UserTest extends BaseTest {
 
 
     @Autowired
-    UserDao userDao;
+    UserRepository userDao;
 
     @Autowired
     UserService userService;
