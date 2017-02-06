@@ -4,3 +4,4 @@
 <script src="${ctx }/common/bootstrap/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 <script src="${ctx }/common/bootstrap/js/bootstrapValidator.min.js" type="text/javascript"></script>
 <script src="${ctx }/common/sco/js/sco.modal.js" type="text/javascript"></script>
+<script src="${ctx }/common/toastr/toastr.min.js" type="text/javascript"></script>

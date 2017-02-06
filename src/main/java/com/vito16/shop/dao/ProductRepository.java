@@ -2,6 +2,7 @@ package com.vito16.shop.dao;
 
 import java.util.List;
 
+import com.vito16.shop.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Repository;
  * @date 2013-7-9
  */
 @Repository
-public interface ProductRepository extends JpaRepository<ProductRepository, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    List<ProductRepository> findByOrderByCreateTimeDesc();
+    List<Product> findByOrderByCreateTimeDesc();
 
-    List<ProductRepository> findByOrderByCreateTimeAsc();
+    List<Product> findByOrderByCreateTimeAsc();
 
     @Query("FROM Product p")
-    List<ProductRepository> findPopProducts();
+    List<Product> findPopProducts();
 
 }

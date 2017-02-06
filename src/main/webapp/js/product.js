@@ -5,13 +5,13 @@ $(function() {
             url:ctx+"/cart/add/"+$(this).attr("productid")+"/1",
             success:function(result){
                 if(result=="success"){
-                    alert("添加购物车成功...");
+                    toastr.info("添加购物车成功.");
                 }else{
-                    alert("发生错误..");
+                    toastr.warn("发生错误,稍后重试.");
                 }
             },
             error:function(){
-                alert("发生错误..");
+                toastr.warn("发生错误,稍后重试.");
             }
         })
     })

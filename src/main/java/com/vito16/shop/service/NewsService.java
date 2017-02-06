@@ -26,7 +26,6 @@ import com.vito16.shop.model.News;
 public class NewsService extends BaseService {
 
 	@Autowired
-    @Qualifier("newsDao")
     NewsRepository newsDao;
 
     public void addNews(News news){

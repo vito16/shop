@@ -5,6 +5,7 @@
 <%--<link type="text/css" rel="stylesheet" media="screen" href="${ctx }/common/bootstrap/css/bootstrap-theme.css">--%>
 <link type="text/css" rel="stylesheet" media="screen" href="${ctx }/common/bootstrap/css/bootstrap-datetimepicker.min.css">
 <link type="text/css" rel="stylesheet" media="screen" href="${ctx }/common/sco/css/scojs.css">
+<link type="text/css" rel="stylesheet" media="screen" href="${ctx }/common/toastr/toastr.min.css">
 <link type="text/css" rel="stylesheet" media="screen" href="${ctx }/common/bootstrap/css/bootstrapValidator.min.css"/>
 <!--[if IE 6]>
 <SCRIPT src="${ctx }/common/js/iepng.js"></SCRIPT>
