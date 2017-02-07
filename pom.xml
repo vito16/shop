@@ -97,10 +97,6 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>-->
     </dependencies>
 
     <build>
@@ -110,6 +106,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
+                    <addResources>true</addResources>
                 </configuration>
             </plugin>
             <plugin>
