@@ -1,15 +1,5 @@
 package com.vito16.shop.test;
 
-import java.util.Date;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.model.User;
@@ -17,6 +7,9 @@ import com.vito16.shop.service.AdminService;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 /**
  * 初始化测试用例
@@ -25,10 +18,6 @@ import com.vito16.shop.service.UserService;
  * <p/>
  * Created by Vito on 2014/7/15.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/applicationContext1.xml"})
-@Transactional
-@Commit
 public class InitiTest {
 
     @Autowired
@@ -40,7 +29,7 @@ public class InitiTest {
     @Autowired
     AdminService adminService;
 
-    @Test
+//    @Test
     public void testInit() {
         Admin admin = new Admin();
         admin.setUsername("vito");

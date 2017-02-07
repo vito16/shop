@@ -3,9 +3,9 @@
  */
 package com.vito16.shop.test;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author 木鱼 muyu@yiji.com

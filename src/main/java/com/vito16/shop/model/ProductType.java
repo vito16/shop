@@ -13,7 +13,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "T_PRODUCTTYPE")
+@Table(name = "t_producttype")
 public class ProductType implements Serializable {
 	/**
 	 * 

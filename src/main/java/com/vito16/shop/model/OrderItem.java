@@ -14,7 +14,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "T_ORDERITEM")
+@Table(name = "t_orderitem")
 public class OrderItem implements Serializable {
 	/**
 	 * 

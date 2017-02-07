@@ -3,14 +3,13 @@
  */
 package com.vito16.shop.test;
 
+import com.vito16.shop.dao.UserRepository;
+import com.vito16.shop.model.User;
+import com.vito16.shop.service.UserService;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.vito16.shop.dao.UserRepository;
-import com.vito16.shop.model.User;
-import com.vito16.shop.service.UserService;
 
 /**
  * @author 木鱼 muyu@yiji.com

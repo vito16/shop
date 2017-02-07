@@ -16,7 +16,7 @@ import javax.persistence.*;
  * @date 2013-7-18
  */
 @Entity
-@Table(name = "T_ANNOUNCEMENT")
+@Table(name = "t_announcement")
 public class Announcement implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;

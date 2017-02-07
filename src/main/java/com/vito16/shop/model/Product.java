@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @DynamicUpdate
-@Table(name = "T_PRODUCT")
+@Table(name = "t_product")
 public class Product implements Serializable {
     /**
      *
@@ -123,12 +123,29 @@ public class Product implements Serializable {
         this.masterPic = masterPic;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     public List<Picture> getSlavePic() {
         return slavePic;
     }
 
     public void setSlavePic(List<Picture> slavePic) {
         this.slavePic = slavePic;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", point=" + point +
+                ", masterPic=" + masterPic +
+                ", slavePic=" + slavePic +
+                ", note='" + note + '\'' +
+                ", createTime=" + createTime +
+                ", code='" + code + '\'' +
+                ", model='" + model + '\'' +
+                ", stock=" + stock +
+                ", inputUser=" + inputUser +
+                '}';
     }
 }

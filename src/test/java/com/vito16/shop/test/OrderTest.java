@@ -1,12 +1,5 @@
 package com.vito16.shop.test;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.vito16.shop.model.Order;
 import com.vito16.shop.model.OrderItem;
 import com.vito16.shop.model.Product;
@@ -14,6 +7,12 @@ import com.vito16.shop.model.UserAddress;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.service.UserService;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author 木鱼 muyu@yiji.com

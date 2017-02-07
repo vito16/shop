@@ -14,7 +14,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "T_ADMIN")
+@Table(name = "t_admin")
 public class Admin implements Serializable {
 	/**
 	 * 

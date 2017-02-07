@@ -20,7 +20,7 @@ import org.springframework.data.annotation.Transient;
  * 
  */
 @Entity
-@Table(name = "T_USER")
+@Table(name = "t_user")
 public class User implements Serializable {
 	/**
 	 * 

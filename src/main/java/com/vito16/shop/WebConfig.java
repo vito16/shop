@@ -1,13 +1,10 @@
 package com.vito16.shop;
 
-import org.springframework.boot.autoconfigure.velocity.VelocityProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver;
 
 /**
  * @author 木鱼 muyu@yiji.com

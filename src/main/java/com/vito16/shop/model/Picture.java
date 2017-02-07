@@ -13,7 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
  */
 @Entity
 @DynamicUpdate
-@Table(name = "T_PICTURE")
+@Table(name = "t_picture")
 public class Picture {
     private Integer id;
     private String title;

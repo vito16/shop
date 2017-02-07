@@ -19,7 +19,7 @@ import org.springframework.format.annotation.NumberFormat;
  * @date 2013-7-8
  */
 @Entity
-@Table(name = "T_ORDER")
+@Table(name = "t_order")
 public class Order implements Serializable {
     /**
      *

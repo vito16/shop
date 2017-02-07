@@ -9,12 +9,11 @@
  */
 package com.vito16.shop.test.suite;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import com.vito16.shop.test.AdminTest;
 import com.vito16.shop.test.OrderTest;
 import com.vito16.shop.test.UserTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * @author 木鱼 muyu@yiji.com
