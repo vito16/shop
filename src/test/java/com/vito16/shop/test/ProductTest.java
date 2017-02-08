@@ -1,11 +1,13 @@
 package com.vito16.shop.test;
 
+import com.google.common.collect.Lists;
 import com.vito16.shop.dao.AdminRepository;
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,15 @@ public class ProductTest extends BaseTest {
     @Test
     public void testAddProduct() {
         List<Admin> adminList = adminDao.findAll();
-        Admin admin = adminList.get(0);
+        Admin admin = null;
+        if (CollectionUtils.isEmpty(adminList)) {
+            admin = new Admin();
+            admin.setUsername("product_test");
+            admin.setPassword("123456");
+            adminDao.save(admin);
+        } else {
+            admin = adminList.get(0);
+        }
 
         Product product = new Product();
         product.setCreateTime(new Date());
