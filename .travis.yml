@@ -1,7 +1,13 @@
 language: java
 
+before_install:
+  - mysql -e 'CREATE DATABASE shop;'
+
 test:
-  -
+  adapter: mysql
+  database: shop
+  username: root
+  encoding: utf8
 
 install:
   -
