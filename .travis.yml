@@ -11,3 +11,8 @@ test:
 
 install:
   -
+
+notifications:
+  email:
+    recipients:
+      - zhouwentao16@gmail.com
