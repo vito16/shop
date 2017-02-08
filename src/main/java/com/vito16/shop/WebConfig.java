@@ -25,4 +25,6 @@ public class WebConfig extends SpringBootServletInitializer {
         resolver.setMaxUploadSize(10240000);
         return resolver;
     }
+
+
 }

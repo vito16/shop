@@ -47,7 +47,7 @@
         </div>
         <div class="form-group">
             <label class="checkbox">
-                <input type="checkbox" value="remember-me">自动登陆
+                <input type="checkbox" name="remember">自动登陆
             </label>
         </div>
         <div class="form-group">

@@ -25,7 +25,7 @@ public class UserService {
 	public boolean checkLogin(User user) {
 		user = userDao.findByUsernameAndPassword(user.getUsername(),
 				user.getPassword());
-		return user == null ? false : true;
+		return user != null;
 	}
 	
 	public User findByUsernameAndPassword(String username,String password){

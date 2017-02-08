@@ -2,10 +2,15 @@ package com.vito16.shop.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.vito16.shop.config.AppConfig;
+import com.vito16.shop.util.CookieUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +40,9 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
+    AppConfig appConfig;
+
+    @Autowired
     UserService userService;
 
     @Autowired
@@ -47,15 +55,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginForm() {
+    public String loginForm(HttpServletRequest request) {
+        String uuid;
+        if((uuid = CookieUtil.getCookieValue(request,appConfig.USER_COOKIE_NAME))!=null){
+            //TODO uuid获取数据进行登录并跳转
+        }
         return "user/userLogin";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(User user, HttpSession session) {
+    public String doLogin(User user, HttpServletRequest request,HttpServletResponse response,HttpSession session) {
         if (userService.checkLogin(user)) {
             user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
+            logger.info("是否记住登录用户："+request.getParameter("remember"));
+            if ("true".equals(request.getParameter("remember"))) {
+                String uuid = UUID.randomUUID().toString();
+                CookieUtil.addCookie(response, appConfig.USER_COOKIE_NAME, uuid, appConfig.USER_COOKIE_AGE);
+            } else {
+                CookieUtil.removeCookie(response, appConfig.USER_COOKIE_NAME);
+            }
             logger.info("用户[" + user.getUsername() + "]登陆成功");
             return "redirect:/";
         }
@@ -147,7 +166,7 @@ public class UserController {
 
     @RequestMapping(value = "/userAddress/update", method = RequestMethod.POST)
     @ResponseBody
-    public String doUpdeteUserAddress(HttpSession session,UserAddress userAddress){
+    public String doUpdateUserAddress(HttpSession session,UserAddress userAddress){
         userAddressService.updateUserAddress(userAddress);
         return "success";
     }
@@ -166,5 +185,6 @@ public class UserController {
         logger.debug("收货地址删除成功...");
         return "success";
     }
+
 
 }
