@@ -1,4 +1,4 @@
-购物系统
+购物系统[![Build Status](https://travis-ci.org/vito16/shop.svg?branch=master)](https://travis-ci.org/vito16/shop)
 =====================
 
 在线商城，持续完善中...
