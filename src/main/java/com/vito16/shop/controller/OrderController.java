@@ -158,7 +158,7 @@ public class OrderController {
     public String pay(@PathVariable(value = "id") Integer orderId, HttpSession session) {
         //验证订单是否归当前人员所有
         if (orderService.checkOwned(orderId, UserUtil.getUserFromSession(session).getId())) {
-            orderService.updateOrderStatus(orderId, Constants.OrderStatus.PAYED);
+            orderService.pay(orderId);
             return "success";
         }
         return "error";

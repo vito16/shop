@@ -24,14 +24,14 @@ $(function () {
             url: ctx + "/order/pay/" + orderId,
             success: function (result) {
                 if (result == "success") {
-                    alert("付款成功...我们会尽快为您安排发货...");
+                    toastr.info("付款成功...我们会尽快为您安排发货...");
                     window.location.reload();
                 } else {
-                    alert("发生错误..");
+                    toastr.warn("发生错误..");
                 }
             },
             error: function () {
-                alert("发生错误..");
+                toastr.warn("发生错误..");
             }
         })
     });
@@ -42,14 +42,14 @@ $(function () {
             url: ctx + "/order/confirm/" + orderId,
             success: function (result) {
                 if (result == "success") {
-                    alert("交易已完成...");
+                    toastr.info("交易已完成...");
                     window.location.reload();
                 } else {
-                    alert("发生错误..");
+                    toastr.warn("发生错误..");
                 }
             },
             error: function () {
-                alert("发生错误..");
+                toastr.warn("发生错误..");
             }
         });
     });
@@ -59,7 +59,7 @@ $(function () {
             url: ctx + "/order/delete/" + orderId,
             success: function (result) {
                 if (result == "success") {
-                    alert("订单删除成功...");
+                    toastr.info("订单删除成功...");
                     window.location.reload();
                 } else {
                     alert("发生错误..");

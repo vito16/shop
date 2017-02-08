@@ -109,4 +109,11 @@ public class OrderService {
     public boolean checkOwned(Integer orderId, Integer userId) {
         return orderDao.findOne(orderId).getUser().getId().equals(userId) ? true : false;
     }
+
+    public void pay(Integer orderId) {
+        Order order = orderDao.findOne(orderId);
+        order.setStatus(Constants.OrderStatus.PAYED);
+        order.setPayTime(new Date());
+        orderDao.save(order);
+    }
 }

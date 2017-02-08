@@ -69,7 +69,7 @@ public class UserController {
             user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
             logger.info("是否记住登录用户："+request.getParameter("remember"));
-            if ("true".equals(request.getParameter("remember"))) {
+            if ("on".equals(request.getParameter("remember"))) {
                 String uuid = UUID.randomUUID().toString();
                 CookieUtil.addCookie(response, appConfig.USER_COOKIE_NAME, uuid, appConfig.USER_COOKIE_AGE);
             } else {
@@ -128,16 +128,15 @@ public class UserController {
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public String doReg(@Valid User user, Model model, BindingResult result) {
         if (result.hasErrors()) {
-            logger.error("Java Bean 没有通过验证");
             for (ObjectError or : result.getAllErrors()) {
                 logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
                         + or.getDefaultMessage());
             }
-            model.addAttribute("error", "数据信息错误");
+            model.addAttribute("error", "数据错误,请重试");
             return "user/userReg";
         }
         userService.save(user);
-        logger.info("后台成功添加用户:" + user);
+        logger.info("成功添加用户:" + user);
         return "redirect:/";
     }
 
