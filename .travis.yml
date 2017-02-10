@@ -16,3 +16,6 @@ notifications:
   email:
     recipients:
       - zhouwentao16@gmail.com
+
+after_success:
+  - coveralls
