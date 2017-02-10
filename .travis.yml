@@ -1,5 +1,8 @@
 language: java
 
+jdk:
+  - oraclejdk8
+
 before_install:
   - mysql -e 'CREATE DATABASE shop;'
 
@@ -10,7 +13,7 @@ test:
   encoding: utf8
 
 install:
-  -
+  - pip install coveralls
 
 notifications:
   email:
