@@ -1,16 +1,18 @@
 package com.vito16.shop.common;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.PageRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author Vito
  * @version 2014/6/14
  */
 public class Page<T> {
+    public static final int DEFAULT_PAGE_SIZE = 10;
     // -- 公共变量 --//
     public static final String ASC = "asc";
     public static final String DESC = "desc";
@@ -27,11 +29,16 @@ public class Page<T> {
     protected long totalCount = -1;
 
     // -- 构造函数 --//
-    public Page() {
+    public Page(int pageNo,int pageSize) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
     }
 
-    public Page(int pageSize) {
-        this.pageSize = pageSize;
+    public Page(HttpServletRequest request) {
+        int pageNumber = Integer.parseInt(StringUtils.defaultIfBlank(request.getParameter("p"), "1"));
+        setPageNo(pageNumber);
+        int pageSize = Integer.parseInt(StringUtils.defaultIfBlank(request.getParameter("ps"), String.valueOf(DEFAULT_PAGE_SIZE)));
+        setPageSize(pageSize);
     }
 
     // -- 分页参数访问函数 --//
@@ -48,7 +55,6 @@ public class Page<T> {
      */
     public void setPageNo(final int pageNo) {
         this.pageNo = pageNo;
-
         if (pageNo < 1) {
             this.pageNo = 1;
         }
@@ -255,5 +261,9 @@ public class Page<T> {
         } else {
             return pageNo;
         }
+    }
+
+    public PageRequest getPageable(){
+        return new PageRequest(getPageNo()-1, getPageSize());
     }
 }

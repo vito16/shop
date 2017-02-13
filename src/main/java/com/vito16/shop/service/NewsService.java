@@ -36,7 +36,7 @@ public class NewsService extends BaseService {
         newsDao.delete(newsId);
     }
 
-    public List<News> findNews(Page<News> page, int[] pageParams) {
+    public List<News> findNews(Page<News> page) {
         /*return doIt(page,List.class,new ProcessInvoker(){
 
             @Override

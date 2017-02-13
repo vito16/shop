@@ -63,10 +63,16 @@ public class OrderService {
         return orderDao.findAll();
     }
 
-    public List<Order> findOrders(Page<Order> page, int[] pageParams) {
-        page.setResult(orderDao.findAll(new PageRequest(pageParams[0] - 1, pageParams[1])).getContent());
+    public List<Order> findOrders(Page<Order> page) {
+        page.setResult(orderDao.findAll(page.getPageable()).getContent());
         page.setTotalCount(orderDao.count());
         return page.getResult();
+    }
+
+    public List<Order> findOrders(Page<Order> page,Integer userId){
+        page.setResult(orderDao.findByUserId(userId,page.getPageable()).getContent());
+        page.setTotalCount(orderDao.countByUserId(userId));
+        return null;
     }
 
     /**
@@ -107,7 +113,7 @@ public class OrderService {
      * @return
      */
     public boolean checkOwned(Integer orderId, Integer userId) {
-        return orderDao.findOne(orderId).getUser().getId().equals(userId) ? true : false;
+        return orderDao.findOne(orderId).getUser().getId().equals(userId);
     }
 
     public void pay(Integer orderId) {

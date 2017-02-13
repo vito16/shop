@@ -33,18 +33,16 @@ public class NewsController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model,HttpServletRequest request) {
-        Page<News> page = new Page<News>(PageUtil.PAGE_SIZE);
-        int[] pageParams = PageUtil.init(page, request);
-        newsService.findNews(page, pageParams);
+        Page<News> page = new Page<News>(request);
+        newsService.findNews(page);
         model.addAttribute("page",page);
         return "news/newsList";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String admin(Model model,HttpServletRequest request) {
-        Page<News> page = new Page<News>(PageUtil.PAGE_SIZE);
-        int[] pageParams = PageUtil.init(page, request);
-        newsService.findNews(page, pageParams);
+        Page<News> page = new Page<News>(request);
+        newsService.findNews(page);
         model.addAttribute("page",page);
         return "news/newsAdmin";
     }

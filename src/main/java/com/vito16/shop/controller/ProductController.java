@@ -55,13 +55,8 @@ public class ProductController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView admin(ModelAndView model, HttpSession session, HttpServletRequest request) {
-        if (AdminUtil.getAdminFromSession(session) == null) {
-            model.setViewName("redirect:/admin/login?error=true");
-            return model;
-        }
-        Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
-        int[] pageParams = PageUtil.init(page, request);
-        productService.findProducts(page, pageParams);
+        Page<Product> page = new Page<Product>(request);
+        productService.findProducts(page);
         model.addObject("page", page);
         model.setViewName("product/productAdmin");
         return model;
@@ -69,19 +64,14 @@ public class ProductController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
-    public List<Product> test(HttpSession session, HttpServletRequest request) {
-        Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
-        int[] pageParams = PageUtil.init(page, request);
-        productService.findProducts(page, pageParams);
+    public List<Product> test(HttpServletRequest request) {
+        Page<Product> page = new Page<Product>(request);
+        productService.findProducts(page);
         return page.getResult();
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(ModelAndView model, HttpSession session, @PathVariable Integer id) {
-        if (AdminUtil.getAdminFromSession(session) == null) {
-            model.setViewName("redirect:/admin/login?error=true");
-            return model;
-        }
+    public ModelAndView edit(ModelAndView model, @PathVariable Integer id) {
         Product product = productService.findById(id);
         model.addObject("product", product);
         model.setViewName("product/productEdit");
@@ -90,10 +80,6 @@ public class ProductController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView doEdit(ModelAndView model, Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
-        if (AdminUtil.getAdminFromSession(session) == null) {
-            model.setViewName("redirect:/admin/login?error=true");
-            return model;
-        }
         if (!file.isEmpty()) {
             uploadImage(product, session, file);
         }
@@ -104,9 +90,22 @@ public class ProductController {
     }
 
     private void uploadImage(Product product, HttpSession session, MultipartFile file) {
-        String fileName = new Date().getTime() + ".jpg";
-        String path = session.getServletContext().getRealPath("/upload");
+        String fileName = generateFileName();
+        String path = generateFilePath(session);
         String serverFile = path + "/" + fileName;
+        Picture picture = uploadAndSaveImg(session, file, fileName, path, serverFile);
+        product.setMasterPic(picture);
+    }
+
+    private String generateFilePath(HttpSession session) {
+        return session.getServletContext().getRealPath("/upload");
+    }
+
+    private String generateFileName() {
+        return new Date().getTime() + ".jpg";
+    }
+
+    private Picture uploadAndSaveImg(HttpSession session, MultipartFile file, String fileName, String path, String serverFile) {
         Picture picture = new Picture();
         try {
             logger.info(path);
@@ -134,14 +133,13 @@ public class ProductController {
         picture.setUrl("/upload/" + fileName);
         picture.setUpdateAdmin(AdminUtil.getAdminFromSession(session));
         pictureService.save(picture);
-        product.setMasterPic(picture);
+        return picture;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView listProduct(ModelAndView model, HttpServletRequest request) {
-        Page<Product> page = new Page<Product>(PageUtil.PAGE_SIZE);
-        int[] pageParams = PageUtil.init(page, request);
-        productService.findProducts(page, pageParams);
+        Page<Product> page = new Page<Product>(request);
+        productService.findProducts(page);
         model.addObject("page", page);
         model.setViewName("product/productList");
         return model;

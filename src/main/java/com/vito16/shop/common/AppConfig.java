@@ -1,6 +1,7 @@
-package com.vito16.shop.common.config;
+package com.vito16.shop.common;
 
-import com.vito16.shop.common.PropertiesLoader;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -8,12 +9,21 @@ import com.vito16.shop.common.PropertiesLoader;
  * @author Vito16 zhouwentao16@gmail.com
  * @version 2013-11-02
  */
-public class Global {
+@Component
+public class AppConfig {
+
 	/**
 	 * 属性文件加载对象
 	 */
 	private static PropertiesLoader propertiesLoader;
-	
+
+	@Value("${user.cookie.name}")
+	public String USER_COOKIE_NAME;
+
+	@Value("${user.cookie.age}")
+	public int USER_COOKIE_AGE;
+
+
 	/**
 	 * 获取配置
 	 */
@@ -23,7 +33,6 @@ public class Global {
 		}
 		return propertiesLoader.getProperty(key);
 	}
-
 	public static String getAdminPath() {
 		return getConfig("adminPath");
 	}

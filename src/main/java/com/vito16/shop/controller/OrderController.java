@@ -25,7 +25,6 @@ import com.vito16.shop.model.UserAddress;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
-import com.vito16.shop.util.AdminUtil;
 import com.vito16.shop.util.CartUtil;
 import com.vito16.shop.util.UserUtil;
 
@@ -53,12 +52,9 @@ public class OrderController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Model model, HttpSession session, HttpServletRequest request) {
-        if (UserUtil.getUserFromSession(session) == null) {
-            return "redirect:/user/login";
-        }
-        Page<Order> page = new Page<Order>(PageUtil.PAGE_SIZE);
-        int[] pageParams = PageUtil.init(page, request);
-        orderService.findOrders(page, pageParams);
+        User user = UserUtil.getUserFromSession(session);
+        Page<Order> page = new Page<Order>(request);
+        orderService.findOrders(page, user.getId());
         model.addAttribute("page", page);
         return "order/orderList";
     }
@@ -66,17 +62,12 @@ public class OrderController {
     /**
      * 订单管理
      *
-     * @param session
      * @return
      */
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminList(Model model, HttpSession session, HttpServletRequest request) {
-        if (AdminUtil.getAdminFromSession(session) == null) {
-            return "redirect:/admin/login";
-        }
-        Page<Order> page = new Page<Order>(PageUtil.PAGE_SIZE);
-        int[] pageParams = PageUtil.init(page, request);
-        orderService.findOrders(page, pageParams);
+    public String adminList(Model model, HttpServletRequest request) {
+        Page<Order> page = new Page<Order>(request);
+        orderService.findOrders(page);
         model.addAttribute("page", page);
         return "order/orderAdmin";
     }
@@ -89,9 +80,6 @@ public class OrderController {
      */
     @RequestMapping(value = "/purchase", method = RequestMethod.GET)
     public String purchase(Model model, HttpSession session) {
-        if (UserUtil.getUserFromSession(session) == null) {
-            return "redirect:/user/login";
-        }
         User user = userService.findOne(UserUtil.getUserFromSession(session).getId());
         List<UserAddress> userAddressList = user.getAddresses();
         model.addAttribute("addressList", userAddressList);

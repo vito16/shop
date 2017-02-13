@@ -22,6 +22,7 @@ import java.util.Properties;
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableTransactionManagement
+
 public class Application {
 	
 	@Value("${jdbc.driverClassName}")

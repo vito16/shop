@@ -62,8 +62,8 @@ public class ProductService {
 		return productDao.findPopProducts();
 	}
 
-    public List<Product> findProducts(Page<Product> page, int[] pageParams) {
-        page.setResult(productDao.findAll(new PageRequest(pageParams[0]-1,pageParams[1])).getContent());
+    public List<Product> findProducts(Page<Product> page) {
+        page.setResult(productDao.findAll(page.getPageable()).getContent());
         page.setTotalCount(productDao.count());
         return page.getResult();
     }
