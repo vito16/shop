@@ -4,12 +4,11 @@
 package com.vito16.shop.service;
 
 import com.vito16.shop.common.Page;
-import com.vito16.shop.dao.ProductRepository;
-import com.vito16.shop.dao.ProductTypeRepository;
+import com.vito16.shop.repository.ProductRepository;
+import com.vito16.shop.repository.ProductTypeRepository;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.model.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

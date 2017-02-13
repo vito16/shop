@@ -1,9 +1,9 @@
-package com.vito16.shop.dao;
+package com.vito16.shop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.vito16.shop.model.Picture;
+import com.vito16.shop.model.News;
 
 /**
  * 
@@ -13,5 +13,5 @@ import com.vito16.shop.model.Picture;
  * 
  */
 @Repository
-public interface PictureRepository extends JpaRepository<Picture, Integer> {
+public interface NewsRepository extends JpaRepository<News, Integer> {
 }

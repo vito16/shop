@@ -6,12 +6,11 @@ package com.vito16.shop.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vito16.shop.common.Page;
-import com.vito16.shop.dao.NewsRepository;
+import com.vito16.shop.repository.NewsRepository;
 import com.vito16.shop.model.News;
 
 /**

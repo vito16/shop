@@ -1,4 +1,4 @@
-package com.vito16.shop.dao;
+package com.vito16.shop.repository;
 
 import java.util.List;
 

@@ -1,6 +1,7 @@
 package com.vito16.shop.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.vito16.shop.common.AppConfig;
+import com.vito16.shop.model.Remember;
+import com.vito16.shop.service.RememberService;
 import com.vito16.shop.util.CookieUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +51,8 @@ public class UserController {
     @Autowired
     UserAddressService userAddressService;
 
+    @Autowired
+    RememberService rememberService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
@@ -55,22 +60,38 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginForm(HttpServletRequest request) {
+    public String loginForm(HttpServletRequest request, HttpSession session) {
         String uuid;
-        if((uuid = CookieUtil.getCookieValue(request,appConfig.USER_COOKIE_NAME))!=null){
-            //TODO uuid获取数据进行登录并跳转
+        if ((uuid = CookieUtil.getCookieValue(request, appConfig.USER_COOKIE_NAME)) != null) {
+            Remember remember = rememberService.findById(uuid);
+            if (remember != null && remember.getUser() != null) {
+                logger.info("有记录哦。。");
+                if (userService.checkLogin(remember.getUser())) {
+                    UserUtil.saveUserToSession(session, remember.getUser());
+                    logger.info("用户[{}]使用cookie登录成功.", remember.getUser().getUsername());
+                    return "redirect:/";
+                } else {
+                    logger.info("没有登录记录哦。。。");
+                }
+            }
         }
         return "user/userLogin";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(User user, HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+    public String doLogin(User user, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         if (userService.checkLogin(user)) {
             user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
-            logger.info("是否记住登录用户："+request.getParameter("remember"));
+            logger.info("是否记住登录用户：" + request.getParameter("remember"));
+
             if ("on".equals(request.getParameter("remember"))) {
                 String uuid = UUID.randomUUID().toString();
+                Remember remember = new Remember();
+                remember.setId(uuid);
+                remember.setUser(user);
+                remember.setAddTime(new Date());
+                rememberService.add(remember);
                 CookieUtil.addCookie(response, appConfig.USER_COOKIE_NAME, uuid, appConfig.USER_COOKIE_AGE);
             } else {
                 CookieUtil.removeCookie(response, appConfig.USER_COOKIE_NAME);
@@ -82,18 +103,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session,HttpServletResponse response) {
         UserUtil.deleteUserFromSession(session);
+        CookieUtil.removeCookie(response, appConfig.USER_COOKIE_NAME);
+//        rememberService.delete();
         return "redirect:/";
     }
 
     @RequestMapping(value = "/profile")
-    public String profile(HttpSession session,Model model) {
+    public String profile(HttpSession session, Model model) {
         User user = UserUtil.getUserFromSession(session);
         if (user == null) {
             return "redirect:/user/login?timeout=true";
         }
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user/userProfile";
     }
 
@@ -165,7 +188,7 @@ public class UserController {
 
     @RequestMapping(value = "/userAddress/update", method = RequestMethod.POST)
     @ResponseBody
-    public String doUpdateUserAddress(HttpSession session,UserAddress userAddress){
+    public String doUpdateUserAddress(HttpSession session, UserAddress userAddress) {
         userAddressService.updateUserAddress(userAddress);
         return "success";
     }

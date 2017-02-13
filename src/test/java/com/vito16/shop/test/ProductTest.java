@@ -1,7 +1,6 @@
 package com.vito16.shop.test;
 
-import com.google.common.collect.Lists;
-import com.vito16.shop.dao.AdminRepository;
+import com.vito16.shop.repository.AdminRepository;
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;

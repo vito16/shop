@@ -3,7 +3,7 @@
  */
 package com.vito16.shop.test;
 
-import com.vito16.shop.dao.UserRepository;
+import com.vito16.shop.repository.UserRepository;
 import com.vito16.shop.model.User;
 import com.vito16.shop.service.UserService;
 import org.junit.Test;

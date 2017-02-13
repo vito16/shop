@@ -1,4 +1,4 @@
-package com.vito16.shop.dao;
+package com.vito16.shop.repository;
 
 import com.vito16.shop.model.Order;
 import org.springframework.data.domain.Page;

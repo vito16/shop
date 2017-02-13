@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vito16.shop.dao.PictureRepository;
+import com.vito16.shop.repository.PictureRepository;
 import com.vito16.shop.model.Picture;
 
 /**
