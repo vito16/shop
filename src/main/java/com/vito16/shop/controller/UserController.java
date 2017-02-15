@@ -65,13 +65,10 @@ public class UserController {
         if ((uuid = CookieUtil.getCookieValue(request, appConfig.USER_COOKIE_NAME)) != null) {
             Remember remember = rememberService.findById(uuid);
             if (remember != null && remember.getUser() != null) {
-                logger.info("有记录哦。。");
                 if (userService.checkLogin(remember.getUser())) {
                     UserUtil.saveUserToSession(session, remember.getUser());
                     logger.info("用户[{}]使用cookie登录成功.", remember.getUser().getUsername());
                     return "redirect:/";
-                } else {
-                    logger.info("没有登录记录哦。。。");
                 }
             }
         }

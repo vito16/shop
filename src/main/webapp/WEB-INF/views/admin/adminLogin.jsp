@@ -45,11 +45,11 @@
         <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="密码" required>
         </div>
-        <div class="form-group">
+        <%--<div class="form-group">
             <label class="checkbox">
-                <input type="checkbox" value="remember-me">自动登陆
+                <input type="checkbox" name="remember">自动登陆
             </label>
-        </div>
+        </div>--%>
         <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
         </div>

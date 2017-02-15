@@ -82,9 +82,10 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <a class="btn btn-primary" href="${ctx}/cart/">回购物车修改</a>
-            <button class="btn btn-primary" type="submit" href="${ctx}/order/ordering/">确认</button>
-
+            <div class="row text-right">
+                <a class="btn btn-primary" href="${ctx}/cart/">回购物车修改</a>
+                <button class="btn btn-primary" type="submit" href="${ctx}/order/ordering/">确认</button>
+            </div>
             <div id="delSuccess" class="alert alert-success" style="display: none;">删除成功...</div>
             <div id="delAllSuccess" class="alert alert-success" style="display: none;">购物车清空成功...</div>
         </div>

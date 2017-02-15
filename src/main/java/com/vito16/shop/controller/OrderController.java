@@ -39,8 +39,10 @@ public class OrderController {
 
     @Autowired
     UserService userService;
+
     @Autowired
     OrderService orderService;
+
     @Autowired
     UserAddressService userAddressService;
 
@@ -57,19 +59,6 @@ public class OrderController {
         orderService.findOrders(page, user.getId());
         model.addAttribute("page", page);
         return "order/orderList";
-    }
-
-    /**
-     * 订单管理
-     *
-     * @return
-     */
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminList(Model model, HttpServletRequest request) {
-        Page<Order> page = new Page<Order>(request);
-        orderService.findOrders(page);
-        model.addAttribute("page", page);
-        return "order/orderAdmin";
     }
 
     /**
@@ -134,13 +123,6 @@ public class OrderController {
         return "order/orderView";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public String delete(@PathVariable Integer id) {
-        orderService.deleteOrder(id);
-        return "success";
-    }
-
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String pay(@PathVariable(value = "id") Integer orderId, HttpSession session) {
@@ -153,19 +135,6 @@ public class OrderController {
     }
 
     /**
-     * 订单发货
-     *
-     * @param orderId
-     * @return
-     */
-    @RequestMapping(value = "/ship/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public String ship(@PathVariable(value = "id") Integer orderId, HttpSession session) {
-        orderService.updateOrderStatus(orderId, Constants.OrderStatus.SHIPPED);
-        return "success";
-    }
-
-    /**
      * 取消订单
      *
      * @param orderId
@@ -174,6 +143,7 @@ public class OrderController {
     @RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String cancel(@PathVariable(value = "id") Integer orderId) {
+        //TODO 验证是否拥有此订单
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.DELETED);
         return "success";
     }
@@ -190,4 +160,5 @@ public class OrderController {
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.ENDED);
         return "success";
     }
+
 }

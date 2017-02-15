@@ -39,21 +39,4 @@ public class NewsController {
         return "news/newsList";
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin(Model model,HttpServletRequest request) {
-        Page<News> page = new Page<News>(request);
-        newsService.findNews(page);
-        model.addAttribute("page",page);
-        return "news/newsAdmin";
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ResponseBody
-    public String doAdd(News news,HttpSession session) {
-        news.setInputUser(AdminUtil.getAdminFromSession(session));
-        news.setCreateTime(new Date());
-        newsService.addNews(news);
-        return "success";
-    }
-
 }

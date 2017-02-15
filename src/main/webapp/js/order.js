@@ -56,7 +56,7 @@ $(function () {
     $(".del-order-btn").click(function () {
         var orderId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/order/delete/" + orderId,
+            url: ctx + "/order/admin/delete/" + orderId,
             success: function (result) {
                 if (result == "success") {
                     toastr.info("订单删除成功...");
@@ -73,7 +73,7 @@ $(function () {
     $(".ship-order-btn").click(function () {
         var orderId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/order/ship/" + orderId,
+            url: ctx + "/order/admin/ship/" + orderId,
             success: function (result) {
                 if (result == "success") {
                     alert("发货成功...");

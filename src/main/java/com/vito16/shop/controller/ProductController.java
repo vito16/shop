@@ -45,12 +45,12 @@ public class ProductController {
     @Autowired
     PictureService pictureService;
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/new", method = RequestMethod.GET)
     public String newForm(HttpSession session) {
         if (AdminUtil.getAdminFromSession(session) == null) {
             return "redirect:/admin/login?error=true";
         }
-        return "product/productNew";
+        return "admin/product/productNew";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -58,27 +58,19 @@ public class ProductController {
         Page<Product> page = new Page<Product>(request);
         productService.findProducts(page);
         model.addObject("page", page);
-        model.setViewName("product/productAdmin");
+        model.setViewName("admin/product/productAdmin");
         return model;
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Product> test(HttpServletRequest request) {
-        Page<Product> page = new Page<Product>(request);
-        productService.findProducts(page);
-        return page.getResult();
-    }
-
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView model, @PathVariable Integer id) {
         Product product = productService.findById(id);
         model.addObject("product", product);
-        model.setViewName("product/productEdit");
+        model.setViewName("admin/product/productEdit");
         return model;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
     public ModelAndView doEdit(ModelAndView model, Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             uploadImage(product, session, file);
