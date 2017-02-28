@@ -12,13 +12,13 @@ test:
   username: root
   encoding: utf8
 
-install:
-  - pip install coveralls
+#install:
+#  - pip install coveralls
 
 notifications:
   email:
     recipients:
       - zhouwentao16@gmail.com
 
-after_success:
-  - coveralls
+#after_success:
+#  - coveralls
