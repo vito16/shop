@@ -24,8 +24,8 @@ public class TestController  {
 
     @ResponseBody
     @RequestMapping(value="hello",method = RequestMethod.GET)
-    public String index2() {
-        return "userhellondex";
+    public String index() {
+        return "test success!";
     }
 
 }
