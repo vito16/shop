@@ -54,6 +54,19 @@ public class OrderAdminController {
         return "admin/order/orderList";
     }
 
+    /**
+     * 订单管理
+     *
+     * @return
+     */
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String newsAdd(Model model, HttpServletRequest request) {
+        Page<Order> page = new Page<Order>(request);
+        orderService.findOrders(page);
+        model.addAttribute("page", page);
+        return "admin/order/orderList";
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String delete(@PathVariable Integer id) {

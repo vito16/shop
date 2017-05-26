@@ -10,6 +10,7 @@ test:
   adapter: mysql
   database: shop
   username: root
+  password: root
   encoding: utf8
 
 #install:

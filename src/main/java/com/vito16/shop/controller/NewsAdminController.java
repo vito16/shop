@@ -28,7 +28,7 @@ public class NewsAdminController {
     @Autowired
     NewsService newsService;
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String admin(Model model,HttpServletRequest request) {
         Page<News> page = new Page<News>(request);
         newsService.findNews(page);
@@ -36,13 +36,20 @@ public class NewsAdminController {
         return "news/newsAdmin";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ResponseBody
-    public String doAdd(News news,HttpSession session) {
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String toNews(News news,HttpSession session) {
+        if (AdminUtil.getAdminFromSession(session) == null) {
+            return "redirect:/admin/login?error=true";
+        }
+        return "news/newsAdd";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String addNews(News news,HttpSession session) {
         news.setInputUser(AdminUtil.getAdminFromSession(session));
         news.setCreateTime(new Date());
         newsService.addNews(news);
-        return "success";
+        return "redirect:/news/admin/";
     }
 
 }

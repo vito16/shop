@@ -5,6 +5,7 @@ package com.vito16.shop.service;
 
 import java.util.List;
 
+import com.vito16.shop.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,17 +37,9 @@ public class NewsService extends BaseService {
     }
 
     public List<News> findNews(Page<News> page) {
-        /*return doIt(page,List.class,new ProcessInvoker(){
-
-            @Override
-            void process() {
-
-            }
-        });
-        page.setResult(newsDao.findAll(new PageRequest(pageParams[0] - 1, pageParams[1])).getContent());
-        page.setTotalCount(newsDao.count());
-        return page.getResult();*/
-        return null;
+            page.setResult(newsDao.findAll(page.getPageable()).getContent());
+            page.setTotalCount(newsDao.count());
+            return page.getResult();
     }
 
 }

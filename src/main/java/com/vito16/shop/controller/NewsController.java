@@ -1,6 +1,7 @@
 package com.vito16.shop.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import com.vito16.shop.common.PageUtil;
 import com.vito16.shop.model.News;
 import com.vito16.shop.service.NewsService;
 import com.vito16.shop.util.AdminUtil;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -32,11 +34,12 @@ public class NewsController {
     NewsService newsService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model,HttpServletRequest request) {
+    public ModelAndView index(ModelAndView model, HttpServletRequest request) {
         Page<News> page = new Page<News>(request);
         newsService.findNews(page);
-        model.addAttribute("page",page);
-        return "news/newsList";
+        model.addObject("page", page);
+        model.setViewName("news/newsList");
+        return model;
     }
 
 }
