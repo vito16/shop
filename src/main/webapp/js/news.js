@@ -8,13 +8,13 @@ $(function () {
             success: function (result) {
                 if (result == "success") {
                     toastr.info("公告删除成功...");
-                    window.location.reload();
+                    $("tr[pid="+newsId+"]").remove();
                 } else {
-                    alert("发生错误..");
+                    toastr.error("发生错误");
                 }
             },
             error: function () {
-                alert("发生错误..");
+                toastr.error("发生错误");
             }
         })
     });

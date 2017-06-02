@@ -17,9 +17,6 @@
 <div class="container">
     <%@include file="/common/user-admin-nav.jsp" %>
     <div class="row">
-        <div id="errorTip" style="display: none" class="alert alert-warn">发生错误</div>
-        <div id="addAddressSuccess" style="display: none" class="alert alert-success">添加成功</div>
-        <div id="delAddressSuccess" style="display: none" class="alert alert-success">删除成功</div>
         <table class="table table-responsive table-striped">
             <thead>
             <tr>

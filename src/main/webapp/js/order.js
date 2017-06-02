@@ -7,14 +7,14 @@ $(function () {
             url: ctx + "/order/cancel/" + orderId,
             success: function (result) {
                 if (result == "success") {
-                    alert("订单已取消成功...");
+                    toastr.info("订单已取消成功...");
                     window.location.reload();
                 } else {
-                    alert("发生错误..");
+                    toastr.error("发生错误..");
                 }
             },
             error: function () {
-                alert("发生错误..");
+                toastr.error("发生错误..");
             }
         })
     });
@@ -27,11 +27,11 @@ $(function () {
                     toastr.info("付款成功...我们会尽快为您安排发货...");
                     window.location.reload();
                 } else {
-                    toastr.warn("发生错误..");
+                    toastr.error("发生错误..");
                 }
             },
             error: function () {
-                toastr.warn("发生错误..");
+                toastr.error("发生错误..");
             }
         })
     });
@@ -45,11 +45,11 @@ $(function () {
                     toastr.info("交易已完成...");
                     window.location.reload();
                 } else {
-                    toastr.warn("发生错误..");
+                    toastr.error("发生错误..");
                 }
             },
             error: function () {
-                toastr.warn("发生错误..");
+                toastr.error("发生错误..");
             }
         });
     });
@@ -62,11 +62,11 @@ $(function () {
                     toastr.info("订单删除成功...");
                     window.location.reload();
                 } else {
-                    alert("发生错误..");
+                    toastr.error("发生错误..");
                 }
             },
             error: function () {
-                alert("发生错误..");
+                toastr.error("发生错误..");
             }
         })
     });
@@ -76,14 +76,15 @@ $(function () {
             url: ctx + "/admin/order/ship/" + orderId,
             success: function (result) {
                 if (result == "success") {
-                    alert("发货成功...");
+                    toastr.info("发货成功...");
+                    // $("tr[pid="+orderId+"] td:eq(3)").val("已发货");
                     window.location.reload();
                 } else {
-                    alert("发生错误..");
+                    toastr.error("发生错误..");
                 }
             },
             error: function () {
-                alert("发生错误..");
+                toastr.error("发生错误..");
             }
         })
     });

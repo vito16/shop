@@ -8,16 +8,13 @@ $(function () {
             success: function (result) {
                 if (result == "success") {
                     $("tr[addressId="+addressId+"]").remove();
-                    $('#delAddressSuccess').show();
-                    setTimeout(function () {
-                        $('#delAddressSuccess').hide('slow');
-                    }, 3000);
+                    toastr.info("地址信息删除成功...");
                 } else {
-                    alert("发生错误..");
+                    toastr.error("发生错误...");
                 }
             },
             error: function () {
-                alert("发生错误..");
+                toastr.error("发生错误...");
             }
         })
     });
@@ -38,21 +35,13 @@ $(function () {
             success: function (result) {
                 if (result == "success") {
                     $('#addAddressSuccess').show();
-                    setTimeout(function () {
-                        $('#addAddressSuccess').hide('slow');
-                    }, 3000);
+                    toastr.info("添加成功");
                 } else {
-                    $('#errorTip').show();
-                    setTimeout(function () {
-                        $('#errorTip').hide('slow');
-                    }, 3000);
+                    toastr.error("发生错误...");
                 }
             },
             error: function () {
-                $('#errorTip').show();
-                setTimeout(function () {
-                    $('#errorTip').hide('slow');
-                }, 3000);
+                toastr.error("发生错误...");
             }
         })
     });
@@ -64,10 +53,11 @@ $(function () {
             url: ctx + "/user/userAddress/" + addressId,
             method:"get",
             success: function (result) {
-                alert(result);
+                toastr.info("功能暂未实现...  ;)");
+                // alert(result);
             },
             error: function () {
-                alert("发生错误..");
+                toastr.error("发生错误...");
             }
         })
     });

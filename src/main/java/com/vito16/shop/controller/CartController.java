@@ -23,7 +23,9 @@ import com.vito16.shop.util.CartUtil;
 @Controller
 @RequestMapping("/cart")
 public class CartController {
+
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
+
     @Autowired
     ProductService productService;
 
