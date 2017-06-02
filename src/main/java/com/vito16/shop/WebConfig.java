@@ -11,6 +11,7 @@ import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.text.ParseException;
@@ -35,23 +36,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 "/admin/*","/*/admin/*"
         ).excludePathPatterns("/admin/login","/admin/logout");
     }
-/*
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        // Add formatters and/or converters
-        Formatter<Date> formatter = new Formatter<Date>() {
-            @Override
-            public Date parse(String text, Locale locale) throws ParseException {
-                return null;
-            }
-
-            @Override
-            public String print(Date object, Locale locale) {
-                return null;
-            }
-        };
-        registry.addFormatter(formatter);
-    }*/
 
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
@@ -61,5 +45,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+/*
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources*//**").addResourceLocations("/resources/");
+    }*/
 
 }

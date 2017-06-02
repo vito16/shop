@@ -1,30 +1,21 @@
 $(function () {
     $("#sub-nav-news").attr("class", "active");
-    //保存公告
-    $("#addNewsBtn").click(function () {
-        //var addressId = $(this).attr("addressId");
+
+    $(".del-news-btn").click(function () {
+        var newsId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/news/add/",
-            method:"post",
-            data:{
-                "content":$("#content").val(),
-                "title":$("#title").val()
-            },
+            url: ctx + "/admin/news/delete/" + newsId,
             success: function (result) {
                 if (result == "success") {
-                    $('#addNewsSuccess').show();
-                    setTimeout(function () {
-                        $('#addNewsSuccess').hide('slow');
-                        window.location.reload();
-                    }, 3000);
+                    toastr.info("公告删除成功...");
+                    window.location.reload();
                 } else {
-                    alert("发生错误");
+                    alert("发生错误..");
                 }
             },
             error: function () {
-                alert("发生错误");
+                alert("发生错误..");
             }
         })
     });
-
 })

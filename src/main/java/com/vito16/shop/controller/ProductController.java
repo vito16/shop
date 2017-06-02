@@ -40,93 +40,9 @@ import com.vito16.shop.util.Image;
 public class ProductController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+
     @Autowired
     ProductService productService;
-    @Autowired
-    PictureService pictureService;
-
-    @RequestMapping(value = "/admin/new", method = RequestMethod.GET)
-    public String newForm(HttpSession session) {
-        if (AdminUtil.getAdminFromSession(session) == null) {
-            return "redirect:/admin/login?error=true";
-        }
-        return "admin/product/productNew";
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView admin(ModelAndView model, HttpSession session, HttpServletRequest request) {
-        Page<Product> page = new Page<Product>(request);
-        productService.findProducts(page);
-        model.addObject("page", page);
-        model.setViewName("admin/product/productAdmin");
-        return model;
-    }
-
-    @RequestMapping(value = "/admin/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(ModelAndView model, @PathVariable Integer id) {
-        Product product = productService.findById(id);
-        model.addObject("product", product);
-        model.setViewName("admin/product/productEdit");
-        return model;
-    }
-
-    @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
-    public ModelAndView doEdit(ModelAndView model, Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
-        if (!file.isEmpty()) {
-            uploadImage(product, session, file);
-        }
-        product.setInputUser(AdminUtil.getAdminFromSession(session));
-        productService.save(product);
-        model.setViewName("redirect:/product/admin");
-        return model;
-    }
-
-    private void uploadImage(Product product, HttpSession session, MultipartFile file) {
-        String fileName = generateFileName();
-        String path = generateFilePath(session);
-        String serverFile = path + "/" + fileName;
-        Picture picture = uploadAndSaveImg(session, file, fileName, path, serverFile);
-        product.setMasterPic(picture);
-    }
-
-    private String generateFilePath(HttpSession session) {
-        return session.getServletContext().getRealPath("/upload");
-    }
-
-    private String generateFileName() {
-        return new Date().getTime() + ".jpg";
-    }
-
-    private Picture uploadAndSaveImg(HttpSession session, MultipartFile file, String fileName, String path, String serverFile) {
-        Picture picture = new Picture();
-        try {
-            logger.info(path);
-            if (!new File(path).exists()) {
-                new File(path).mkdirs();
-            }
-            if (!new File(serverFile).exists()) {
-                new File(serverFile).createNewFile();
-            }
-            byte[] bytes = file.getBytes();
-            BufferedOutputStream stream =
-                    new BufferedOutputStream(new FileOutputStream(new File(serverFile)));
-            stream.write(bytes);
-            stream.close();
-            //缩放处理
-            Image image = new Image(serverFile);
-            image.resize(Constants.IMG_WIDTH,Constants.IMG_HEIGHT);
-            image.save();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        picture.setMemo("商品上传");
-        picture.setTitle("商品上传");
-        picture.setUpdateTime(new Date());
-        picture.setUrl("/upload/" + fileName);
-        picture.setUpdateAdmin(AdminUtil.getAdminFromSession(session));
-        pictureService.save(picture);
-        return picture;
-    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView listProduct(ModelAndView model, HttpServletRequest request) {
@@ -144,15 +60,5 @@ public class ProductController {
         return "product/productView";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String doNew(Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
-        if (!file.isEmpty()) {
-            uploadImage(product, session, file);
-        }
-        product.setInputUser(AdminUtil.getAdminFromSession(session));
-        product.setCreateTime(new Date());
-        productService.save(product);
-        return "redirect:/product/admin";
-    }
 
 }

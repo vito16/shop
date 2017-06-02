@@ -11,7 +11,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.vito16.shop.common.AppConfig;
+import com.vito16.shop.common.Constants;
+import com.vito16.shop.common.Page;
+import com.vito16.shop.model.Order;
 import com.vito16.shop.model.Remember;
+import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.RememberService;
 import com.vito16.shop.util.CookieUtil;
 import org.slf4j.Logger;
@@ -21,10 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vito16.shop.model.User;
@@ -49,6 +50,9 @@ public class UserController {
     UserService userService;
 
     @Autowired
+    OrderService orderService;
+
+    @Autowired
     UserAddressService userAddressService;
 
     @Autowired
@@ -57,6 +61,26 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
         return "user/index";
+    }
+
+    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    public String reg() {
+        return "user/userReg";
+    }
+
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
+    public String doReg(@Valid User user, Model model, BindingResult result) {
+        if (result.hasErrors()) {
+            for (ObjectError or : result.getAllErrors()) {
+                logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
+                        + or.getDefaultMessage());
+            }
+            model.addAttribute("error", "数据错误,请重试");
+            return "user/userReg";
+        }
+        userService.save(user);
+        logger.info("成功添加用户:" + user);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -117,47 +141,65 @@ public class UserController {
         return "user/userProfile";
     }
 
-    @RequestMapping("/list")
-    public ModelAndView listUser(ModelAndView model) {
-        List<User> userList = new ArrayList<User>();
-        User user1 = new User();
-        user1.setUsername("测试用户1");
-        user1.setPassword("123");
-        user1.setId(1);
-        userList.add(user1);
-        User user2 = new User();
-        user2.setUsername("测试用户2");
-        user2.setPassword("123");
-        user2.setId(2);
-        userList.add(user2);
-        User user3 = new User();
-        user3.setUsername("测试用户3");
-        user3.setPassword("12333");
-        user3.setId(3);
-        userList.add(user3);
-        User user = new User(2, null, null);
-        model.addObject(userList).addObject(user);
-        return model;
+    /**
+     * 订单列表
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    public String orderList(Model model, HttpSession session, HttpServletRequest request) {
+        User user = UserUtil.getUserFromSession(session);
+        Page<Order> page = new Page<Order>(request);
+        orderService.findOrders(page, user.getId());
+        model.addAttribute("page", page);
+        return "order/orderList";
     }
 
-    @RequestMapping(value = "/reg", method = RequestMethod.GET)
-    public String reg() {
-        return "user/userReg";
+    /**
+     * 订单查看
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
+    public String orderView(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
+        User user = UserUtil.getUserFromSession(session);
+        Order order = orderService.findById(id);
+        model.addAttribute("order", order);
+        return "order/orderView";
     }
 
-    @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public String doReg(@Valid User user, Model model, BindingResult result) {
-        if (result.hasErrors()) {
-            for (ObjectError or : result.getAllErrors()) {
-                logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
-                        + or.getDefaultMessage());
-            }
-            model.addAttribute("error", "数据错误,请重试");
-            return "user/userReg";
+    /**
+     * 确认收货
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/order/confirm/{id}")
+    @ResponseBody
+    public String orderConfirm(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
+        User user = UserUtil.getUserFromSession(session);
+        Order order = orderService.findById(id);
+        if(order.getUser().getId()==user.getId()){
+            orderService.updateOrderStatus(id, Constants.OrderStatus.ENDED);
+            return "success";
+        }else{
+            return "fail";
         }
-        userService.save(user);
-        logger.info("成功添加用户:" + user);
-        return "redirect:/";
+    }
+
+    /**
+     * 用户地址加载
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/userAddressList/{id}")
+    @ModelAttribute
+    @ResponseBody
+    public List<UserAddress> getUserAddressList(@PathVariable int id) {
+        return userAddressService.findByUserId(id);
     }
 
     @RequestMapping(value = "/userAddress", method = RequestMethod.GET)
@@ -190,7 +232,7 @@ public class UserController {
         return "success";
     }
 
-    @RequestMapping(value = "/userAddress/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/userAddress/{id}")
     @ResponseBody
     public UserAddress findAddress(@PathVariable Integer id) {
         UserAddress userAddress = userAddressService.findById(id);

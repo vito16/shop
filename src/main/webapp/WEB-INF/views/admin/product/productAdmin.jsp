@@ -38,7 +38,7 @@
                         <td>${product.code}</td>
                         <td>${product.point}</td>
                         <td>${product.stock}</td>
-                        <td><a href="${ctx}/product/edit/${product.id}">修改</a></td>
+                        <td><a href="${ctx}/admin/product/edit/${product.id}">修改</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -47,7 +47,7 @@
     <div class="text-center">
         <tags:pagination page="${page}" paginationSize="${page.pageSize}"/>
     </div>
-    <a class="btn btn-primary" href="${ctx}/product/new">添加</a>
+    <a class="btn btn-primary" href="${ctx}/admin/product/new">添加</a>
 
 </div>
 <!-- /container -->

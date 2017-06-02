@@ -63,7 +63,6 @@ $(function () {
         $.ajax({
             url: ctx + "/user/userAddress/" + addressId,
             method:"get",
-            //url: ctx + "/user/userAddress/edit/" + addressId,
             success: function (result) {
                 alert(result);
             },

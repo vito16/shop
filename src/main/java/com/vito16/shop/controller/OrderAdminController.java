@@ -30,7 +30,7 @@ import java.util.List;
  * @date 2013-7-8
  */
 @Controller
-@RequestMapping("/order/admin")
+@RequestMapping("/admin/order")
 public class OrderAdminController {
     private static final Logger logger = LoggerFactory.getLogger(OrderAdminController.class);
 
@@ -46,7 +46,7 @@ public class OrderAdminController {
      *
      * @return
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String adminList(Model model, HttpServletRequest request) {
         Page<Order> page = new Page<Order>(request);
         orderService.findOrders(page);
@@ -54,19 +54,18 @@ public class OrderAdminController {
         return "admin/order/orderList";
     }
 
-    /**
-     * 订单管理
-     *
-     * @return
-     */
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String newsAdd(Model model, HttpServletRequest request) {
-        Page<Order> page = new Page<Order>(request);
-        orderService.findOrders(page);
-        model.addAttribute("page", page);
-        return "admin/order/orderList";
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String viewOrder(@PathVariable Integer id, Model model) {
+        model.addAttribute("order", orderService.findById(id));
+        return "admin/order/orderDetail";
     }
 
+    /**
+     * 订单删除
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String delete(@PathVariable Integer id) {
@@ -75,7 +74,7 @@ public class OrderAdminController {
     }
 
     /**
-     * 管理取消订单
+     * 订单取消
      *
      * @param orderId
      * @return

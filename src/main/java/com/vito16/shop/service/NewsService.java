@@ -5,6 +5,7 @@ package com.vito16.shop.service;
 
 import java.util.List;
 
+import com.vito16.shop.model.Order;
 import com.vito16.shop.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class NewsService extends BaseService {
             page.setTotalCount(newsDao.count());
             return page.getResult();
     }
+
+    public News findById(Integer id) {
+        return newsDao.findOne(id);
+    }
+
 
 }

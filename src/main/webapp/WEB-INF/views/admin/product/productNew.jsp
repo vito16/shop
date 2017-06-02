@@ -14,7 +14,7 @@
 <%@include file="/common/header-nav.jsp" %>
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
-        <form:form id="inputForm" role="form" action="${ctx}/product/new"
+        <form:form id="inputForm" role="form" action="${ctx}/admin/product/new"
                    method="post" class="form-horizontal" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="col-sm-2 control-label">商品名称</label>

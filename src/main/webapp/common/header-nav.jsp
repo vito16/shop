@@ -35,7 +35,7 @@
                                     ${login_admin.username}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="${ctx}/product/admin">后台管理</a></li>
+                                <li><a href="${ctx}/admin/product">后台管理</a></li>
                                 <li><a href="${ctx}/admin/logout">登出</a></li>
                             </ul>
                         </li>

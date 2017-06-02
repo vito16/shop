@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,12 +34,20 @@ public class NewsController {
     @Autowired
     NewsService newsService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index(ModelAndView model, HttpServletRequest request) {
         Page<News> page = new Page<News>(request);
         newsService.findNews(page);
         model.addObject("page", page);
         model.setViewName("news/newsList");
+        return model;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView viewNews(@PathVariable Integer id,ModelAndView model, HttpServletRequest request) {
+        News news = newsService.findById(id);
+        model.addObject("news", news);
+        model.setViewName("news/newsDetail");
         return model;
     }
 

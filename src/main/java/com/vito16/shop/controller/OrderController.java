@@ -75,14 +75,6 @@ public class OrderController {
         return "order/orderPurchase";
     }
 
-    @RequestMapping(value = "/userAddressList/{id}")
-    @ModelAttribute
-    @ResponseBody
-    public List<UserAddress> getUserAddressList(@PathVariable int id) {
-        return userAddressService.findByUserId(id);
-    }
-
-
     /**
      * 下单
      *
@@ -117,10 +109,10 @@ public class OrderController {
         return "order/orderingSuccess";
     }
 
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewOrder(@PathVariable Integer id, Model model) {
         model.addAttribute("order", orderService.findById(id));
-        return "order/orderView";
+        return "order/orderDetail";
     }
 
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)

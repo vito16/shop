@@ -45,11 +45,11 @@
                         <td>${order.consignee}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></c:when>
-                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></c:when>
-                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></c:when>
-                                <c:when test="${order.status==3}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
-                                <c:when test="${order.status==4}"><a class="btn btn-info btn-xs" href="${ctx}/order/view/${order.id}">查看</a></c:when>
+                                <c:when test="${order.status==0}"><a class="btn btn-info btn-xs" href="${ctx}/order/${order.id}">查看</a> <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></c:when>
+                                <c:when test="${order.status==1}"><a class="btn btn-info btn-xs" href="${ctx}/order/${order.id}">查看</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></c:when>
+                                <c:when test="${order.status==2}"><a class="btn btn-info btn-xs" href="${ctx}/order/${order.id}">查看</a> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></c:when>
+                                <c:when test="${order.status==3}"><a class="btn btn-info btn-xs" href="${ctx}/order/${order.id}">查看</a></c:when>
+                                <c:when test="${order.status==4}"><a class="btn btn-info btn-xs" href="${ctx}/order/${order.id}">查看</a></c:when>
                             </c:choose>
                         </td>
                     </tr>

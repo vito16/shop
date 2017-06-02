@@ -30,37 +30,16 @@
                 <tr pid="${news.id}">
                     <td>${news.createTime}</td>
                     <td>${news.title}</td>
-                    <td><a class="btn btn-info btn-xs">查看</a> <a class="btn btn-info btn-xs">修改 <a class="btn btn-info btn-xs">删除</a></a></td>
+                    <td><a class="btn btn-info btn-xs" href="${ctx}/admin/news/${order.id}">查看</a> <a class="btn btn-info btn-xs del-news-btn">修改</a> <a class="btn btn-info btn-xs del-news-btn">删除</a></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-        <div class="col-md-6 col-md-offset-3">
-            <form:form id="inputForm" role="form" action="${ctx}/news/add"
-                       method="post" class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">标题</label>
-                    <div class="col-sm-10">
-                        <input minlength="6" required class="form-control" type="text" id="title" name="title"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">内容</label>
-
-                    <div class="col-sm-10">
-                        <textarea class="form-control" name="content" id="content"></textarea>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button type="button" id="addNewsBtn" class="btn btn-primary">保存</button>
-                </div>
-            </form:form>
-        </div>
-
     </div>
     <div class="text-center">
         <tags:pagination page="${page}" paginationSize="${page.pageSize}"/>
     </div>
+    <a class="btn btn-primary" href="${ctx}/admin/news/new">添加</a>
 </div>
 <!-- /container -->
 <%@include file="/common/footer.jsp" %>

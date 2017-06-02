@@ -18,7 +18,7 @@
     <%@include file="/common/admin-admin-nav.jsp" %>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form:form id="inputForm" role="form" action="${ctx}/product/edit"
+            <form:form id="inputForm" role="form" action="${ctx}/admin/product/edit"
                        method="post" class="form-horizontal" enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="hidden" name="id" value="${product.id}"/>
