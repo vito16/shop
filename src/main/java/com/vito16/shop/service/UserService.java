@@ -19,6 +19,7 @@ import com.vito16.shop.model.User;
 @Service
 @Transactional
 public class UserService {
+
 	@Autowired
 	private UserRepository userDao;
 
@@ -29,7 +30,8 @@ public class UserService {
 	}
 	
 	public User findByUsernameAndPassword(String username,String password){
-		return userDao.findByUsernameAndPassword(username, password);
+		User user = userDao.findByUsernameAndPassword(username, password);
+		return user;
 	}
 
     public User findByUsername(String username){

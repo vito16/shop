@@ -22,26 +22,78 @@ import org.springframework.data.annotation.Transient;
 @Entity
 @Table(name = "t_user")
 public class User implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private String account; // 账号
-	private String username;// 用户名
-	private Integer point;// 积分
-	private String phone;// 手机
-	private String telPhone;// 座机
-	private String address;// 地址
-	private String zipCode;// 邮编
-	private String remark;// 备注
-	private String password;// 密码
-	private List<UserAddress> addresses; // 关联收货地址
-	private List<Order> orders;// 订单
-    private String slat;//密码加密使用
 
-	// ***** VO *********
-	private String spc; // 验证码
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 数据序号
+	 */
+	private Integer id;
+
+	/**
+	 * 账号
+	 */
+	private String account;
+
+	/**
+	 * 用户名
+	 */
+	private String username;
+
+	/**
+	 * 账户余额
+	 */
+	private Long balance;
+
+	/**
+	 * 积分值
+	 */
+	private Long point;
+
+	/**
+	 * 手机号码
+	 */
+	private String phone;
+
+	/**
+	 * 座机电话
+	 */
+	private String telPhone;
+
+	/**
+	 * 地址
+	 */
+	private String address;
+
+	/**
+	 * 邮编
+	 */
+	private String zipCode;
+
+	/**
+	 * 备注
+	 */
+	private String remark;
+
+	/**
+	 * 密码信息(加密)
+	 */
+	private String password;
+
+	/**
+	 * 收货地址
+	 */
+	private List<UserAddress> addresses; // 关联收货地址
+
+	/**
+	 * 订单
+	 */
+	private List<Order> orders;// 订单
+
+	/**
+	 * 密码加密盐
+	 */
+    private String slat;
 
 	public User() {
 	};
@@ -103,11 +155,11 @@ public class User implements Serializable {
 
 	@Max(999999)
 	@Min(0)
-	public Integer getPoint() {
+	public Long getPoint() {
 		return point;
 	}
 
-	public void setPoint(Integer point) {
+	public void setPoint(Long point) {
 		this.point = point;
 	}
 
@@ -174,16 +226,15 @@ public class User implements Serializable {
 		this.orders = orders;
 	}
 
-	@Transient
-	public String getSpc() {
-		return spc;
+	public Long getBalance() {
+		return balance;
 	}
 
-	public void setSpc(String spc) {
-		this.spc = spc;
+	public void setBalance(Long balance) {
+		this.balance = balance;
 	}
 
-    public String getSlat() {
+	public String getSlat() {
         return slat;
     }
 
