@@ -4,6 +4,9 @@
 
 在线商城项目，持续完善中...
 
+![功能导图](img/module.png)
+
+
 ## 启动服务
 
     com.vito16.shop.Application.main()
