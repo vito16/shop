@@ -6,11 +6,11 @@ $(function () {
         $.ajax({
             url: ctx + "/order/cancel/" + orderId,
             success: function (result) {
-                if (result == "success") {
+                if(result.status=="SUCCESS"){
                     toastr.info("订单已取消成功...");
                     window.location.reload();
                 } else {
-                    toastr.error("发生错误..");
+                    toastr.error(result.message);
                 }
             },
             error: function () {
@@ -23,11 +23,11 @@ $(function () {
         $.ajax({
             url: ctx + "/order/pay/" + orderId,
             success: function (result) {
-                if (result == "success") {
+                if(result.status=="SUCCESS"){
                     toastr.info("付款成功...我们会尽快为您安排发货...");
                     window.location.reload();
                 } else {
-                    toastr.error("发生错误..");
+                    toastr.error(result.message);
                 }
             },
             error: function () {
@@ -41,11 +41,11 @@ $(function () {
         $.ajax({
             url: ctx + "/order/confirm/" + orderId,
             success: function (result) {
-                if (result == "success") {
+                if(result.status=="SUCCESS"){
                     toastr.info("交易已完成...");
                     window.location.reload();
                 } else {
-                    toastr.error("发生错误..");
+                    toastr.error(result.message);
                 }
             },
             error: function () {
@@ -58,11 +58,11 @@ $(function () {
         $.ajax({
             url: ctx + "/admin/order/delete/" + orderId,
             success: function (result) {
-                if (result == "success") {
+                if(result.status=="SUCCESS"){
                     toastr.info("订单删除成功...");
                     window.location.reload();
                 } else {
-                    toastr.error("发生错误..");
+                    toastr.error(result.message);
                 }
             },
             error: function () {
@@ -75,12 +75,12 @@ $(function () {
         $.ajax({
             url: ctx + "/admin/order/ship/" + orderId,
             success: function (result) {
-                if (result == "success") {
+                if(result.status=="SUCCESS"){
                     toastr.info("发货成功...");
                     // $("tr[pid="+orderId+"] td:eq(3)").val("已发货");
                     window.location.reload();
                 } else {
-                    toastr.error("发生错误..");
+                    toastr.error(result.message);
                 }
             },
             error: function () {

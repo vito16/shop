@@ -1,8 +1,8 @@
 package com.vito16.shop.test;
 
-import com.vito16.shop.repository.AdminRepository;
 import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.Product;
+import com.vito16.shop.repository.AdminRepository;
 import com.vito16.shop.service.ProductService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

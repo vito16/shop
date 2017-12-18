@@ -1,7 +1,6 @@
-package com.vito16.shop.common;
+package com.vito16.shop.common.web;
 
 import com.vito16.shop.util.AdminUtil;
-import com.vito16.shop.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

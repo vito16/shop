@@ -6,11 +6,11 @@ $(function () {
         $.ajax({
             url: ctx + "/user/userAddress/delete/" + addressId,
             success: function (result) {
-                if (result == "success") {
+                if(result.status=="SUCCESS"){
                     $("tr[addressId="+addressId+"]").remove();
                     toastr.info("地址信息删除成功...");
                 } else {
-                    toastr.error("发生错误...");
+                    toastr.error(result.message);
                 }
             },
             error: function () {
@@ -33,11 +33,11 @@ $(function () {
                 "consignee":$("#consignee").val()
             },
             success: function (result) {
-                if (result == "success") {
+                if(result.status=="SUCCESS"){
                     $('#addAddressSuccess').show();
                     toastr.info("添加成功");
                 } else {
-                    toastr.error("发生错误...");
+                    toastr.error(result.message);
                 }
             },
             error: function () {

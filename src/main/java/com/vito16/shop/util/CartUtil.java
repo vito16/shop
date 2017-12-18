@@ -1,18 +1,16 @@
 package com.vito16.shop.util;
 
+import com.vito16.shop.common.Constants;
+import com.vito16.shop.model.OrderItem;
+import com.vito16.shop.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.vito16.shop.common.Constants;
-import com.vito16.shop.model.OrderItem;
-import com.vito16.shop.model.Product;
 
 /**
  * 购物车工具类

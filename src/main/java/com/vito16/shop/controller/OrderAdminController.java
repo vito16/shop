@@ -2,28 +2,23 @@ package com.vito16.shop.controller;
 
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
+import com.vito16.shop.common.web.JsonResult;
 import com.vito16.shop.model.Order;
-import com.vito16.shop.model.OrderItem;
-import com.vito16.shop.model.User;
-import com.vito16.shop.model.UserAddress;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
-import com.vito16.shop.util.CartUtil;
-import com.vito16.shop.util.UserUtil;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -68,9 +63,11 @@ public class OrderAdminController {
      */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String delete(@PathVariable Integer id) {
+    public JsonResult delete(@PathVariable Integer id) {
         orderService.deleteOrder(id);
-        return "success";
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
     /**
@@ -81,9 +78,12 @@ public class OrderAdminController {
      */
     @RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String cancel(@PathVariable(value = "id") Integer orderId) {
+    public JsonResult cancel(@PathVariable(value = "id") Integer orderId) {
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.DELETED);
-        return "success";
+
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
     /**
@@ -94,9 +94,12 @@ public class OrderAdminController {
      */
     @RequestMapping(value = "/ship/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String ship(@PathVariable(value = "id") Integer orderId, HttpSession session) {
+    public JsonResult ship(@PathVariable(value = "id") Integer orderId, HttpSession session) {
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.SHIPPED);
-        return "success";
+
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
 

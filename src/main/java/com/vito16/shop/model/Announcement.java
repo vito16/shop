@@ -3,10 +3,9 @@
  */
 package com.vito16.shop.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.*;
 
 /**
  * 公告

@@ -51,9 +51,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="pic">封面图片</label>
+                <label class="col-sm-2 control-label" for="imgFile">封面图片</label>
                 <div class="col-sm-10">
-                    <input type="file" id="pic" name="file">
+                    <input type="file" id="imgFile" name="imgFile">
                     <p class="help-block">图片不能超过1MB.</p>
                 </div>
             </div>

@@ -27,14 +27,14 @@ $(function () {
         $.ajax({
             url: ctx + "/cart/delete/" + pid,
             success: function (result) {
-                if (result == "success") {
+                if (result.status == "SUCCESS") {
                     $("tr[pid="+pid+"]").remove();
                     $('#delSuccess').show();
                     setTimeout(function () {
                         $('#delSuccess').hide('slow');
                     }, 3000);
                 } else {
-                    alert("发生错误..");
+                    alert(result.message);
                 }
             },
             error: function () {
@@ -46,14 +46,14 @@ $(function () {
         $.ajax({
             url: ctx + "/cart/deleteAll",
             success: function (result) {
-                if (result == "success") {
+                if (result.status == "SUCCESS") {
                     $("tbody tr").remove();
                     $('#delAllSuccess').show();
                     setTimeout(function () {
                         $('#delAllSuccess').hide('slow');
                     }, 3000);
                 } else {
-                    alert("发生错误..");
+                    alert(result.message);
                 }
             },
             error: function () {
@@ -68,10 +68,10 @@ $(function () {
             $.ajax({
                 url:ctx+"/cart/add/"+dom.attr("productid")+"/-1",
                 success:function(result){
-                    if(result=="success"){
+                    if(result.status=="SUCCESS"){
                         dom.html(currentTotal-1);
                     }else{
-                        alert("发生错误..");
+                        alert(result.message);
                     }
                 },
                 error:function(){
@@ -87,10 +87,10 @@ $(function () {
             $.ajax({
                 url:ctx+"/cart/add/"+dom.attr("productid")+"/1",
                 success:function(result){
-                    if(result=="success"){
+                    if(result.status=="SUCCESS"){
                         dom.html(currentTotal+1);
                     }else{
-                        alert("发生错误..");
+                        alert(result.message);
                     }
                 },
                 error:function(){

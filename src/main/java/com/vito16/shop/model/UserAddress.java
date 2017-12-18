@@ -3,9 +3,8 @@
  */
 package com.vito16.shop.model;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Vito16 zhouwentao16@gmail.com

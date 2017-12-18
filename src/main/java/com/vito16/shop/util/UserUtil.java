@@ -1,9 +1,9 @@
 package com.vito16.shop.util;
 
-import javax.servlet.http.HttpSession;
-
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.model.User;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 用户工具类

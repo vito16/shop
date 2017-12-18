@@ -3,20 +3,19 @@
  */
 package com.vito16.shop.service;
 
-import java.util.Date;
-import java.util.List;
-
+import com.vito16.shop.common.Constants;
+import com.vito16.shop.common.Page;
+import com.vito16.shop.model.Order;
+import com.vito16.shop.model.OrderItem;
+import com.vito16.shop.model.UserAddress;
+import com.vito16.shop.repository.OrderItemRepository;
+import com.vito16.shop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vito16.shop.common.Constants;
-import com.vito16.shop.common.Page;
-import com.vito16.shop.repository.OrderRepository;
-import com.vito16.shop.repository.OrderItemRepository;
-import com.vito16.shop.model.Order;
-import com.vito16.shop.model.OrderItem;
-import com.vito16.shop.model.UserAddress;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Vito

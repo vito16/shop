@@ -3,12 +3,11 @@
  */
 package com.vito16.shop.service;
 
+import com.vito16.shop.model.User;
+import com.vito16.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.vito16.shop.repository.UserRepository;
-import com.vito16.shop.model.User;
 
 /**
  * @author Vito

@@ -3,9 +3,8 @@
  */
 package com.vito16.shop.model;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * 支付方式

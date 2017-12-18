@@ -1,23 +1,19 @@
 package com.vito16.shop.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import com.vito16.shop.common.AppConfig;
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
+import com.vito16.shop.common.web.JsonResult;
 import com.vito16.shop.model.Order;
 import com.vito16.shop.model.Remember;
+import com.vito16.shop.model.User;
+import com.vito16.shop.model.UserAddress;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.RememberService;
+import com.vito16.shop.service.UserAddressService;
+import com.vito16.shop.service.UserService;
 import com.vito16.shop.util.CookieUtil;
+import com.vito16.shop.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +22,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.vito16.shop.model.User;
-import com.vito16.shop.model.UserAddress;
-import com.vito16.shop.service.UserAddressService;
-import com.vito16.shop.service.UserService;
-import com.vito16.shop.util.UserUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -127,7 +125,6 @@ public class UserController {
     public String logout(HttpSession session,HttpServletResponse response) {
         UserUtil.deleteUserFromSession(session);
         CookieUtil.removeCookie(response, appConfig.USER_COOKIE_NAME);
-//        rememberService.delete();
         return "redirect:/";
     }
 
@@ -178,15 +175,18 @@ public class UserController {
      */
     @RequestMapping(value = "/order/confirm/{id}")
     @ResponseBody
-    public String orderConfirm(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
+    public JsonResult orderConfirm(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
         User user = UserUtil.getUserFromSession(session);
         Order order = orderService.findById(id);
-        if(order.getUser().getId()==user.getId()){
+
+        JsonResult result = new JsonResult();
+        if(Objects.equals(order.getUser().getId(), user.getId())){
             orderService.updateOrderStatus(id, Constants.OrderStatus.ENDED);
-            return "success";
+            result.setToSuccess();
         }else{
-            return "fail";
+            result.setToFail();
         }
+        return result;
     }
 
     /**
@@ -218,11 +218,14 @@ public class UserController {
 
     @RequestMapping(value = "/userAddress/add", method = RequestMethod.POST)
     @ResponseBody
-    public String doAddUserAddress(HttpSession session, UserAddress userAddress) {
+    public JsonResult doAddUserAddress(HttpSession session, UserAddress userAddress) {
         userAddress.setUser(UserUtil.getUserFromSession(session));
         userAddressService.save(userAddress);
         logger.debug("地址信息保存成功.");
-        return "success";
+
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
     @RequestMapping(value = "/userAddress/update", method = RequestMethod.POST)

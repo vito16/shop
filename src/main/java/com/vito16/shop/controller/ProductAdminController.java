@@ -60,7 +60,7 @@ public class ProductAdminController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String doNew(Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
+    public String doNew(Product product, HttpSession session, @RequestParam("imgFile") MultipartFile file) {
         if (file!=null&&!file.isEmpty()) {
             uploadImage(product, session, file);
         }

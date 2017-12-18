@@ -1,7 +1,9 @@
 package com.vito16.shop.controller;
 
-import javax.servlet.http.HttpSession;
-
+import com.vito16.shop.common.web.JsonResult;
+import com.vito16.shop.model.Product;
+import com.vito16.shop.service.ProductService;
+import com.vito16.shop.util.CartUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.vito16.shop.model.Product;
-import com.vito16.shop.service.ProductService;
-import com.vito16.shop.util.CartUtil;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -36,26 +36,34 @@ public class CartController {
 
     @RequestMapping(value = "/add/{id}/{total}")
     @ResponseBody
-    public String addToCart(ModelAndView model, @PathVariable Integer id, @PathVariable Integer total, HttpSession session) {
+    public JsonResult addToCart(@PathVariable Integer id, @PathVariable Integer total, HttpSession session) {
         Product product = productService.findById(id);
         CartUtil.saveProductToCart(session, product, total);
         logger.debug("添加到购物车成功...");
-        return "success";
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
     @RequestMapping(value = "/delete/{id}")
     @ResponseBody
-    public String deleteFromCart(ModelAndView model, @PathVariable(value = "id") Integer productId, HttpSession session) {
+    public JsonResult deleteFromCart(ModelAndView model, @PathVariable(value = "id") Integer productId, HttpSession session) {
         CartUtil.deleteProductFromCart(session, productId);
         logger.debug("购物车商品删除成功...");
-        return "success";
+
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
     @RequestMapping(value = "/deleteAll")
     @ResponseBody
-    public String deleteAllFromCart(HttpSession session) {
+    public JsonResult deleteAllFromCart(HttpSession session) {
         CartUtil.cleanCart(session);
         logger.debug("购物车商品清空成功...");
-        return "success";
+
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 }

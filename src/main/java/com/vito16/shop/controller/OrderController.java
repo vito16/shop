@@ -1,23 +1,8 @@
 package com.vito16.shop.controller;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
-import com.vito16.shop.common.PageUtil;
+import com.vito16.shop.common.web.JsonResult;
 import com.vito16.shop.model.Order;
 import com.vito16.shop.model.OrderItem;
 import com.vito16.shop.model.User;
@@ -27,6 +12,22 @@ import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
 import com.vito16.shop.util.CartUtil;
 import com.vito16.shop.util.UserUtil;
+import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -117,13 +118,16 @@ public class OrderController {
 
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String pay(@PathVariable(value = "id") Integer orderId, HttpSession session) {
+    public JsonResult pay(@PathVariable(value = "id") Integer orderId, HttpSession session) {
+        JsonResult result = new JsonResult();
         //验证订单是否归当前人员所有
         if (orderService.checkOwned(orderId, UserUtil.getUserFromSession(session).getId())) {
             orderService.pay(orderId);
-            return "success";
+            result.setToSuccess();
+        }else{
+            result.setToFail();
         }
-        return "error";
+        return result;
     }
 
     /**
@@ -134,10 +138,13 @@ public class OrderController {
      */
     @RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String cancel(@PathVariable(value = "id") Integer orderId) {
+    public JsonResult cancel(@PathVariable(value = "id") Integer orderId) {
         //TODO 验证是否拥有此订单
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.DELETED);
-        return "success";
+
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
     /**
@@ -148,9 +155,12 @@ public class OrderController {
      */
     @RequestMapping(value = "/confirm/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String confirm(@PathVariable(value = "id") Integer orderId) {
+    public JsonResult confirm(@PathVariable(value = "id") Integer orderId) {
         orderService.updateOrderStatus(orderId, Constants.OrderStatus.ENDED);
-        return "success";
+
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
 }

@@ -1,10 +1,9 @@
 package com.vito16.shop.model;
 
-import java.util.Date;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-
-import org.hibernate.annotations.DynamicUpdate;
+import java.util.Date;
 
 /**
  * 图片实体

@@ -1,15 +1,13 @@
 package com.vito16.shop.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.vito16.shop.common.Page;
-import com.vito16.shop.common.PageUtil;
+import com.vito16.shop.common.web.JsonResult;
+import com.vito16.shop.model.Admin;
 import com.vito16.shop.model.News;
-import com.vito16.shop.model.Order;
+import com.vito16.shop.service.AdminService;
 import com.vito16.shop.service.NewsService;
 import com.vito16.shop.service.OrderService;
-import com.vito16.shop.util.UserUtil;
+import com.vito16.shop.util.AdminUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.vito16.shop.model.Admin;
-import com.vito16.shop.service.AdminService;
-import com.vito16.shop.util.AdminUtil;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
@@ -87,9 +83,11 @@ public class AdminController {
 
     @RequestMapping(value = "/news/delete/{id}")
     @ResponseBody
-    public String newsDelete(@PathVariable("id") Integer id) {
+    public JsonResult newsDelete(@PathVariable("id") Integer id) {
         newsService.delNews(id);
-        return "success";
+        JsonResult result = new JsonResult();
+        result.setToSuccess();
+        return result;
     }
 
     @RequestMapping(value = "/news/{id}")

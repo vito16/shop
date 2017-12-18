@@ -3,16 +3,14 @@
  */
 package com.vito16.shop.model;
 
-import java.io.Serializable;
-import java.util.List;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Transient;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Vito16 zhouwentao16@gmail.com
