@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.9.RELEASE</version>
+        <version>1.5.10.RELEASE</version>
     </parent>
 
     <groupId>com.vito16</groupId>
@@ -18,9 +18,9 @@
 
     <properties>
         <mysql.version>5.1.38</mysql.version>
-        <druid.version>1.0.17</druid.version>
-        <tomcat.version>7.0.59</tomcat.version>
-        <guava.version>19.0</guava.version>
+        <druid.version>1.1.7</druid.version>
+        <tomcat.version>7.0.84</tomcat.version>
+        <guava.version>24.0-jre</guava.version>
     </properties>
 
     <dependencies>
