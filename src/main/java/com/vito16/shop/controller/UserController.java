@@ -14,6 +14,7 @@ import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
 import com.vito16.shop.util.CookieUtil;
 import com.vito16.shop.util.UserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import sun.jvm.hotspot.utilities.Assert;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +33,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import static com.vito16.shop.util.UserUtil.getUserFromSession;
 
 /**
  * @author Vito zhouwentao16@gmail.com
@@ -70,21 +74,20 @@ public class UserController {
     public String doReg(@Valid User user, Model model, BindingResult result) {
         if (result.hasErrors()) {
             for (ObjectError or : result.getAllErrors()) {
-                logger.warn("验证类型:" + or.getCode() + " \t错误消息:"
-                        + or.getDefaultMessage());
+                logger.warn("验证类型:{}\n错误消息:{}", or.getCode() ,or.getDefaultMessage());
             }
             model.addAttribute("error", "数据错误,请重试");
             return "user/userReg";
         }
         userService.save(user);
-        logger.info("成功添加用户:" + user);
+        logger.info("成功添加用户:{}", user);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm(HttpServletRequest request, HttpSession session) {
         String uuid;
-        if ((uuid = CookieUtil.getCookieValue(request, appConfig.USER_COOKIE_NAME)) != null) {
+        if (StringUtils.isNotBlank(uuid = CookieUtil.getCookieValue(request, appConfig.USER_COOKIE_NAME))) {
             Remember remember = rememberService.findById(uuid);
             if (remember != null && remember.getUser() != null) {
                 if (userService.checkLogin(remember.getUser())) {
@@ -102,7 +105,7 @@ public class UserController {
         if (userService.checkLogin(user)) {
             user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
-            logger.info("是否记住登录用户：" + request.getParameter("remember"));
+            logger.info("是否记住登录用户：{}",request.getParameter("remember"));
 
             if ("on".equals(request.getParameter("remember"))) {
                 String uuid = UUID.randomUUID().toString();
@@ -115,7 +118,7 @@ public class UserController {
             } else {
                 CookieUtil.removeCookie(response, appConfig.USER_COOKIE_NAME);
             }
-            logger.info("用户[" + user.getUsername() + "]登陆成功");
+            logger.info("用户[{}]登陆成功",user.getUsername());
             return "redirect:/";
         }
         return "redirect:/user/login?errorPwd=true";
@@ -130,7 +133,7 @@ public class UserController {
 
     @RequestMapping(value = "/profile")
     public String profile(HttpSession session, Model model) {
-        User user = UserUtil.getUserFromSession(session);
+        User user = getUserFromSession(session);
         if (user == null) {
             return "redirect:/user/login?timeout=true";
         }
@@ -146,8 +149,9 @@ public class UserController {
      */
     @RequestMapping(value = "/order", method = RequestMethod.GET)
     public String orderList(Model model, HttpSession session, HttpServletRequest request) {
-        User user = UserUtil.getUserFromSession(session);
-        Page<Order> page = new Page<Order>(request);
+        User user = getUserFromSession(session);
+        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
+        Page<Order> page = new Page<>(request);
         orderService.findOrders(page, user.getId());
         model.addAttribute("page", page);
         return "order/orderList";
@@ -161,7 +165,8 @@ public class UserController {
      */
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
     public String orderView(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
-        User user = UserUtil.getUserFromSession(session);
+        User user = getUserFromSession(session);
+        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
         Order order = orderService.findById(id);
         model.addAttribute("order", order);
         return "order/orderView";
@@ -176,7 +181,8 @@ public class UserController {
     @RequestMapping(value = "/order/confirm/{id}")
     @ResponseBody
     public JsonResult orderConfirm(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
-        User user = UserUtil.getUserFromSession(session);
+        User user = getUserFromSession(session);
+        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
         Order order = orderService.findById(id);
 
         JsonResult result = new JsonResult();
@@ -205,7 +211,7 @@ public class UserController {
     @RequestMapping(value = "/userAddress", method = RequestMethod.GET)
     public String userAddress(Model model, HttpSession session) {
         model.addAttribute("title", "地址管理");
-        List<UserAddress> userAddressList = userAddressService.findByUserId(UserUtil.getUserFromSession(session).getId());
+        List<UserAddress> userAddressList = userAddressService.findByUserId(getUserFromSession(session).getId());
         model.addAttribute("userAddressList", userAddressList);
         return "user/userAddress";
     }
@@ -219,7 +225,7 @@ public class UserController {
     @RequestMapping(value = "/userAddress/add", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult doAddUserAddress(HttpSession session, UserAddress userAddress) {
-        userAddress.setUser(UserUtil.getUserFromSession(session));
+        userAddress.setUser(getUserFromSession(session));
         userAddressService.save(userAddress);
         logger.debug("地址信息保存成功.");
 
@@ -230,7 +236,7 @@ public class UserController {
 
     @RequestMapping(value = "/userAddress/update", method = RequestMethod.POST)
     @ResponseBody
-    public String doUpdateUserAddress(HttpSession session, UserAddress userAddress) {
+    public String doUpdateUserAddress(UserAddress userAddress) {
         userAddressService.updateUserAddress(userAddress);
         return "success";
     }
@@ -238,13 +244,12 @@ public class UserController {
     @RequestMapping(value = "/userAddress/{id}")
     @ResponseBody
     public UserAddress findAddress(@PathVariable Integer id) {
-        UserAddress userAddress = userAddressService.findById(id);
-        return userAddress;
+        return userAddressService.findById(id);
     }
 
     @RequestMapping(value = "/userAddress/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String delUserAddress(Model model, @PathVariable Integer id) {
+    public String delUserAddress(@PathVariable Integer id) {
         userAddressService.deleteById(id);
         logger.debug("收货地址删除成功...");
         return "success";
