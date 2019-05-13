@@ -1,17 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <%@ include file="/common/global.jsp" %>
     <title>商品列表</title>
-    <%@ include file="/common/meta.jsp" %>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>
+
+    <div th:replace="common_cssjs"></div>
+    <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/product.css}">
+
 </head>
 
 <body>
-<%@include file="/common/header-nav.jsp" %>
+<div th:replace="common/header::nav"></div>
 <div class="container">
     <div class="row">
         <c:forEach items="${page.result}" var="product">

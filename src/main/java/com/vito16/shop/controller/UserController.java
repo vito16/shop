@@ -14,6 +14,7 @@ import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
 import com.vito16.shop.util.CookieUtil;
 import com.vito16.shop.util.UserUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +40,10 @@ import static com.vito16.shop.util.UserUtil.getUserFromSession;
  * @author Vito zhouwentao16@gmail.com
  * @version 2013-7-8
  */
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     AppConfig appConfig;
@@ -59,31 +60,31 @@ public class UserController {
     @Autowired
     RememberService rememberService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String index() {
         return "user/index";
     }
 
-    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    @GetMapping(value = "/reg")
     public String reg() {
         return "user/userReg";
     }
 
-    @RequestMapping(value = "/reg", method = RequestMethod.POST)
+    @PostMapping(value = "/reg")
     public String doReg(@Valid User user, Model model, BindingResult result) {
         if (result.hasErrors()) {
             for (ObjectError or : result.getAllErrors()) {
-                logger.warn("验证类型:{}\n错误消息:{}", or.getCode() ,or.getDefaultMessage());
+                log.warn("验证类型:{}\n错误消息:{}", or.getCode() ,or.getDefaultMessage());
             }
             model.addAttribute("error", "数据错误,请重试");
             return "user/userReg";
         }
         userService.save(user);
-        logger.info("成功添加用户:{}", user);
+        log.info("成功添加用户:{}", user);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String loginForm(HttpServletRequest request, HttpSession session) {
         String uuid;
         if (StringUtils.isNotBlank(uuid = CookieUtil.getCookieValue(request, appConfig.USER_COOKIE_NAME))) {
@@ -91,7 +92,7 @@ public class UserController {
             if (remember != null && remember.getUser() != null) {
                 if (userService.checkLogin(remember.getUser())) {
                     UserUtil.saveUserToSession(session, remember.getUser());
-                    logger.info("用户[{}]使用cookie登录成功.", remember.getUser().getUsername());
+                    log.info("用户[{}]使用cookie登录成功.", remember.getUser().getUsername());
                     return "redirect:/";
                 }
             }
@@ -104,7 +105,7 @@ public class UserController {
         if (userService.checkLogin(user)) {
             user = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             UserUtil.saveUserToSession(session, user);
-            logger.info("是否记住登录用户：{}",request.getParameter("remember"));
+            log.info("是否记住登录用户：{}",request.getParameter("remember"));
 
             if ("on".equals(request.getParameter("remember"))) {
                 String uuid = UUID.randomUUID().toString();
@@ -117,7 +118,7 @@ public class UserController {
             } else {
                 CookieUtil.removeCookie(response, appConfig.USER_COOKIE_NAME);
             }
-            logger.info("用户[{}]登陆成功",user.getUsername());
+            log.info("用户[{}]登陆成功",user.getUsername());
             return "redirect:/";
         }
         return "redirect:/user/login?errorPwd=true";
@@ -226,7 +227,7 @@ public class UserController {
     public JsonResult doAddUserAddress(HttpSession session, UserAddress userAddress) {
         userAddress.setUser(getUserFromSession(session));
         userAddressService.save(userAddress);
-        logger.debug("地址信息保存成功.");
+        log.debug("地址信息保存成功.");
 
         JsonResult result = new JsonResult();
         result.setToSuccess();
@@ -250,7 +251,7 @@ public class UserController {
     @ResponseBody
     public String delUserAddress(@PathVariable Integer id) {
         userAddressService.deleteById(id);
-        logger.debug("收货地址删除成功...");
+        log.debug("收货地址删除成功...");
         return "success";
     }
 
