@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @SpringBootApplication
 @EnableJpaRepositories
-@EnableWebMvc
 @EnableTransactionManagement
 public class ShopApplication  {
 
