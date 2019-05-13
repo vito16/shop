@@ -9,9 +9,9 @@
  */
 package com.vito16.shop.test.suite;
 
-import com.vito16.shop.test.AdminTest;
-import com.vito16.shop.test.OrderTest;
-import com.vito16.shop.test.UserTest;
+import com.vito16.shop.test.service.AdminTest;
+import com.vito16.shop.test.service.OrderTest;
+import com.vito16.shop.test.service.UserTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

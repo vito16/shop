@@ -31,7 +31,7 @@ public class NewsService extends BaseService {
     }
 
     public void delNews(Integer newsId){
-        newsDao.delete(newsId);
+        newsDao.deleteById(newsId);
     }
 
     public List<News> findNews(Page<News> page) {
@@ -41,7 +41,7 @@ public class NewsService extends BaseService {
     }
 
     public News findById(Integer id) {
-        return newsDao.findOne(id);
+        return newsDao.getOne(id);
     }
 
 

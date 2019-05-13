@@ -54,7 +54,7 @@ public class OrderService {
     }
 
     public Order findById(Integer id) {
-        return orderDao.findOne(id);
+        return orderDao.getOne(id);
     }
 
     public List<Order> findAll() {
@@ -80,7 +80,7 @@ public class OrderService {
      */
     public void deleteOrder(Integer id) {
         orderItemDao.deleteByOrderId(id);
-        orderDao.delete(id);
+        orderDao.deleteById(id);
     }
 
     /**
@@ -90,7 +90,7 @@ public class OrderService {
      * @param status
      */
     public void updateOrderStatus(Integer orderID, Integer status) {
-        Order order = orderDao.findOne(orderID);
+        Order order = orderDao.getOne(orderID);
         order.setStatus(status);
         //状态修改时修改相应时间数据
         if (status == Constants.OrderStatus.PAYED) {
@@ -111,11 +111,11 @@ public class OrderService {
      * @return
      */
     public boolean checkOwned(Integer orderId, Integer userId) {
-        return orderDao.findOne(orderId).getUser().getId().equals(userId);
+        return orderDao.getOne(orderId).getUser().getId().equals(userId);
     }
 
     public void pay(Integer orderId) {
-        Order order = orderDao.findOne(orderId);
+        Order order = orderDao.getOne(orderId);
         order.setStatus(Constants.OrderStatus.PAYED);
         order.setPayTime(new Date());
         orderDao.save(order);

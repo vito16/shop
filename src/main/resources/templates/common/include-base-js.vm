@@ -1,5 +1,0 @@
-<script src="/common/js/jquery.min.js" type="text/javascript"></script>
-<script src="/common/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-<script src="/common/bootstrap/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-<script src="/common/bootstrap/js/bootstrapValidator.min.js" type="text/javascript"></script>
-<script src="/common/sco/js/sco.modal.js" type="text/javascript"></script>

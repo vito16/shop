@@ -1,8 +1,0 @@
-<div class="row br">
-    <ul class="nav nav-tabs">
-        <li id="sub-nav-user"><a href="/user/profile">个人信息</a></li>
-        <li id="sub-nav-order"><a href="/order/">订单管理</a></li>
-        <li id="sub-nav-address"><a href="/user/userAddress">地址管理</a></li>
-        <%--<li id="sub-nav-security"><a href="/user/security">安全管理</a></li>--%>
-    </ul>
-</div>

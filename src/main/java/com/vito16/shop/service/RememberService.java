@@ -20,10 +20,10 @@ public class RememberService {
     }
 
     public void delete(String uuid){
-        rememberRepository.delete(uuid);
+        rememberRepository.deleteById(uuid);
     }
 
     public Remember findById(String uuid){
-        return rememberRepository.findOne(uuid);
+        return rememberRepository.getOne(uuid);
     }
 }

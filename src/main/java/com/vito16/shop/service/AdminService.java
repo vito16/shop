@@ -33,7 +33,7 @@ public class AdminService {
     }
 
     public Admin findOne(Integer id) {
-        return adminDao.findOne(id);
+        return adminDao.getOne(id);
     }
 
 }

@@ -42,7 +42,7 @@ public class UserService {
 	}
 
 	public User findOne(Integer id) {
-		return userDao.findOne(id);
+		return userDao.getOne(id);
 	}
 
 }

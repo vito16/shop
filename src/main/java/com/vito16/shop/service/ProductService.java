@@ -9,6 +9,7 @@ import com.vito16.shop.model.ProductType;
 import com.vito16.shop.repository.ProductRepository;
 import com.vito16.shop.repository.ProductTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,7 @@ public class ProductService {
 	}
 
 	public Product findById(Integer id) {
-		return productDao.findOne(id);
+		return productDao.getOne(id);
 	}
 
 	public List<Product> findAll() {

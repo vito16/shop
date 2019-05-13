@@ -39,7 +39,7 @@ public class UserAddressService {
      * @return
      */
     public UserAddress findById(Integer id) {
-        return userAddressDao.findOne(id);
+        return userAddressDao.getOne(id);
     }
 
     /**
@@ -60,7 +60,7 @@ public class UserAddressService {
      * @param id 收货地址ID
      */
     public void deleteById(Integer id) {
-        userAddressDao.delete(id);
+        userAddressDao.deleteById(id);
     }
 
     /**
