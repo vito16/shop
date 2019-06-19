@@ -24,7 +24,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${page.result}" var="order">
                     <tr th:each="page.result : ${order}" pid="${order.id}">
                         <td th:text="${order.createTime}"></td>
                         <td th:text="${order.orderNumber}"></td>
@@ -52,7 +51,6 @@
                             </c:choose>
                         </td>-->
                     </tr>
-                </c:forEach>
                 </tbody>
         </table>
     </div>
