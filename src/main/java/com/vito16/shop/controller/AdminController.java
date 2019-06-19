@@ -8,6 +8,7 @@ import com.vito16.shop.service.AdminService;
 import com.vito16.shop.service.NewsService;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.util.AdminUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ import java.util.Date;
  * @date 2013-7-8
  */
 @Controller
+@Slf4j
 @RequestMapping("/admin")
 public class AdminController {
-    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @Autowired
     AdminService adminService;
@@ -47,7 +48,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public String doReg(Admin admin, HttpSession session) {
+    public String doReg(Admin admin) {
         adminService.save(admin);
         return "redirect:/";
     }
@@ -61,7 +62,7 @@ public class AdminController {
     public String doLogin(Admin admin, HttpSession session) {
         if (adminService.checkLogin(admin)) {
             AdminUtil.saveAdminToSession(session, adminService.findByUsernameAndPassword(admin.getUsername(), admin.getPassword()));
-            logger.debug("管理员[{}]登陆成功",admin.getUsername());
+            log.debug("管理员[{}]登陆成功",admin.getUsername());
             return "redirect:/admin/product";
         }
         return "redirect:/admin/login?errorPwd=true";

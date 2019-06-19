@@ -47,7 +47,7 @@ public class ProductAdminController {
         Page<Product> page = new Page<Product>(request);
         productService.findProducts(page);
         model.addObject("page", page);
-        model.setViewName("admin/product/productAdmin");
+        model.setViewName("product/productAdmin");
         return model;
     }
 
@@ -56,11 +56,11 @@ public class ProductAdminController {
         if (AdminUtil.getAdminFromSession(session) == null) {
             return "redirect:/admin/login?error=true";
         }
-        return "admin/product/productNew";
+        return "product/productNew";
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String doNew(Product product, HttpSession session, @RequestParam("imgFile") MultipartFile file) {
+    public String doNew(Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
         if (file!=null&&!file.isEmpty()) {
             uploadImage(product, session, file);
         }

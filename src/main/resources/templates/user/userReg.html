@@ -13,14 +13,6 @@
 <body>
 <div th:replace="common/header::nav"></div>
 <div class="container">
-    <c:if test="${not empty error}">
-        <div id="error" class="alert alert-success">${error}</div>
-        <script type="text/javascript">
-            setTimeout(function () {
-                $('#error').hide('slow');
-            }, 4000);
-        </script>
-    </c:if>
     <form action="#" th:action="@{/user/reg}" method="post"
           id="regForm" class="form-signin">
         <h2 class="form-signin-heading">用户注册</h2>

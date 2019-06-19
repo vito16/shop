@@ -1,20 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <%@ include file="/common/global.jsp" %>
     <title>商品添加</title>
-    <%@ include file="/common/meta.jsp" %>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>
+
+    <div th:replace="common_cssjs"></div>
+    <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/index.css}">
+
 </head>
 
 <body>
-<%@include file="/common/header-nav.jsp" %>
+<div th:replace="common/header::nav"></div>
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
-        <form:form id="inputForm" role="form" action="${ctx}/product/new"
+        <form id="inputForm" role="form" th:action="@{/admin/product/new}"
                    method="post" class="form-horizontal" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="col-sm-2 control-label">商品名称</label>
@@ -26,7 +25,7 @@
                 <label class="col-sm-2 control-label">商品价格</label>
 
                 <div class="col-sm-10">
-                    <input type="number" required class="form-control" type="text" id="point" name="point"/>
+                    <input required class="form-control" type="text" id="point" name="point"/>
                 </div>
             </div>
             <div class="form-group">
@@ -67,15 +66,9 @@
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">保存</button>
             </div>
-        </form:form>
+        </form>
     </div>
 </div>
 <!-- /container -->
-<%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
-<script src="${ctx }/common/bootstrap/js/jqBootstrapValidation.js" type="text/javascript"></script>
-<script>
-    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
-</script>
 </body>
 </html>
