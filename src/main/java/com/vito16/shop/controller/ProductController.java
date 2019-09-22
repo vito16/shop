@@ -6,6 +6,7 @@ package com.vito16.shop.controller;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,10 @@ import javax.servlet.http.HttpServletRequest;
  * @author Vito zhouwentao16@gmail.com
  * @version 2013-7-17
  */
+@Slf4j
 @Controller
 @RequestMapping(value = "/product")
 public class ProductController {
-
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     ProductService productService;

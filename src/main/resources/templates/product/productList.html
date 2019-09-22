@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>商品列表</title>
 
     <div th:replace="common_cssjs"></div>
     <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/product.css}">
-
+    <script th:src="@{/js/product.js}" type="text/javascript"></script>
 </head>
 
 <body>
 <div th:replace="common/header::nav"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-4 col-xs-6 text-center" th:each="page.result:${product}" pid="${product.id}">
-            <a th:href="@{/product/}" +${product.id}><img class="img-thumbnail" src="${product.masterPic.url}"
+        <div class="col-md-3 col-sm-4 col-xs-6 text-center" th:each="product : ${page.result}" pid="${product.id}">
+            <a th:href="@{/product/}" +${product.id}><img class="img-thumbnail" th:src="${product.masterPic.url}"
                                                           style="width: 140px; height: 140px;"></a>
-            <p>${product.title}</p>
+            <p th:text="${product.title}">商品标题</p>
 
-            <p class="price">${product.point}</p>
+            <p th:text="${product.point}">商品价格</p>
 
             <p>
                 <a class="btn btn-info" href="/product/${product.id}" role="button">查看</a>
@@ -31,8 +30,7 @@
     </div>
 </div>
 <!-- /container -->
-<%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
-<script src="${ctx }/js/product.js" type="text/javascript"></script>
+
+<div th:replace="common/footer::copy"></div>
 </body>
 </html>
