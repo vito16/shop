@@ -6,6 +6,10 @@
 
 ![功能导图](img/module.png)
 
+## 前提条件  
+- redis(Win上可以找3.0的安装包或者Docker方式,Linux和Mac就不多说了)
+- Lombok插件(IDEA的话自己安装，Eclipse没试过)
+- MySQL数据库(>=5.7)
 
 ## 启动服务
 
