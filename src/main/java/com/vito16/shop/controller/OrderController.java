@@ -1,5 +1,6 @@
 package com.vito16.shop.controller;
 
+import com.google.common.collect.Maps;
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
 import com.vito16.shop.common.web.JsonResult;
@@ -10,6 +11,7 @@ import com.vito16.shop.model.UserAddress;
 import com.vito16.shop.service.OrderService;
 import com.vito16.shop.service.UserAddressService;
 import com.vito16.shop.service.UserService;
+import com.vito16.shop.util.CartItem;
 import com.vito16.shop.util.CartUtil;
 import com.vito16.shop.util.UserUtil;
 import org.joda.time.DateTime;
@@ -27,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -73,6 +76,13 @@ public class OrderController {
         User user = userService.findOne(UserUtil.getUserFromSession(session).getId());
         List<UserAddress> userAddressList = user.getAddresses();
         model.addAttribute("addressList", userAddressList);
+
+        HashMap<Integer, CartItem> cartItems = (HashMap<Integer, CartItem>) session.getAttribute(CartUtil.CART);
+        if(cartItems==null){
+            cartItems = Maps.newHashMap();
+        }
+        model.addAttribute("cartItems",cartItems);
+
         return "order/orderPurchase";
     }
 

@@ -2,7 +2,7 @@ $(function() {
     $("#sub-nav-product").attr("class","active");
     $(".addCart").click(function () {
         $.ajax({
-            url:ctx+"/cart/add/"+$(this).attr("productid")+"/1",
+            url:"/cart/add/"+$(this).attr("productid")+"/1",
             success:function(result){
                 if(result.status=="SUCCESS"){
                     toastr.info("添加购物车成功.");

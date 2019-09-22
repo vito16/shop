@@ -1,50 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<%@ include file="/common/global.jsp"%>
-<title>${product.title} 商品信息</title>
-<%@ include file="/common/meta.jsp"%>
-<%@ include file="/common/include-base-styles.jsp"%>
-<link type="text/css" rel="stylesheet" href="${ctx}/css/index.css"/>
+    <title th:text="@{${product.title}+'-商品信息'}">商品信息</title>
+
+    <div th:replace="common_cssjs"></div>
+    <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/index.css}">
+    <script th:src="@{/js/product.js}" type="text/javascript"></script>
+
 </head>
 
 <body>
-    <%@include file="/common/header-nav.jsp" %>
-	<div class="container">
-        <div class="row">
-            <div class="col-md-5 text-center">
-                <img class="img-responsive img-rounded" src="${ctx}${product.masterPic.url}">
-            </div>
-            <div class="col-md-7">
-                <div class="form-group">
-                    <label>商品名称：</label>${product.title}
-                </div>
-                <div class="form-group">
-                    <label>商品编码：</label>${product.code}
-                </div>
-                <div class="form-group">
-                    <label>商品型号：</label>${product.model}
-                </div>
-                <div class="form-group">
-                    <label>商品价格：</label>${product.point}
-                </div>
-                <div class="form-group">
-                    <label>商品简介：</label>${product.note}
-                </div>
-                <p>
-                    <a class="btn btn-primary btn-lg  btn-block addCart" productid="${product.id}" role="button">加入购物车</a>
-                </p>
-            </div>
+<div th:replace="common/header::nav"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 text-center">
+            <img class="img-responsive img-rounded" th:src="${product.masterPic.url}">
         </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <label>商品名称：</label><span th:text="@{${product.title}}">七彩虹火神RTX2070</span>
+            </div>
+            <div class="form-group">
+                <label>商品编码：</label><span th:text="@{${product.code}}">A-12</span>
+            </div>
+            <div class="form-group">
+                <label>商品型号：</label><span th:text="@{${product.model}}">RTX2070</span>
+            </div>
+            <div class="form-group">
+                <label>商品价格：</label><span th:text="@{${product.point}}">3999</span>
+            </div>
+            <div class="form-group">
+                <label>商品简介：</label><span th:text="@{${product.note}}">拍下默认发2070七彩虹水神工包单卡，包邮顺丰,2988元，数量不多了，秒杀价！</span>
+            </div>
+            <p>
+                <a class="btn btn-primary btn-lg  btn-block addCart" th:productid="@{${product.id}}" productid="28" role="button">加入购物车</a>
+            </p>
         </div>
+    </div>
+</div>
 
 
-    </div> <!-- /container -->
+</div> <!-- /container -->
+<div th:replace="common/footer::copy"></div>
 
-    <%@include file="/common/footer.jsp" %>
-	<%@ include file="/common/include-base-js.jsp"%>
-    <script src="${ctx }/js/product.js" type="text/javascript"></script>
 </body>
 </html>

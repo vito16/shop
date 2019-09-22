@@ -12,7 +12,7 @@
 <div th:replace="common/header::nav"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-4 col-xs-6 text-center" th:each="product : ${page.result}" pid="${product.id}">
+        <div class="col-md-3 col-sm-4 col-xs-6 text-center" th:each="product : ${page.result}" th:pid="@{${product.id}}" pid="100">
             <a th:href="@{/product/}" +${product.id}><img class="img-thumbnail" th:src="${product.masterPic.url}"
                                                           style="width: 140px; height: 140px;"></a>
             <p th:text="${product.title}">商品标题</p>
@@ -20,8 +20,8 @@
             <p th:text="${product.point}">商品价格</p>
 
             <p>
-                <a class="btn btn-info" href="/product/${product.id}" role="button">查看</a>
-                <a class="btn btn-primary addCart" productid="${product.id}" role="button">购买</a>
+                <a class="btn btn-info" th:href="@{'/product/' + ${product.id}}" role="button">查看</a>
+                <a class="btn btn-primary addCart" th:productid="@{${product.id}}" productid="100" role="button">购买</a>
             </p>
         </div>
     </div>
