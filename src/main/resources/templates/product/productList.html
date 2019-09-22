@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>商品列表</title>
-
     <div th:replace="common_cssjs"></div>
     <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/product.css}">
     <script th:src="@{/js/product.js}" type="text/javascript"></script>
@@ -13,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-sm-4 col-xs-6 text-center" th:each="product : ${page.result}" th:pid="@{${product.id}}" pid="100">
-            <a th:href="@{/product/}" +${product.id}><img class="img-thumbnail" th:src="${product.masterPic.url}"
+            <a th:href="@{'/product/'+${product.id}}"><img class="img-thumbnail" th:src="${product.masterPic.url}"
                                                           style="width: 140px; height: 140px;"></a>
             <p th:text="${product.title}">商品标题</p>
 

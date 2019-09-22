@@ -27,22 +27,21 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${page.result}" var="product">
-                    <tr th:each="page.result:${product}" pid="${product.id}">
-                        <td>${product.id}</td>
-                        <td>${product.title}</td>
-                        <td>${product.model}</td>
-                        <td>${product.code}</td>
-                        <td>${product.point}</td>
-                        <td>${product.stock}</td>
-                        <td><a href="@{/product/edit/}" +${product.id}>修改</a></td>
+                    <tr th:each="product:${page.result}" th:pid="${product.id}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.title}"></td>
+                        <td th:text="${product.model}"></td>
+                        <td th:text="${product.code}"></td>
+                        <td th:text="${product.point}"></td>
+                        <td th:text="${product.stock}"></td>
+                        <td><a th:href="@{'/product/edit/'+${product.id}}">修改</a></td>
                     </tr>
             </tbody>
         </table>
     </div>
-    <div class="text-center">
+    <!--<div class="text-center">
         <tags:pagination page="${page}" paginationSize="${page.pageSize}"/>
-    </div>
+    </div>-->
     <a class="btn btn-primary" th:href="@{/admin/product/new}">添加</a>
 
 </div>
