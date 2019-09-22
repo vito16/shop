@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>${title}</title>
+    <title>订单记录</title>
 
     <div th:replace="common_cssjs"></div>
     <script th:src="@{/js/order.js}" type="text/javascript"></script>
@@ -24,13 +24,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="page.result : ${order}" pid="${order.id}">
+                    <tr th:each="order : ${page.result}" pid="${order.id}" th:switch="${order.status}">
                         <td th:text="${order.createTime}"></td>
                         <td th:text="${order.orderNumber}"></td>
                         <td th:text="${order.finalPrice}"></td>
-                        <td th:text="${order.finalPrice}"></td>
-                        <td th:text="${order.finalPrice}"></td>
-                        <td th:text="${order.finalPrice}"></td>
+                        <td th:text="${order.status}"></td>
+                        <td th:text="${order.consignee}"></td>
+                        <td>
+                            <span th:case="'0'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a>  <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a><span>
+                            <span th:case="'1'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
+                            <span th:case="'2'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></span>
+                            <span th:case="'3'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a></span>
+                            <span th:case="'4'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a></span>
+                        </td>
                     </tr>
                 </tbody>
         </table>
