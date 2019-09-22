@@ -8,9 +8,11 @@ import com.vito16.shop.service.PictureService;
 import com.vito16.shop.service.ProductService;
 import com.vito16.shop.util.AdminUtil;
 import com.vito16.shop.util.Image;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +32,14 @@ import java.util.Date;
  * @author 木鱼 muyu@yiji.com
  * @version 2017/6/1
  */
+@Slf4j
 @Controller
 @RequestMapping(value = "/admin/product")
 public class ProductAdminController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductAdminController.class);
+    @Value("${app.upload.location}")
+    public String uploadingDir;
+
 
     @Autowired
     ProductService productService;
@@ -91,27 +96,22 @@ public class ProductAdminController {
 
     private void uploadImage(Product product, HttpSession session, MultipartFile file) {
         String fileName = generateFileName();
-        String path = generateFilePath(session);
-        String serverFile = path + "/" + fileName;
-        Picture picture = uploadAndSaveImg(session, file, fileName, path, serverFile);
+        Picture picture = uploadAndSaveImg(session, file, fileName);
         product.setMasterPic(picture);
-    }
-
-    private String generateFilePath(HttpSession session) {
-        return session.getServletContext().getRealPath("/upload");
     }
 
     private String generateFileName() {
         return new Date().getTime() + ".jpg";
     }
 
-    private Picture uploadAndSaveImg(HttpSession session, MultipartFile file, String fileName, String path, String serverFile) {
+    private Picture uploadAndSaveImg(HttpSession session, MultipartFile file, String fileName) {
         Picture picture = new Picture();
         try {
-            logger.info(path);
-            if (!new File(path).exists()) {
-                new File(path).mkdirs();
+            log.info(uploadingDir);
+            if (!new File(uploadingDir).exists()) {
+                new File(uploadingDir).mkdirs();
             }
+            String serverFile = uploadingDir+"/"+fileName;
             if (!new File(serverFile).exists()) {
                 new File(serverFile).createNewFile();
             }
@@ -130,7 +130,7 @@ public class ProductAdminController {
         picture.setMemo("商品上传");
         picture.setTitle("商品上传");
         picture.setUpdateTime(new Date());
-        picture.setUrl("/upload/" + fileName);
+        picture.setUrl("/img/" + fileName);
         picture.setUpdateAdmin(AdminUtil.getAdminFromSession(session));
         pictureService.save(picture);
         return picture;
