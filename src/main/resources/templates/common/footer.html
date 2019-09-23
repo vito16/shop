@@ -1,6 +1,8 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <div class="footer text-center" th:fragment="copy">
     <br>
-    <p>&copy; <span th:text="${env.getProperty('app.name')}"></span> <span th:text="${env.getProperty('app.copyright')}"></span></p>
+<!--    TODO 页面通用配置渲染，ENV有时候为空 -->
+<!--    <p>&copy; <span th:text="${env.getProperty('app.name')}"></span> <span th:text="${env.getProperty('app.copyright')}"></span></p>-->
+    <p>&copy; <span>小小商店</span> <span>2019</span></p>
 </div>
 <!-- /footer -->
