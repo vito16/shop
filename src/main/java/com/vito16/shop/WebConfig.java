@@ -5,7 +5,9 @@ import com.vito16.shop.common.web.AppConfigInterceptor;
 import com.vito16.shop.common.web.AuthenticationInterceptor;
 import com.vito16.shop.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -36,5 +38,10 @@ public class WebConfig  implements WebMvcConfigurer {
                 "/*"
         );
 
+    }
+
+    @Bean
+    public LettuceConnectionFactory connectionFactory() {
+        return new LettuceConnectionFactory();
     }
 }
