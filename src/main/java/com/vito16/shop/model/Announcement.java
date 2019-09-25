@@ -3,6 +3,9 @@
  */
 package com.vito16.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,47 +18,16 @@ import java.util.Date;
  * @date 2013-7-18
  */
 @Entity
+@Setter
+@Getter
 @Table(name = "t_announcement")
-public class Announcement implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private Integer id;
-    private String content;//公告内容
-    private Date createTime;//公告时间
-    private Admin createAdmin;//创建用户
+public class Announcement extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+    @Column(columnDefinition="VARCHAR(512) NOT NULL COMMENT '公告内容'")
+    private String content;
 
     @ManyToOne
-    @JoinColumn
-    public Admin getCreateAdmin() {
-        return createAdmin;
-    }
+    @JoinColumn(columnDefinition="BIGINT(20) NOT NULL COMMENT '创建管理员ID'")
+    private Admin createAdmin;
 
-    public void setCreateAdmin(Admin createAdmin) {
-        this.createAdmin = createAdmin;
-    }
 }

@@ -3,6 +3,8 @@
  */
 package com.vito16.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -17,157 +19,53 @@ import java.util.List;
  * @author Vito16 zhouwentao16@gmail.com
  * @date 2013-7-8
  */
+@Setter
+@Getter
 @Entity
 @Table(name = "t_order")
-public class Order implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    private Integer id;
-    private String orderNumber;//订单编号
-    private User user;//关联客户
-    private String address;//收货地址
-    private String phone;//收货电话
-    private String zipcode;//收货邮编
-    private String consignee;//收货人
-    private List<OrderItem> orderItems;//关联商品
-    private Date createTime;//创建时间
-    private Date payTime;//付款时间
-    private Date shipTime;//发货时间
-    private Date confirmTime;//确认收货时间
-    private Integer status;//状态
-    private Double finalPrice;//实际成交价
-    private Double totalPrice;//总价
+public class Order extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
-    }
+    @Column(columnDefinition="VARCHAR(64) NOT NULL COMMENT '订单编号'")
+    private String orderNumber;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    public User getUser() {
-        return user;
-    }
+    @JoinColumn(name = "user_id",columnDefinition="BIGINT(20) NOT NULL COMMENT '关联客户'")
+    private User user;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    @Column(columnDefinition="VARCHAR(512) NOT NULL COMMENT '收货地址'")
+    private String address;
 
+    @Column(columnDefinition="VARCHAR(16) NOT NULL COMMENT '收货电话'")
+    private String phone;
+
+    @Column(columnDefinition="VARCHAR(8) NOT NULL COMMENT '收货邮编'")
+    private String zipcode;
+
+    @Column(columnDefinition="VARCHAR(16) NOT NULL COMMENT '收货人'")
+    private String consignee;
+
+    /**
+     * 关联商品
+     */
     @OneToMany(mappedBy = "order")
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
+    private List<OrderItem> orderItems;
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
+    @Column(columnDefinition="TIMESTAMP NOT NULL COMMENT '付款时间'")
+    private Date payTime;//付款时间
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
-    public Date getCreateTime() {
-        return createTime;
-    }
+    @Column(columnDefinition="TIMESTAMP NOT NULL COMMENT '发货时间'")
+    private Date shipTime;//发货时间
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+    @Column(columnDefinition="TIMESTAMP NOT NULL COMMENT '确认收货时间'")
+    private Date confirmTime;//确认收货时间
 
-    public Integer getStatus() {
-        return status;
-    }
+    @Column(columnDefinition="INT(11) NOT NULL COMMENT '状态'")
+    private Integer status;//状态
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+    @Column(columnDefinition="DOUBLE NOT NULL COMMENT '实际成交价'")
+    private Double finalPrice;//实际成交价
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
-    public Date getPayTime() {
-        return payTime;
-    }
+    @Column(columnDefinition="DOUBLE NOT NULL COMMENT '总价'")
+    private Double totalPrice;//总价
 
-    public void setPayTime(Date payTime) {
-        this.payTime = payTime;
-    }
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
-    public Date getShipTime() {
-        return shipTime;
-    }
-
-    public void setShipTime(Date shipTime) {
-        this.shipTime = shipTime;
-    }
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
-    public Date getConfirmTime() {
-        return confirmTime;
-    }
-
-    public void setConfirmTime(Date confirmTime) {
-        this.confirmTime = confirmTime;
-    }
-
-    @NumberFormat(pattern = "0.00")
-    public Double getFinalPrice() {
-        return finalPrice;
-    }
-
-    public void setFinalPrice(Double finalPrice) {
-        this.finalPrice = finalPrice;
-    }
-
-    @NumberFormat(pattern = "0.00")
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getConsignee() {
-        return consignee;
-    }
-
-    public void setConsignee(String consignee) {
-        this.consignee = consignee;
-    }
 }

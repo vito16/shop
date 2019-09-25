@@ -2,7 +2,7 @@
 =====================
 [![Build Status](https://travis-ci.org/vito16/shop.svg?branch=master)](https://travis-ci.org/vito16/shop) [![Coverage Status](https://coveralls.io/repos/github/vito16/shop/badge.svg?branch=master)](https://coveralls.io/github/vito16/shop?branch=master)  
 
-在线商城项目，持续完善中...(之前视图使用的JSP，现已经切换Thymeleaf，可能会有部分页面未完善)
+在线商城项目，持续完善中...
 
 ![功能导图](img/module.png)
 
@@ -23,5 +23,6 @@
 
 - 访问端口：server.port
 - 数据库相关配置：jdbc.***
+- 初始化数据脚本在`/src/main/resources/sql/`下
 
 

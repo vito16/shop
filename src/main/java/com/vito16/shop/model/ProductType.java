@@ -1,5 +1,8 @@
 package com.vito16.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,32 +14,13 @@ import java.io.Serializable;
  * @date 2013-7-9
  * 
  */
+@Setter
+@Getter
 @Entity
 @Table(name = "t_producttype")
-public class ProductType implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer id;
+public class ProductType extends AbstractEntity {
+
+	@Column(columnDefinition="VARCHAR(32) NOT NULL COMMENT '分类名称'")
 	private String name;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 }

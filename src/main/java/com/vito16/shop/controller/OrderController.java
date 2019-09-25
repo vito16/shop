@@ -31,13 +31,16 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+
+import static com.vito16.shop.util.UserUtil.getUserFromSession;
 
 /**
  * @author Vito zhouwentao16@gmail.com
  * @date 2013-7-8
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/user/order")
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
@@ -58,12 +61,52 @@ public class OrderController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Model model, HttpSession session, HttpServletRequest request) {
-        User user = UserUtil.getUserFromSession(session);
-        Page<Order> page = new Page<Order>(request);
+        User user = getUserFromSession(session);
+        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
+        Page<Order> page = new Page<>(request);
         orderService.findOrders(page, user.getId());
         model.addAttribute("page", page);
         return "order/orderList";
     }
+
+    /**
+     * 订单查看
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String orderView(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
+        User user = getUserFromSession(session);
+        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
+        Order order = orderService.findById(id);
+        model.addAttribute("order", order);
+        return "order/orderView";
+    }
+
+    /**
+     * 确认收货
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/confirm/{id}")
+    @ResponseBody
+    public JsonResult orderConfirm(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
+        User user = getUserFromSession(session);
+        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
+        Order order = orderService.findById(id);
+
+        JsonResult result = new JsonResult();
+        if(Objects.equals(order.getUser().getId(), user.getId())){
+            orderService.updateOrderStatus(id, Constants.OrderStatus.ENDED);
+            result.setToSuccess();
+        }else{
+            result.setToFail();
+        }
+        return result;
+    }
+
 
     /**
      * 订单确认
@@ -120,11 +163,11 @@ public class OrderController {
         return "order/orderingSuccess";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewOrder(@PathVariable Integer id, Model model) {
         model.addAttribute("order", orderService.findById(id));
         return "order/orderDetail";
-    }
+    }*/
 
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
     @ResponseBody

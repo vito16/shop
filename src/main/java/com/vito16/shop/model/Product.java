@@ -1,5 +1,7 @@
 package com.vito16.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,138 +15,41 @@ import java.util.List;
  * @email zhouwentao16@gmail.com
  * @date 2013-7-9
  */
+@Setter
+@Getter
 @Entity
 @DynamicUpdate
 @Table(name = "t_product")
-public class Product implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    private Integer id;
-    private String title;//名称
-    private Integer point;//价格
+public class Product extends AbstractEntity {
+
+    @Column(columnDefinition="VARCHAR(64) NOT NULL COMMENT '商品名称'")
+    private String title;
+
+    @Column(columnDefinition="DOUBLE NOT NULL COMMENT '商品价格'")
+    private Integer point;
+
+    @ManyToOne
+    @JoinColumn
     private Picture masterPic;//主图
-    private List<Picture> slavePic;//关联图
-    private String note;//描述
-    private Date createTime;//创建时间
-    private String code;//商品编码
-    private String model;//型号
-    private Long stock;//库存
-    private Admin inputUser;//创建人
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public Integer getPoint() {
-        return point;
-    }
-
-    public void setPoint(Integer point) {
-        this.point = point;
-    }
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public Long getStock() {
-        return stock;
-    }
-
-    public void setStock(Long stock) {
-        this.stock = stock;
-    }
-
-    @ManyToOne
-    @JoinColumn
-    public Admin getInputUser() {
-        return inputUser;
-    }
-
-    public void setInputUser(Admin inputUser) {
-        this.inputUser = inputUser;
-    }
-
-    @ManyToOne
-    @JoinColumn
-    public Picture getMasterPic() {
-        return masterPic;
-    }
-
-    public void setMasterPic(Picture masterPic) {
-        this.masterPic = masterPic;
-    }
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    public List<Picture> getSlavePic() {
-        return slavePic;
-    }
+    private List<Picture> slavePic;//关联图
 
-    public void setSlavePic(List<Picture> slavePic) {
-        this.slavePic = slavePic;
-    }
+    @Lob
+    @Column(columnDefinition = "TEXT COMMENT '商品描述'")
+    private String note;
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", point=" + point +
-                ", masterPic=" + masterPic +
-                ", slavePic=" + slavePic +
-                ", note='" + note + '\'' +
-                ", createTime=" + createTime +
-                ", code='" + code + '\'' +
-                ", model='" + model + '\'' +
-                ", stock=" + stock +
-                ", inputUser=" + inputUser +
-                '}';
-    }
+    @Column(columnDefinition="VARCHAR(32) NOT NULL COMMENT '商品编码'")
+    private String code;
+
+    @Column(columnDefinition="VARCHAR(32) NOT NULL COMMENT '商品型号'")
+    private String model;
+
+    @Column(columnDefinition="INT(11) NOT NULL COMMENT '库存数量'")
+    private Long stock;
+
+    @ManyToOne
+    @JoinColumn
+    private Admin inputUser;
+
 }
