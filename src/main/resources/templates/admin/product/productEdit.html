@@ -19,7 +19,6 @@
                 <div class="form-group">
                     <input type="hidden" name="id" value="${product.id}"/>
                     <input type="hidden" name="inputUser.id" value="${product.inputUser.id}"/>
-                    <%--<input type="hidden" name="picUrl" value="${product.picUrl}"/>--%>
                     <label class="col-sm-2 control-label">商品名称</label>
                     <div class="col-sm-10">
                         <input minlength="6" required class="form-control" value="${product.title}" type="text" id="title" name="title"/>
@@ -29,7 +28,7 @@
                     <label class="col-sm-2 control-label">商品价格</label>
 
                     <div class="col-sm-10">
-                        <input type="number" required class="form-control" type="text" value="${product.point}" id="point" name="point"/>
+                        <input type="number" required class="form-control" value="${product.point}" id="point" name="point"/>
                     </div>
                 </div>
                 <div class="form-group">
