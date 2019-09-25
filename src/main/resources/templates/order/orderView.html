@@ -1,17 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <%@ include file="/common/global.jsp" %>
     <title>订单详情</title>
-    <%@ include file="/common/meta.jsp" %>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>
+
+    <div th:replace="common_cssjs"></div>
+    <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/product.css}">
 </head>
 
 <body>
-<%@include file="/common/header-nav.jsp" %>
+<div th:replace="common/header::nav"></div>
 <div class="container">
     <div class="form-horizontal">
         <div class="row">
@@ -85,22 +82,19 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${order.orderItems}" var="orderItem">
-                <tr pid="${orderItem.id}">
-                    <td><a href="${ctx}/product/${orderItem.product.id}">${orderItem.product.title}</a></td>
-                    <td>${orderItem.product.model}</td>
-                    <td>${orderItem.product.code}</td>
-                    <td>${orderItem.product.point}</td>
-                    <td>${orderItem.quantity}</td>
-                    <td>${orderItem.product.point*orderItem.quantity}</td>
+                <tr th:each="orderItem:${order.orderItems}" th:pid="${orderItem.id}">
+                    <td><a href="@{'/product/'+${orderItem.product.id}}" th:text="${orderItem.product.title}"></a></td>
+                    <td th:text="${orderItem.product.model}"></td>
+                    <td th:text="${orderItem.product.code}"></td>
+                    <td th:text="${orderItem.product.point}"></td>
+                    <td th:text="${orderItem.product.quantity}"></td>
+                    <td th:text="${orderItem.product.point*orderItem.quantity}"></td>
                 </tr>
-            </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
 <!-- /container -->
-<%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
+<div th:replace="common/footer::copy"></div>
 </body>
 </html>
