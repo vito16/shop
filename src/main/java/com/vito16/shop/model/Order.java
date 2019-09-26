@@ -50,13 +50,13 @@ public class Order extends AbstractEntity {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
 
-    @Column(columnDefinition="TIMESTAMP NOT NULL COMMENT '付款时间'")
+    @Column(columnDefinition="DATETIME DEFAULT COMMENT '付款时间'")
     private Date payTime;//付款时间
 
-    @Column(columnDefinition="TIMESTAMP NOT NULL COMMENT '发货时间'")
+    @Column(columnDefinition="DATETIME DEFAULT COMMENT '发货时间'")
     private Date shipTime;//发货时间
 
-    @Column(columnDefinition="TIMESTAMP NOT NULL COMMENT '确认收货时间'")
+    @Column(columnDefinition="DATETIME DEFAULT COMMENT '确认收货时间'")
     private Date confirmTime;//确认收货时间
 
     @Column(columnDefinition="INT(11) NOT NULL COMMENT '状态'")

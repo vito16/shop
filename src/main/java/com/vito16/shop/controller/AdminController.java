@@ -58,6 +58,11 @@ public class AdminController {
         return "admin/adminLogin";
     }
 
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String testIndex() {
+        return "admin/index";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String doLogin(Admin admin, HttpSession session) {
         if (adminService.checkLogin(admin)) {
