@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>订单确认</title>
-
     <div th:replace="common_cssjs"></div>
     <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/product.css}">
     <script th:src="@{/js/cart.js}" type="text/javascript"></script>
@@ -11,7 +10,7 @@
 <body>
 <div th:replace="common/header::nav"></div>
 <div class="container">
-    <form class="form-horizontal" action="/order/ordering" method="post">
+    <form class="form-horizontal" action="/user/order/ordering" method="post">
         <div class="row">
             <div class="col-sm-6 list-group">
                     <a href="#" th:each="address : ${addressList}" class="list-group-item addressItem">
@@ -76,7 +75,7 @@
                 </tbody>
             </table>
             <a class="btn btn-primary" href="/cart/">回购物车修改</a>
-            <button class="btn btn-primary" type="submit" href="/order/ordering/">确认</button>
+            <button class="btn btn-primary" type="submit">确认</button>
 
             <div id="delSuccess" class="alert alert-success" style="display: none;">删除成功...</div>
             <div id="delAllSuccess" class="alert alert-success" style="display: none;">购物车清空成功...</div>

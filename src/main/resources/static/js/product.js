@@ -1,8 +1,9 @@
 $(function() {
     $("#sub-nav-product").attr("class","active");
+    var productId = $(this).attr("productid");
     $(".addCart").click(function () {
         $.ajax({
-            url:"/cart/add/"+$(this).attr("productid")+"/1",
+            url:"/cart/add/"+productId+"/1",
             success:function(result){
                 if(result.status=="SUCCESS"){
                     toastr.info("添加购物车成功.");

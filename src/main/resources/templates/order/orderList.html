@@ -31,11 +31,11 @@
                         <td th:text="${order.status}"></td>
                         <td th:text="${order.consignee}"></td>
                         <td>
-                            <span th:case="'0'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a>  <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a><span>
-                            <span th:case="'1'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
-                            <span th:case="'2'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></span>
-                            <span th:case="'3'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a></span>
-                            <span th:case="'4'"><a class="btn btn-info btn-xs" href="/order/view/${order.id}">查看</a></span>
+                            <span th:case="'0'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a>  <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
+                            <span th:case="'1'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
+                            <span th:case="'2'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></span>
+                            <span th:case="'3'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a></span>
+                            <span th:case="'4'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a></span>
                         </td>
                     </tr>
                 </tbody>

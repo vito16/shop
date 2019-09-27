@@ -58,6 +58,11 @@ public class AdminController {
         return "admin/adminLogin";
     }
 
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String testIndex() {
+        return "admin/index";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String doLogin(Admin admin, HttpSession session) {
         if (adminService.checkLogin(admin)) {
@@ -72,14 +77,6 @@ public class AdminController {
     public String doLogout(HttpSession session) {
         AdminUtil.deleteAdminFromSession(session);
         return "redirect:/";
-    }
-
-    @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public String news(Model model,HttpServletRequest request) {
-        Page<News> page = new Page<News>(request);
-        newsService.findNews(page);
-        model.addAttribute("page",page);
-        return "admin/news/newsAdmin";
     }
 
     @RequestMapping(value = "/news/delete/{id}")

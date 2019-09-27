@@ -108,13 +108,11 @@ public class UserController {
             log.info("是否记住登录用户：{}",request.getParameter("remember"));
 
             if ("on".equals(request.getParameter("remember"))) {
-                String uuid = UUID.randomUUID().toString();
                 Remember remember = new Remember();
-                remember.setId(uuid);
                 remember.setUser(user);
-                remember.setAddTime(new Date());
+                remember.setCreateTime(new Date());
                 rememberService.add(remember);
-                CookieUtil.addCookie(response, appConfig.USER_COOKIE_NAME, uuid, appConfig.USER_COOKIE_AGE);
+                CookieUtil.addCookie(response, appConfig.USER_COOKIE_NAME, remember.getId().toString(), appConfig.USER_COOKIE_AGE);
             } else {
                 CookieUtil.removeCookie(response, appConfig.USER_COOKIE_NAME);
             }
@@ -139,60 +137,6 @@ public class UserController {
         }
         model.addAttribute("user", user);
         return "user/userProfile";
-    }
-
-    /**
-     * 订单列表
-     *
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public String orderList(Model model, HttpSession session, HttpServletRequest request) {
-        User user = getUserFromSession(session);
-        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
-        Page<Order> page = new Page<>(request);
-        orderService.findOrders(page, user.getId());
-        model.addAttribute("page", page);
-        return "order/orderList";
-    }
-
-    /**
-     * 订单查看
-     *
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
-    public String orderView(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
-        User user = getUserFromSession(session);
-        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
-        Order order = orderService.findById(id);
-        model.addAttribute("order", order);
-        return "order/orderView";
-    }
-
-    /**
-     * 确认收货
-     *
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/order/confirm/{id}")
-    @ResponseBody
-    public JsonResult orderConfirm(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
-        User user = getUserFromSession(session);
-        org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");
-        Order order = orderService.findById(id);
-
-        JsonResult result = new JsonResult();
-        if(Objects.equals(order.getUser().getId(), user.getId())){
-            orderService.updateOrderStatus(id, Constants.OrderStatus.ENDED);
-            result.setToSuccess();
-        }else{
-            result.setToFail();
-        }
-        return result;
     }
 
     /**

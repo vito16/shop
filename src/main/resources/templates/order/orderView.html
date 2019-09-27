@@ -1,17 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <%@ include file="/common/global.jsp" %>
     <title>订单详情</title>
-    <%@ include file="/common/meta.jsp" %>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <link type="text/css" rel="stylesheet" href="${ctx}/css/product.css"/>
+
+    <div th:replace="common_cssjs"></div>
+    <link type="text/css" rel="stylesheet" media="screen" th:href="@{/css/product.css}">
 </head>
 
 <body>
-<%@include file="/common/header-nav.jsp" %>
+<div th:replace="common/header::nav"></div>
 <div class="container">
     <div class="form-horizontal">
         <div class="row">
@@ -19,28 +16,28 @@
                 <label class="col-sm-2 control-label">地址</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.address}</p>
+                    <p class="form-control-static" th:text="${order.address}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">邮编</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.zipcode}</p>
+                    <p class="form-control-static" th:text="${order.zipcode}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">电话</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.phone}</p>
+                    <p class="form-control-static" th:text="${order.phone}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">联系人</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.consignee}</p>
+                    <p class="form-control-static" th:text="${order.consignee}"></p>
                 </div>
             </div>
 
@@ -48,7 +45,7 @@
                 <label class="col-sm-2 control-label">创建时间</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.createTime}</p>
+                    <p class="form-control-static" th:text="${order.createTime}"></p>
                 </div>
             </div>
 
@@ -56,7 +53,7 @@
                 <label class="col-sm-2 control-label">付款时间</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.shipTime}</p>
+                    <p class="form-control-static" th:text="${order.shipTime}"></p>
                 </div>
             </div>
 
@@ -64,7 +61,7 @@
                 <label class="col-sm-2 control-label">发货时间</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.confirmTime}</p>
+                    <p class="form-control-static" th:text="${order.confirmTime}"></p>
                 </div>
             </div>
         </div>
@@ -85,22 +82,19 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${order.orderItems}" var="orderItem">
-                <tr pid="${orderItem.id}">
-                    <td><a href="${ctx}/product/${orderItem.product.id}">${orderItem.product.title}</a></td>
-                    <td>${orderItem.product.model}</td>
-                    <td>${orderItem.product.code}</td>
-                    <td>${orderItem.product.point}</td>
-                    <td>${orderItem.quantity}</td>
-                    <td>${orderItem.product.point*orderItem.quantity}</td>
+                <tr th:each="orderItem:${order.orderItems}" th:pid="${orderItem.id}">
+                    <td><a th:href="@{'/product/'+${orderItem.product.id}}" th:text="${orderItem.product.title}"></a></td>
+                    <td th:text="${orderItem.product.model}"></td>
+                    <td th:text="${orderItem.product.code}"></td>
+                    <td th:text="${orderItem.product.point}"></td>
+                    <td th:text="${orderItem.quantity}"></td>
+                    <td th:text="${orderItem.product.point*orderItem.quantity}"></td>
                 </tr>
-            </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
 <!-- /container -->
-<%@include file="/common/footer.jsp" %>
-<%@ include file="/common/include-base-js.jsp" %>
+<div th:replace="common/footer::copy"></div>
 </body>
 </html>

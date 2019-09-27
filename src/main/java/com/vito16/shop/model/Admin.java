@@ -3,6 +3,9 @@
  */
 package com.vito16.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,40 +15,16 @@ import java.io.Serializable;
  * @date 2013-7-8
  * 
  */
+@Setter
+@Getter
 @Entity
 @Table(name = "t_admin")
-public class Admin implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer id;
+public class Admin extends AbstractEntity {
+
+	@Column(columnDefinition="VARCHAR(16) NOT NULL COMMENT '用户名'")
 	private String username;//账户名
+
+	@Column(columnDefinition="VARCHAR(32) NOT NULL COMMENT '密码'")
 	private String password;//密码
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }

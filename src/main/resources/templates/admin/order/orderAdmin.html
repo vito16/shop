@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>订单管理</title>
+    <div th:replace="common_cssjs"></div>
+    <script th:src="@{/js/order.js}" type="text/javascript"></script>
+</head>
+
+<body>
+<div th:replace="common/header::nav"></div>
+<div class="container">
+    <div th:replace="common/adminNav::admin"></div>
+    <div class="row">
+        <table class="table table-responsive table-striped">
+                <thead>
+                <tr>
+                    <td>订单日期</td>
+                    <td>订单编号</td>
+                    <td>订单金额</td>
+                    <td>订单状态</td>
+                    <td>收件人</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order:${page.result}" th:pid="${order.id}"  th:switch="${order.status}">
+                        <td>${order.createTime}</td>
+                        <td>${order.orderNumber}</td>
+                        <td>${order.finalPrice}</td>
+                        <td>
+                                <span th:case="'0'">等待付款</span>
+                                <span th:case="'1'">等待发货</span>
+                                <span th:case="'2'">已发货</span>
+                                <span th:case="'3'">已取消</span>
+                        </td>
+                        <td>${order.consignee}</td>
+                        <td>
+                            <span th:case="'0'"><a class="btn btn-info btn-xs" th:href="@{'/order/view/'+${order.id}}">查看</a> <a class="btn btn-info btn-xs del-order-btn">删除</a></span>
+                            <span th:case="'1'"><a class="btn btn-info btn-xs" th:href="@{'/order/view/'+${order.id}}">查看</a> <a class="btn btn-info btn-xs ship-order-btn">发货</a> <a class="btn btn-info btn-xs del-order-btn">删除</a></span>
+                            <span th:case="'2'"><a class="btn btn-info btn-xs" th:href="@{'/order/view/'+${order.id}}">查看</a></span>
+                            <span th:case="'3'"><a class="btn btn-info btn-xs" th:href="@{'/order/view/'+${order.id}}">查看</a></span>
+                            <span th:case="'4'"><a class="btn btn-info btn-xs" th:href="@{'/order/view/'+${order.id}}">查看</a></span>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+<!--        <tags:pagination page="${page}" paginationSize="${page.pageSize}"/>-->
+    </div>
+</div>
+<!-- /container -->
+<div th:replace="common/footer::copy"></div>
+</body>
+</html>

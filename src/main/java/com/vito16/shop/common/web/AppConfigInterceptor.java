@@ -39,7 +39,7 @@ public class AppConfigInterceptor implements HandlerInterceptor, InitializingBea
                            HttpServletResponse httpServletResponse,
                            Object o, ModelAndView modelAndView) throws Exception {
         //将Env放入每个Response范围中，方便模板页面调用
-        modelAndView.addObject("env", env);
+//        modelAndView.addObject("env", env);
     }
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest,

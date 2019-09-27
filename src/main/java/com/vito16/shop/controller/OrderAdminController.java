@@ -46,7 +46,7 @@ public class OrderAdminController {
         Page<Order> page = new Page<Order>(request);
         orderService.findOrders(page);
         model.addAttribute("page", page);
-        return "admin/order/orderList";
+        return "admin/order/orderAdmin";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

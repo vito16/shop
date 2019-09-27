@@ -4,7 +4,7 @@ $(function () {
     $(".del-news-btn").click(function () {
         var newsId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/admin/news/delete/" + newsId,
+            url: "/admin/news/delete/" + newsId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     toastr.info("公告删除成功...");

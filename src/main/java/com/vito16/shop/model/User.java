@@ -6,13 +6,8 @@ package com.vito16.shop.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,82 +20,54 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "t_user")
-public class User implements Serializable {
+public class User extends AbstractEntity {
 
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 数据序号
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
-	/**
-	 * 账号
-	 */
+	@Column(columnDefinition="VARCHAR(32) DEFAULT NULL COMMENT '账号(暂时没用)'")
 	private String account;
 
-	/**
-	 * 用户名
-	 */
+	@Column(columnDefinition="VARCHAR(32) NOT NULL COMMENT '用户名'")
 	private String username;
 
-	/**
-	 * 账户余额
-	 */
+	@Column(columnDefinition="DOUBLE DEFAULT 0 NOT NULL COMMENT '账户余额'")
 	private Long balance;
 
-	/**
-	 * 积分值
-	 */
+	@Column(columnDefinition="DOUBLE DEFAULT 0 NOT NULL COMMENT '积分值'")
 	private Long point;
 
-	/**
-	 * 手机号码
-	 */
+	@Column(columnDefinition="VARCHAR(32) DEFAULT NULL COMMENT '手机号码'")
 	private String phone;
 
-	/**
-	 * 座机电话
-	 */
+	@Column(columnDefinition="VARCHAR(32) DEFAULT NULL COMMENT '座机电话'")
 	private String telPhone;
 
-	/**
-	 * 地址
-	 */
+	@Column(columnDefinition="VARCHAR(64) DEFAULT NULL COMMENT '地址'")
 	private String address;
 
-	/**
-	 * 邮编
-	 */
+	@Column(columnDefinition="VARCHAR(16) DEFAULT NULL COMMENT '邮编'")
 	private String zipCode;
 
-	/**
-	 * 备注
-	 */
+	@Column(columnDefinition="VARCHAR(32) DEFAULT NULL COMMENT '备注'")
 	private String remark;
 
-	/**
-	 * 密码信息(加密)
-	 */
+	@Column(columnDefinition="VARCHAR(64) NOT NULL COMMENT '密码'")
 	private String password;
 
 	/**
 	 * 收货地址
 	 */
 	@OneToMany(mappedBy="user")
-	private List<UserAddress> addresses; // 关联收货地址
+	private List<UserAddress> addresses;
 
 	/**
 	 * 订单
 	 */
 	@OneToMany(mappedBy = "user")
-	private List<Order> orders;// 订单
+	private List<Order> orders;
 
 	/**
 	 * 密码加密盐
 	 */
+	@Column(columnDefinition="VARCHAR(64) DEFAULT NULL COMMENT '盐'")
     private String slat;
 
 	/**
@@ -113,12 +80,6 @@ public class User implements Serializable {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password="
-				+ password + "]";
 	}
 
 }

@@ -4,7 +4,7 @@ $(function () {
     $(".cancel-order-btn").click(function () {
         var orderId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/order/cancel/" + orderId,
+            url: "/order/cancel/" + orderId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     toastr.info("订单已取消成功...");
@@ -21,7 +21,7 @@ $(function () {
     $(".pay-order-btn").click(function () {
         var orderId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/order/pay/" + orderId,
+            url: "/order/pay/" + orderId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     toastr.info("付款成功...我们会尽快为您安排发货...");
@@ -39,7 +39,7 @@ $(function () {
     $(".confirm-order-btn").click(function () {
         var orderId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/order/confirm/" + orderId,
+            url: "/order/confirm/" + orderId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     toastr.info("交易已完成...");
@@ -56,7 +56,7 @@ $(function () {
     $(".del-order-btn").click(function () {
         var orderId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/admin/order/delete/" + orderId,
+            url: "/admin/order/delete/" + orderId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     toastr.info("订单删除成功...");
@@ -73,7 +73,7 @@ $(function () {
     $(".ship-order-btn").click(function () {
         var orderId = $(this).parent().parent().attr("pid");
         $.ajax({
-            url: ctx + "/admin/order/ship/" + orderId,
+            url: "/admin/order/ship/" + orderId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     toastr.info("发货成功...");
