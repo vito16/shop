@@ -4,7 +4,7 @@ $(function () {
     $(".delAddresslBtn").click(function () {
         var addressId = $(this).attr("addressId");
         $.ajax({
-            url: ctx + "/user/userAddress/delete/" + addressId,
+            url: "/user/userAddress/delete/" + addressId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     $("tr[addressId="+addressId+"]").remove();
@@ -23,7 +23,7 @@ $(function () {
     $("#addAddressBtn").click(function () {
         var addressId = $(this).attr("addressId");
         $.ajax({
-            url: ctx + "/user/userAddress/add/",
+            url: "/user/userAddress/add/",
             method:"post",
             data:{
                 "id":$("#id").val(),
@@ -50,7 +50,7 @@ $(function () {
     $(".editAddresslBtn").click(function () {
         var addressId = $(this).attr("addressId");
         $.ajax({
-            url: ctx + "/user/userAddress/" + addressId,
+            url: "/user/userAddress/" + addressId,
             method:"get",
             success: function (result) {
                 toastr.info("功能暂未实现...  ;)");

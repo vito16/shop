@@ -1,22 +1,20 @@
 $(function () {
-
     $(".addressItem").click(function () {
         var $kids = $(this).children();
-
-        $kids.each(function( index ) {
-            if(index==0){
+        $kids.each(function (index) {
+            if (index == 0) {
                 $("#address").val($(this).text());
             }
-            if(index==1){
+            if (index == 1) {
                 $("#consignee").val($(this).text());
             }
-            if(index==2){
+            if (index == 2) {
                 $("#id").val($(this).val());
             }
-            if(index==3){
+            if (index == 3) {
                 $("#zipcode").val($(this).val());
             }
-            if(index==4){
+            if (index == 4) {
                 $("#phone").val($(this).val());
             }
         });
@@ -25,10 +23,10 @@ $(function () {
     $(".delBtn").click(function () {
         var pid = $(this).attr("productid");
         $.ajax({
-            url: ctx + "/cart/delete/" + pid,
+            url: "/cart/delete/" + pid,
             success: function (result) {
                 if (result.status == "SUCCESS") {
-                    $("tr[pid="+pid+"]").remove();
+                    $("tr[pid=" + pid + "]").remove();
                     $('#delSuccess').show();
                     setTimeout(function () {
                         $('#delSuccess').hide('slow');
@@ -42,9 +40,9 @@ $(function () {
             }
         })
     });
-    $("#cleanCart").click(function(){
+    $("#cleanCart").click(function () {
         $.ajax({
-            url: ctx + "/cart/deleteAll",
+            url: "/cart/deleteAll",
             success: function (result) {
                 if (result.status == "SUCCESS") {
                     $("tbody tr").remove();
@@ -61,39 +59,39 @@ $(function () {
             }
         })
     });
-    $(".delTotal").click(function(){
+    $(".delTotal").click(function () {
         var dom = $(this).next();
         var currentTotal = parseInt(dom.html());
-        if(currentTotal>1){
+        if (currentTotal > 1) {
             $.ajax({
-                url:ctx+"/cart/add/"+dom.attr("productid")+"/-1",
-                success:function(result){
-                    if(result.status=="SUCCESS"){
-                        dom.html(currentTotal-1);
-                    }else{
+                url: "/cart/add/" + dom.attr("productid") + "/-1",
+                success: function (result) {
+                    if (result.status == "SUCCESS") {
+                        dom.html(currentTotal - 1);
+                    } else {
                         alert(result.message);
                     }
                 },
-                error:function(){
+                error: function () {
                     alert("发生错误..");
                 }
             })
         }
     });
-    $(".addTotal").click(function(){
+    $(".addTotal").click(function () {
         var dom = $(this).prev();
         var currentTotal = parseInt(dom.html());
-        if(currentTotal<999){
+        if (currentTotal < 999) {
             $.ajax({
-                url:ctx+"/cart/add/"+dom.attr("productid")+"/1",
-                success:function(result){
-                    if(result.status=="SUCCESS"){
-                        dom.html(currentTotal+1);
-                    }else{
+                url: "/cart/add/" + dom.attr("productid") + "/1",
+                success: function (result) {
+                    if (result.status == "SUCCESS") {
+                        dom.html(currentTotal + 1);
+                    } else {
                         alert(result.message);
                     }
                 },
-                error:function(){
+                error: function () {
                     alert("发生错误..");
                 }
             })
