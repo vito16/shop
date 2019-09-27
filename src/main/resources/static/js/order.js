@@ -39,7 +39,7 @@ $(function () {
     $(".confirm-order-btn").click(function () {
         var orderId = $(this).parent().parent().parent().attr("pid");
         $.ajax({
-            url: "/order/confirm/" + orderId,
+            url: "/user/order/confirm/" + orderId,
             success: function (result) {
                 if(result.status=="SUCCESS"){
                     toastr.info("交易已完成...");
