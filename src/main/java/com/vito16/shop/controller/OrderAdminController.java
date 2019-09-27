@@ -49,10 +49,10 @@ public class OrderAdminController {
         return "admin/order/orderAdmin";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String viewOrder(@PathVariable Integer id, Model model) {
         model.addAttribute("order", orderService.findById(id));
-        return "admin/order/orderDetail";
+        return "admin/order/orderView";
     }
 
     /**

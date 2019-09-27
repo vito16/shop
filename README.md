@@ -24,5 +24,7 @@
 - 访问端口：server.port
 - 数据库相关配置：jdbc.***
 - 初始化数据脚本在`/src/main/resources/sql/`下
+- 管理员:admin/123456
+- 用户:vito16/123456
 
 
