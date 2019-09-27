@@ -24,18 +24,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="order : ${page.result}" pid="${order.id}" th:switch="${order.status}">
+                    <tr th:each="order : ${page.result}" th:pid="${order.id}" th:switch="${order.status}">
                         <td th:text="${order.createTime}"></td>
                         <td th:text="${order.orderNumber}"></td>
                         <td th:text="${order.finalPrice}"></td>
-                        <td th:text="${order.status}"></td>
+                        <td>
+                            <span th:case="'0'">等待付款</span>
+                            <span th:case="'1'">等待发货</span>
+                            <span th:case="'2'">已发货</span>
+                            <span th:case="'3'">已取消</span>
+                            <span th:case="'4'">已完成</span>
+                        </td>
                         <td th:text="${order.consignee}"></td>
                         <td>
-                            <span th:case="'0'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a>  <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
-                            <span th:case="'1'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
-                            <span th:case="'2'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></span>
-                            <span th:case="'3'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a></span>
-                            <span th:case="'4'"><a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a></span>
+                            <a class="btn btn-info btn-xs" th:href="@{'/user/order/view/'+${order.id}}">查看</a>
+                            <span th:case="'0'">  <a class="btn btn-info btn-xs pay-order-btn">付款</a> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
+                            <span th:case="'1'"> <a class="btn btn-info btn-xs cancel-order-btn">取消订单</a></span>
+                            <span th:case="'2'"> <a class="btn btn-info btn-xs confirm-order-btn">确认收货</a></span>
                         </td>
                     </tr>
                 </tbody>
