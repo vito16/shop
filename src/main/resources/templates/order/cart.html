@@ -14,7 +14,12 @@
 <div th:replace="common/header::nav"></div>
 <div class="container">
     <div class="row">
-        <table class="table table-responsive table-striped">
+        <div class="text-center" th:if="${session.cart} == null or ${session.cart.isEmpty()}">
+            <tr>
+                <td>购物车为空，继续去选购商品吧...</td>
+            </tr>
+        </div>
+        <table class="table table-responsive table-striped" th:unless="${session.cart} == null or ${session.cart.isEmpty()}">
             <thead>
             <tr>
                 <td>名称</td>
