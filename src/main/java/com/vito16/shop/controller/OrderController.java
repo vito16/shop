@@ -75,7 +75,7 @@ public class OrderController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String orderView(@PathVariable Integer id, Model model, HttpSession session, HttpServletRequest request) {
         User user = getUserFromSession(session);
         org.springframework.util.Assert.notNull(user,"未登录用户，非法操作");

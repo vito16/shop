@@ -16,28 +16,28 @@
                 <label class="col-sm-2 control-label">地址</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.address}</p>
+                    <p class="form-control-static" th:text="${order.address}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">邮编</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.zipcode}</p>
+                    <p class="form-control-static" th:text="${order.zipcode}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">电话</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.phone}</p>
+                    <p class="form-control-static" th:text="${order.phone}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">联系人</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.consignee}</p>
+                    <p class="form-control-static" th:text="${order.consignee}"></p>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                 <label class="col-sm-2 control-label">创建时间</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.createTime}</p>
+                    <p class="form-control-static" th:text="${order.createTime}"></p>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                 <label class="col-sm-2 control-label">付款时间</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.shipTime}</p>
+                    <p class="form-control-static" th:text="${order.shipTime}"></p>
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
                 <label class="col-sm-2 control-label">发货时间</label>
 
                 <div class="col-sm-6">
-                    <p class="form-control-static">${order.confirmTime}</p>
+                    <p class="form-control-static" th:text="${order.confirmTime}"></p>
                 </div>
             </div>
         </div>
@@ -83,11 +83,11 @@
             </thead>
             <tbody>
                 <tr th:each="orderItem:${order.orderItems}" th:pid="${orderItem.id}">
-                    <td><a href="@{'/product/'+${orderItem.product.id}}" th:text="${orderItem.product.title}"></a></td>
+                    <td><a th:href="@{'/product/'+${orderItem.product.id}}" th:text="${orderItem.product.title}"></a></td>
                     <td th:text="${orderItem.product.model}"></td>
                     <td th:text="${orderItem.product.code}"></td>
                     <td th:text="${orderItem.product.point}"></td>
-                    <td th:text="${orderItem.product.quantity}"></td>
+                    <td th:text="${orderItem.quantity}"></td>
                     <td th:text="${orderItem.product.point*orderItem.quantity}"></td>
                 </tr>
             </tbody>

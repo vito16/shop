@@ -79,14 +79,6 @@ public class AdminController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public String news(Model model,HttpServletRequest request) {
-        Page<News> page = new Page<News>(request);
-        newsService.findNews(page);
-        model.addAttribute("page",page);
-        return "admin/news/newsAdmin";
-    }
-
     @RequestMapping(value = "/news/delete/{id}")
     @ResponseBody
     public JsonResult newsDelete(@PathVariable("id") Integer id) {
