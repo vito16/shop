@@ -52,7 +52,7 @@ public class ProductAdminController {
         Page<Product> page = new Page<Product>(request);
         productService.findProducts(page);
         model.addObject("page", page);
-        model.setViewName("product/productAdmin");
+        model.setViewName("admin/product/productAdmin");
         return model;
     }
 
@@ -61,7 +61,7 @@ public class ProductAdminController {
         if (AdminUtil.getAdminFromSession(session) == null) {
             return "redirect:/admin/login?error=true";
         }
-        return "product/productNew";
+        return "admin/product/productNew";
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
