@@ -23,8 +23,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `t_admin`;
 CREATE TABLE `t_admin`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
   `username` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
   PRIMARY KEY (`id`) USING BTREE
@@ -41,8 +41,8 @@ INSERT INTO `t_admin` VALUES (1, '2019-09-25 15:42:53', '2019-09-25 15:42:53', '
 DROP TABLE IF EXISTS `t_announcement`;
 CREATE TABLE `t_announcement`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `content` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告内容',
   `create_admin_id` bigint(20) NULL DEFAULT NULL COMMENT '主键',
   PRIMARY KEY (`id`) USING BTREE,
@@ -55,8 +55,8 @@ CREATE TABLE `t_announcement`  (
 DROP TABLE IF EXISTS `t_news`;
 CREATE TABLE `t_news`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `content` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
   `title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标题',
   `input_user_id` bigint(20) NULL DEFAULT NULL COMMENT '主键',
@@ -70,16 +70,16 @@ CREATE TABLE `t_news`  (
 DROP TABLE IF EXISTS `t_order`;
 CREATE TABLE `t_order`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `address` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '收货地址',
-  `confirm_time` timestamp(0) NOT NULL COMMENT '确认收货时间',
+  `confirm_time` datetime DEFAULT NULL COMMENT '确认收货时间',
   `consignee` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '收货人',
   `final_price` double NOT NULL COMMENT '实际成交价',
   `order_number` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '订单编号',
-  `pay_time` timestamp(0) NOT NULL COMMENT '付款时间',
+  `pay_time` datetime default NULL COMMENT '付款时间',
   `phone` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '收货电话',
-  `ship_time` timestamp(0) NOT NULL COMMENT '发货时间',
+  `ship_time` datetime DEFAULT NULL COMMENT '发货时间',
   `status` int(11) NOT NULL COMMENT '状态',
   `total_price` double NOT NULL COMMENT '总价',
   `zipcode` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '收货邮编',
@@ -99,8 +99,8 @@ INSERT INTO `t_order` VALUES (1, '2019-09-27 13:46:33', '2019-09-27 13:46:32', '
 DROP TABLE IF EXISTS `t_orderitem`;
 CREATE TABLE `t_orderitem`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `quantity` int(11) NOT NULL COMMENT '订单数量',
   `order_id` bigint(20) NULL DEFAULT NULL COMMENT '主键',
   `product_id` bigint(20) NULL DEFAULT NULL COMMENT '主键',
@@ -120,8 +120,8 @@ INSERT INTO `t_orderitem` VALUES (1, '2019-09-27 13:46:32', '2019-09-27 13:46:32
 DROP TABLE IF EXISTS `t_payment`;
 CREATE TABLE `t_payment`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '付款人名字',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
@@ -132,8 +132,8 @@ CREATE TABLE `t_payment`  (
 DROP TABLE IF EXISTS `t_picture`;
 CREATE TABLE `t_picture`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `memo` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片描述',
   `title` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片名称',
   `url` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片地址',
